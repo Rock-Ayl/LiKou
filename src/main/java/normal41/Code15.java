@@ -68,6 +68,9 @@ public class Code15 {
         //更有钱的人数量
         private int richerCount = 0;
 
+        //是否绝对最富有,默认是
+        private boolean richest = true;
+
         //初始化
         public Person(int index, int quite) {
             this.index = index;
@@ -79,8 +82,6 @@ public class Code15 {
     }
 
     public int[] loudAndRich(int[][] richer, int[] quiet) {
-        //最富有人员名单,0=富有,1=不再最富有
-        int[] arr = new int[quiet.length];
         //人员节点缓存
         Person[] nodeArr = new Person[quiet.length];
         //循环
@@ -97,15 +98,15 @@ public class Code15 {
             big.poolPersonList.add(small);
             //其更有钱的人数+1
             small.richerCount++;
-            //其不是最富有的人了
-            arr[small.index] = 1;
+            //其不是绝对最富有的人了
+            small.richest = false;
         }
         //结果
         int[] result = new int[quiet.length];
         //循环
-        for (int i = 0; i < arr.length; i++) {
+        for (int i = 0; i < nodeArr.length; i++) {
             //如果是最富有的
-            if (arr[i] == 0) {
+            if (nodeArr[i].richest == true) {
                 //递归计算
                 count(result, nodeArr[i]);
             }
