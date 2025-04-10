@@ -77,10 +77,12 @@ public class Code10 {
 
         //左堆对比
         public int compareMin(Node other) {
+            //对比
+            int compare = other.value.compareTo(this.value);
             //如果数字不同
-            if (this.value.compareTo(other.value) != 0) {
+            if (compare != 0) {
                 //按照数字
-                return other.value.compareTo(this.value);
+                return compare;
             }
             //默认按照索引
             return this.index - other.index;
@@ -88,10 +90,12 @@ public class Code10 {
 
         //右堆对比
         public int compareMax(Node other) {
+            //对比
+            int compare = this.value.compareTo(other.value);
             //如果数字不同
-            if (this.value.compareTo(other.value) != 0) {
+            if (compare != 0) {
                 //按照数字
-                return this.value.compareTo(other.value);
+                return compare;
             }
             //默认按照索引
             return this.index - other.index;
