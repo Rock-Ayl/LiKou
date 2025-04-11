@@ -61,18 +61,18 @@ public class Code21 {
         Map<String, Integer> firstEmailIndexMap = new HashMap<>();
         //循环1
         for (int i = 0; i < accounts.size(); i++) {
-            //获取本次
+            //获取本次用户数据
             List<String> userList = accounts.get(i);
             //循环2
             for (int j = 1; j < userList.size(); j++) {
                 //获取其邮箱
                 String email = userList.get(j);
-                //如果存在
+                //如果存在该邮箱,说明其有父级了
                 if (firstEmailIndexMap.containsKey(email) == true) {
-                    //绑定
+                    //绑定关联的所有关系
                     bind(arr, firstEmailIndexMap.get(email), i);
                 } else {
-                    //加入缓存
+                    //加入邮箱缓存
                     firstEmailIndexMap.put(email, i);
                 }
             }
@@ -111,18 +111,18 @@ public class Code21 {
             List<String> userList = accounts.get(i);
             //如果不是顶级
             if (arr[i] != i) {
-                //顶级分组
+                //顶级分组,默认当前分组
                 int root = i;
-                //如果不是
+                //如果不是顶级,递归到顶级
                 while (arr[root] != root) {
-                    //递归
+                    //上一级
                     root = arr[root];
                 }
-                //获取集合
+                //获取顶级的邮箱集合
                 Set<String> rootEmailSet = resultMap.get(root);
                 //循环
                 for (int j = 1; j < userList.size(); j++) {
-                    //记录
+                    //加入该用户的邮箱
                     rootEmailSet.add(userList.get(j));
                 }
             }
@@ -131,21 +131,20 @@ public class Code21 {
         List<List<String>> result = new ArrayList<>(resultMap.size());
         //循环分组
         for (Integer group : resultMap.keySet()) {
-            //获取分组集合
-            Set<String> set = resultMap.get(group);
-            //获取
-            List<String> groupList = new ArrayList<>(set.size() + 1);
-            //加入
-            groupList.addAll(set);
-            //排序
+            //获取分组的所有邮箱集合
+            Set<String> allEmailSet = resultMap.get(group);
+            //初始化列表,置顶固定空间
+            List<String> groupList = new ArrayList<>(allEmailSet.size() + 1);
+            //加入所有邮箱
+            groupList.addAll(allEmailSet);
+            //按照要求排序
             Collections.sort(groupList);
-            //加入名称
+            //最后开始位置加入名称
             groupList.add(0, nameArr[group]);
             //记录结果
             result.add(groupList);
         }
-
-        //返回
+        //返回最终结果
         return result;
     }
 
