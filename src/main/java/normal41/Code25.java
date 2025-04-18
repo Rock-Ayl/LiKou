@@ -87,7 +87,7 @@ public class Code25 {
         //结果
         int min = Integer.MAX_VALUE;
         //循环
-        while (index < arr.length) {
+        while (index < 2220) {
             //如果是0
             if (arr[index] == 0) {
                 //+1
