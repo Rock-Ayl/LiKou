@@ -54,26 +54,26 @@ public class Code1 {
         //按照开始索引排序,结束索引无所谓
         offers.sort((a, b) -> a.get(0) - b.get(0));
         //初始化动态规划
-        int[] arr = new int[n];
+        int[] arr = new int[n + 1];
         //索引
-        int index = 0;
+        int index = 1;
         //最大结果
         int max = 0;
         //循环
         for (List<Integer> offer : offers) {
             //开始、结束、金币
-            int start = offer.get(0);
-            int end = offer.get(1);
+            int start = offer.get(0) + 1;
+            int end = offer.get(1) + 1;
             int gold = offer.get(2);
             //如果索引已经结束了
             while (index < start) {
                 //后置位最大结果=前置位最大结果
-                arr[index] = Math.max(arr[index], (index > 0 ? arr[index - 1] : 0));
+                arr[index] = Math.max(arr[index], arr[index - 1]);
                 //+1
                 index++;
             }
             //如果使用当前offer,刷新后置位最大结果
-            arr[end] = Math.max(arr[end], (start > 0 ? arr[start - 1] : 0) + gold);
+            arr[end] = Math.max(arr[end], arr[start - 1] + gold);
             //刷新最大结果
             max = Math.max(max, arr[end]);
         }
