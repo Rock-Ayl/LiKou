@@ -67,10 +67,10 @@ public class Code5 {
         while (index < nums.length) {
             //本次结果+1
             count++;
-            //获取开始数字,索引+1
-            int startNumber = nums[index++];
+            //获取开始数字,索引+1,并计算好偏移量
+            int startNumber = nums[index++] + k;
             //如果都是同一个队列的,持续推进
-            while (index < nums.length && nums[index] - k <= startNumber) {
+            while (index < nums.length && nums[index] <= startNumber) {
                 //推进,索引+1
                 index++;
             }
