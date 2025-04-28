@@ -1,8 +1,7 @@
 package normal42;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -84,16 +83,16 @@ public class Code9 {
             nodeMap.get(start).count++;
             nodeMap.get(end).count--;
         }
-        //转化为列表
-        List<Node> nodeList = new ArrayList<>(nodeMap.values());
+        //转为数组
+        Node[] nodeArr = nodeMap.values().toArray(new Node[]{});
         //排序
-        nodeList.sort((a, b) -> a.index - b.index);
+        Arrays.sort(nodeArr, (a, b) -> a.index - b.index);
         //最大和
         int maxSum = 0;
         //当前和
         int sum = 0;
         //循环
-        for (Node node : nodeList) {
+        for (Node node : nodeArr) {
             //叠加
             sum += node.count;
             //刷新最大
