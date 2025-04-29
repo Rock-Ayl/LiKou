@@ -1,8 +1,7 @@
 package normal42;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -99,9 +98,9 @@ public class Code10 {
             }
         }
         //初始化列表
-        List<Node> nodeList = new ArrayList<>(nodeMap.values());
+        Node[] nodeArr = nodeMap.values().toArray(new Node[]{});
         //排序
-        nodeList.sort((a, b) -> a.number - b.number);
+        Arrays.sort(nodeArr, (a, b) -> a.number - b.number);
 
         /**
          * 开始不断收缩
@@ -111,16 +110,16 @@ public class Code10 {
         int changeSum = 0;
         //双指针
         int leftIndex = 0;
-        int rightIndex = nodeList.size() - 1;
+        int rightIndex = nodeArr.length - 1;
         //循环
         while (leftIndex < rightIndex) {
             //获取左右节点
-            Node leftNode = nodeList.get(leftIndex);
-            Node rightNode = nodeList.get(rightIndex);
+            Node leftNode = nodeArr[leftIndex];
+            Node rightNode = nodeArr[rightIndex];
             //如果左边小
             if (leftNode.count <= rightNode.count) {
                 //移动,并获取下一个节点
-                Node nextNode = nodeList.get(++leftIndex);
+                Node nextNode = nodeArr[++leftIndex];
                 //移动距离
                 int move = nextNode.number - leftNode.number;
                 //如果不能移动至此
@@ -135,7 +134,7 @@ public class Code10 {
                 nextNode.count += leftNode.count;
             } else {
                 //移动,并获取下一个节点
-                Node nextNode = nodeList.get(--rightIndex);
+                Node nextNode = nodeArr[--rightIndex];
                 //移动距离
                 int move = rightNode.number - nextNode.number;
                 //如果不能移动至此
