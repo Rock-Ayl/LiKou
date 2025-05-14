@@ -64,12 +64,18 @@ public class Code25 {
 
     }
 
+    /**
+     * 有巨大优化空间,懒得优化了,可以完全不用队列
+     *
+     * @param arrays
+     * @return
+     */
     public int maxDistance(List<List<Integer>> arrays) {
         //节点列表
         List<Node> nodeList = new ArrayList<>();
         //队列
-        PriorityQueue<Node> minQueue = new PriorityQueue<>((a, b) -> a.min - b.min);
-        PriorityQueue<Node> maxQueue = new PriorityQueue<>((a, b) -> b.max - a.max);
+        PriorityQueue<Node> minQueue = new PriorityQueue<>(2, (a, b) -> a.min - b.min);
+        PriorityQueue<Node> maxQueue = new PriorityQueue<>(2, (a, b) -> b.max - a.max);
         //循环
         for (List<Integer> array : arrays) {
             //初始化节点
