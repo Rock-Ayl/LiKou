@@ -53,10 +53,12 @@ public class Code26 {
         for (int num : nums) {
             //所需
             int other = k - num;
+            //所需数字的数量
+            int otherCount = map.getOrDefault(other, 0);
             //如果存在配对
-            if (map.getOrDefault(other, 0) > 0) {
+            if (otherCount > 0) {
                 //记录缓存-1
-                map.put(other, map.get(other) - 1);
+                map.put(other, otherCount - 1);
                 //操作+1
                 count++;
             } else {
