@@ -68,7 +68,7 @@ public class Code4 {
         //缓存
         int[] arr = new int[2];
         //循环
-        while (index < binary.length() && index < binary.length()) {
+        while (index < binary.length()) {
             //+1
             arr[binary.charAt(index++) - '0']++;
         }
@@ -77,14 +77,14 @@ public class Code4 {
          * step 3. 消耗0,这些都可以直接转为1,保留最后一个0,这个无法转换
          */
 
-        //循环
+        //如果0至少有2个
         while (arr[0] > 1) {
             //-1
             arr[0]--;
             //组装1
             str.append(1);
         }
-        //如果还有0
+        //如果有最后一个0
         if (arr[0] == 1) {
             //组装0
             str.append(0);
@@ -94,7 +94,7 @@ public class Code4 {
          * step 4. 消耗1
          */
 
-        //循环
+        //如果还有1
         while (arr[1]-- > 0) {
             //组装
             str.append(1);
