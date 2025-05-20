@@ -1,6 +1,7 @@
 package normal43;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @Author ayl
@@ -55,17 +56,13 @@ public class Code5 {
          * 拆分所有组合情况
          */
 
-        //缓存
-        Map<String, Set<Character>> map = new HashMap<>();
+        //数组
+        int[][][] arr = new int[26][26][26];
+
         //循环
         for (String word : allowed) {
-            //分割key、value
-            String key = word.substring(0, 2);
-            Character value = word.charAt(2);
-            //初始化
-            map.putIfAbsent(key, new HashSet<>());
-            //记录
-            map.get(key).add(value);
+            //记录可以使用
+            arr[word.charAt(0) - 'A'][word.charAt(1) - 'A'][word.charAt(2) - 'A'] = 1;
         }
 
         /**
@@ -73,11 +70,11 @@ public class Code5 {
          */
 
         //递归实现
-        return next(new StringBuilder(), bottom, map);
+        return next(new StringBuilder(), bottom, arr);
     }
 
     //递归
-    private boolean next(StringBuilder prefixStr, String bottom, Map<String, Set<Character>> map) {
+    private boolean next(StringBuilder prefixStr, String bottom, int[][][] arr) {
         //如果达到结果要求了
         if (bottom.length() == 1) {
             //返回是
@@ -86,23 +83,23 @@ public class Code5 {
         //如果完成了本行
         if (prefixStr.length() + 1 == bottom.length()) {
             //递归下一行
-            return next(new StringBuilder(), prefixStr.toString(), map);
+            return next(new StringBuilder(), prefixStr.toString(), arr);
         }
         //索引
         int index = prefixStr.length();
-        //计算出key
-        String key = "" + bottom.charAt(index) + bottom.charAt(index + 1);
-        //如果不存在该组合
-        if (map.containsKey(key) == false) {
-            //过
-            return false;
-        }
+        //获取数组列表
+        int[] valueArr = arr[bottom.charAt(index) - 'A'][bottom.charAt(index + 1) - 'A'];
         //循环
-        for (Character character : map.get(key)) {
+        for (int i = 0; i < valueArr.length; i++) {
+            //如果无法使用
+            if (valueArr[i] != 1) {
+                //本轮过
+                continue;
+            }
             //组装本次
-            prefixStr.append(character);
+            prefixStr.append((char) (i + 'A'));
             //递归
-            boolean next = next(prefixStr, bottom, map);
+            boolean next = next(prefixStr, bottom, arr);
             //如果找到目标了
             if (next == true) {
                 //返回
@@ -116,8 +113,8 @@ public class Code5 {
     }
 
     public static void main(String[] args) {
-        System.out.println(new Code5().pyramidTransition("AAAA", Arrays.asList(
-                "AAB", "AAC", "BCD", "BBE", "DEF"
+        System.out.println(new Code5().pyramidTransition("DBCDA", Arrays.asList(
+                "DBD", "BCC", "CDD", "DAD", "DDA", "AAC", "CCA", "BCD"
         )));
     }
 
