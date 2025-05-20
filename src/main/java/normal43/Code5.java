@@ -59,23 +59,23 @@ public class Code5 {
             arr[word.charAt(0) - 'A'][word.charAt(1) - 'A'][word.charAt(2) - 'A'] = 1;
         }
         //递归实现
-        return next(new StringBuilder(), bottom, arr);
+        return next(new StringBuilder(), new StringBuilder(bottom), arr);
     }
 
     //递归
-    private boolean next(StringBuilder prefixStr, String bottom, int[][][] arr) {
+    private boolean next(StringBuilder prefixStr, StringBuilder fatherStr, int[][][] arr) {
         //如果完成了本行
-        if (prefixStr.length() + 1 == bottom.length()) {
+        if (prefixStr.length() + 1 == fatherStr.length()) {
             //如果是最后一个
-            if (bottom.length() == 2) {
+            if (fatherStr.length() == 2) {
                 //返回是
                 return true;
             }
             //递归下一行
-            return next(new StringBuilder(), prefixStr.toString(), arr);
+            return next(new StringBuilder(), prefixStr, arr);
         }
         //获取数组列表
-        int[] valueArr = arr[bottom.charAt(prefixStr.length()) - 'A'][bottom.charAt(prefixStr.length() + 1) - 'A'];
+        int[] valueArr = arr[fatherStr.charAt(prefixStr.length()) - 'A'][fatherStr.charAt(prefixStr.length() + 1) - 'A'];
         //循环
         for (int i = 0; i < valueArr.length; i++) {
             //如果无法使用
@@ -86,7 +86,7 @@ public class Code5 {
             //组装本次
             prefixStr.append((char) (i + 'A'));
             //递归
-            boolean next = next(prefixStr, bottom, arr);
+            boolean next = next(prefixStr, fatherStr, arr);
             //如果找到目标了
             if (next == true) {
                 //返回
