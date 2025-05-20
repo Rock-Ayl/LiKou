@@ -76,6 +76,8 @@ public class Code5 {
         }
         //获取数组列表
         int[] valueArr = arr[fatherStr.charAt(prefixStr.length()) - 'A'][fatherStr.charAt(prefixStr.length() + 1) - 'A'];
+        //填充字符
+        prefixStr.append('A');
         //循环
         for (int i = 0; i < valueArr.length; i++) {
             //如果无法使用
@@ -83,8 +85,8 @@ public class Code5 {
                 //本轮过
                 continue;
             }
-            //组装本次
-            prefixStr.append((char) (i + 'A'));
+            //覆盖本次字符
+            prefixStr.setCharAt(prefixStr.length() - 1, (char) (i + 'A'));
             //递归
             boolean next = next(prefixStr, fatherStr, arr);
             //如果找到目标了
@@ -92,9 +94,9 @@ public class Code5 {
                 //返回
                 return true;
             }
-            //回溯
-            prefixStr.deleteCharAt(prefixStr.length() - 1);
         }
+        //回溯本次填充
+        prefixStr.deleteCharAt(prefixStr.length() - 1);
         //默认不可以
         return false;
     }
