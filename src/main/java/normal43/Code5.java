@@ -51,44 +51,31 @@ import java.util.List;
 public class Code5 {
 
     public boolean pyramidTransition(String bottom, List<String> allowed) {
-
-        /**
-         * 拆分所有组合情况
-         */
-
-        //数组
+        //缓存数组
         int[][][] arr = new int[26][26][26];
-
         //循环
         for (String word : allowed) {
             //记录可以使用
             arr[word.charAt(0) - 'A'][word.charAt(1) - 'A'][word.charAt(2) - 'A'] = 1;
         }
-
-        /**
-         * 开始递归计算
-         */
-
         //递归实现
         return next(new StringBuilder(), bottom, arr);
     }
 
     //递归
     private boolean next(StringBuilder prefixStr, String bottom, int[][][] arr) {
-        //如果达到结果要求了
-        if (bottom.length() == 1) {
-            //返回是
-            return true;
-        }
         //如果完成了本行
         if (prefixStr.length() + 1 == bottom.length()) {
+            //如果是最后一个
+            if (bottom.length() == 2) {
+                //返回是
+                return true;
+            }
             //递归下一行
             return next(new StringBuilder(), prefixStr.toString(), arr);
         }
-        //索引
-        int index = prefixStr.length();
         //获取数组列表
-        int[] valueArr = arr[bottom.charAt(index) - 'A'][bottom.charAt(index + 1) - 'A'];
+        int[] valueArr = arr[bottom.charAt(prefixStr.length()) - 'A'][bottom.charAt(prefixStr.length() + 1) - 'A'];
         //循环
         for (int i = 0; i < valueArr.length; i++) {
             //如果无法使用
