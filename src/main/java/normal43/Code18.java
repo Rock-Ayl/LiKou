@@ -44,21 +44,11 @@ public class Code18 {
     public boolean hasAllCodes(String s, int k) {
 
         /**
-         * 计算目标数量
-         */
-
-        //目标数量
-        int target = 2;
-        //如果更多
-        if (k > 1) {
-            //位移
-            target = target << k - 1;
-        }
-
-        /**
          * 判断是否可能存在结果
          */
 
+        //计算目标结果数量
+        int target = 2 << k - 1;
         //如果长度不够
         if (s.length() + 1 < target) {
             //过
@@ -93,9 +83,9 @@ public class Code18 {
             str.deleteCharAt(0);
             //增加一个
             str.append(s.charAt(end++));
-            //记录结果
+            //记录本次结果
             set.add(str.toString());
-            //如果到结果了
+            //如果所有结果均出现
             if (set.size() == target) {
                 //结束
                 return true;
