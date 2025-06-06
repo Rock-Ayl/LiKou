@@ -54,7 +54,7 @@ public class Code19 {
     //剩余最小长度
     private int minLength;
     //走过的缓存
-    private Set<String> keySet = new HashSet<>();
+    private Set<Integer> keySet = new HashSet<>();
 
     public int maxOperations(int[] nums) {
         //如果只有2
@@ -75,7 +75,7 @@ public class Code19 {
     //递归
     private void next(int[] nums, int rank, int start, int end) {
         //组合key
-        String key = start + "," + end;
+        Integer key = start * 100 + end;
         //如果走过了
         if (this.keySet.contains(key)) {
             //过
