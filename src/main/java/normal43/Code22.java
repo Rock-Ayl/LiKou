@@ -107,19 +107,12 @@ public class Code22 {
         int[] arr = new int[word.length() + 1];
         //默认0什么都没有是1
         arr[0] = 1;
+        //最大结果
+        int max = 1;
         //动态规划索引,从1开始
         int arrIndex = 1;
         //循环
-        while (arrIndex < arr.length) {
-            //如果没有分组了
-            if (groupIndex >= groupList.size()) {
-                //推进
-                arr[arrIndex] = Math.max(arr[arrIndex], arr[arrIndex - 1]);
-                //+1
-                arrIndex++;
-                //本轮过
-                continue;
-            }
+        while (arrIndex < arr.length && groupIndex < groupList.size()) {
             //获取还未使用的分组
             int[] group = groupList.get(groupIndex);
             //如果还够不到使用分组的条件
@@ -131,12 +124,14 @@ public class Code22 {
             }
             //记录本次使用的最大结果
             arr[group[1] + 1] = Math.max(arr[group[0]] + 1, arr[group[1] + 1]);
+            //刷新最大结果
+            max = Math.max(max, arr[group[1] + 1]);
             //分组+1
             groupIndex++;
         }
 
         //返回最大
-        return arr[arr.length - 1] - 1;
+        return max - 1;
     }
 
     public static void main(String[] args) {
