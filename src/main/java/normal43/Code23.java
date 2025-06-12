@@ -52,8 +52,8 @@ public class Code23 {
         int one = 0;
         //位移次数
         int count = 0;
-        //循环
-        while (exclusiveOR != 1) {
+        //循环,准备找一个位置=1的位移
+        while (exclusiveOR % 2 == 0) {
             //+1位移
             count++;
             exclusiveOR = exclusiveOR >> 1;
