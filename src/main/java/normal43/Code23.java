@@ -47,9 +47,9 @@ public class Code23 {
          */
 
         //0组的数字
-        Integer zero = null;
+        int zero = 0;
         //1组的数字
-        Integer one = null;
+        int one = 0;
         //转为二进制,并翻转
         StringBuilder exclusiveORStr = new StringBuilder(Integer.toBinaryString(exclusiveOR)).reverse();
         //获取随意一个1的位置
@@ -68,7 +68,7 @@ public class Code23 {
             //如果是1
             if (letter == '1') {
                 //判空
-                if (one == null) {
+                if (one == 0) {
                     //第一个
                     one = socket;
                 } else {
@@ -77,7 +77,7 @@ public class Code23 {
                 }
             } else {
                 //判空
-                if (zero == null) {
+                if (zero == 0) {
                     //第一个
                     zero = socket;
                 } else {
