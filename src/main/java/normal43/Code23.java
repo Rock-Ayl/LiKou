@@ -50,25 +50,18 @@ public class Code23 {
         int zero = 0;
         //1组的数字
         int one = 0;
-        //转为二进制
-        String exclusiveORStr = Integer.toBinaryString(exclusiveOR);
+        //位移次数
+        int count = 0;
+        //循环
+        while (exclusiveOR != 1) {
+            //+1位移
+            count++;
+            exclusiveOR = exclusiveOR >> 1;
+        }
         //循环
         for (int socket : sockets) {
-            //转为二进制
-            String socketStr = Integer.toBinaryString(socket);
-            //对应数位的索引
-            int oneIndex = socketStr.length() >= exclusiveORStr.length() ?
-                    socketStr.length() - exclusiveORStr.length()
-                    : Integer.MAX_VALUE;
-            //默认0
-            char letter = '0';
-            //如果可以去拿
-            if (oneIndex < socketStr.length()) {
-                //获取0还是1
-                letter = socketStr.charAt(oneIndex);
-            }
-            //如果是1
-            if (letter == '1') {
+            //如果同位置是1
+            if ((socket >> count) % 2 == 1) {
                 //判空
                 if (one == 0) {
                     //第一个
