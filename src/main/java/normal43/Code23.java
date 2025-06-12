@@ -50,19 +50,21 @@ public class Code23 {
         int zero = 0;
         //1组的数字
         int one = 0;
-        //转为二进制,并翻转
-        StringBuilder exclusiveORStr = new StringBuilder(Integer.toBinaryString(exclusiveOR)).reverse();
-        //获取随意一个1的位置
-        int oneIndex = exclusiveORStr.indexOf("1");
+        //转为二进制
+        String exclusiveORStr = Integer.toBinaryString(exclusiveOR);
         //循环
         for (int socket : sockets) {
-            //转为二进制,翻转
-            StringBuilder socketStr = new StringBuilder(Integer.toBinaryString(socket)).reverse();
+            //转为二进制
+            String socketStr = Integer.toBinaryString(socket);
+            //对应数位的索引
+            int oneIndex = socketStr.length() >= exclusiveORStr.length() ?
+                    socketStr.length() - exclusiveORStr.length()
+                    : Integer.MAX_VALUE;
             //默认0
             char letter = '0';
-            //如果有值
+            //如果可以去拿
             if (oneIndex < socketStr.length()) {
-                //获取
+                //获取0还是1
                 letter = socketStr.charAt(oneIndex);
             }
             //如果是1
