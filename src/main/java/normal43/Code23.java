@@ -1,8 +1,5 @@
 package normal43;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * @Author ayl
  * @Date 2025-06-12
@@ -46,16 +43,17 @@ public class Code23 {
         }
 
         /**
-         * 第二次,根据异或值分组
+         * 第二次,根据异或值 某个1的位置 分组, 并求每组 异或值
          */
 
+        //0组的数字
+        Integer zero = null;
+        //1组的数字
+        Integer one = null;
         //转为二进制,并翻转
         StringBuilder exclusiveORStr = new StringBuilder(Integer.toBinaryString(exclusiveOR)).reverse();
         //获取随意一个1的位置
         int oneIndex = exclusiveORStr.indexOf("1");
-        //按照 0、1 分组
-        List<Integer> oneList = new ArrayList<>();
-        List<Integer> zeroList = new ArrayList<>();
         //循环
         for (int socket : sockets) {
             //转为二进制,翻转
@@ -69,31 +67,24 @@ public class Code23 {
             }
             //如果是1
             if (letter == '1') {
-                //分组
-                oneList.add(socket);
+                //判空
+                if (one == null) {
+                    //第一个
+                    one = socket;
+                } else {
+                    //异或
+                    one = one ^ socket;
+                }
             } else {
-                //分组
-                zeroList.add(socket);
+                //判空
+                if (zero == null) {
+                    //第一个
+                    zero = socket;
+                } else {
+                    //异或
+                    zero = zero ^ socket;
+                }
             }
-        }
-
-        /**
-         * 分别求出每组的数字
-         */
-
-        //0组的数字
-        int zero = zeroList.get(0);
-        //循环
-        for (int i = 1; i < zeroList.size(); i++) {
-            //异或
-            zero = zero ^ zeroList.get(i);
-        }
-        //1组的数字
-        int one = oneList.get(0);
-        //循环
-        for (int i = 1; i < oneList.size(); i++) {
-            //异或
-            one = one ^ oneList.get(i);
         }
 
         //返回
