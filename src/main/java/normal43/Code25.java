@@ -112,6 +112,8 @@ public class Code25 {
          * 计算结果
          */
 
+        //索引缓存数组
+        int[] groupIndexArr = new int[s.length()];
         //结果
         StringBuilder str = new StringBuilder();
         //循环
@@ -121,9 +123,7 @@ public class Code25 {
             //获取分组对应字符列表
             List<Character> charList = groupMap[group];
             //获取最近的
-            Character letter = charList.get(0);
-            //删除之
-            charList.remove(0);
+            Character letter = charList.get(groupIndexArr[group]++);
             //组装本次
             str.append(letter);
         }
