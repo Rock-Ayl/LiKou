@@ -1,6 +1,8 @@
 package normal43;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @Author ayl
@@ -76,8 +78,8 @@ public class Code25 {
          * 根据分组,分字母,排序
          */
 
-        //分组
-        Map<Integer, List<Character>> groupMap = new HashMap<>();
+        //分组缓存
+        List<Character>[] groupMap = new List[s.length()];
         //循环
         for (int i = 0; i < arr.length; i++) {
             //获取分组
@@ -90,14 +92,20 @@ public class Code25 {
                 group = arr[i];
             }
             //初始化列表
-            groupMap.putIfAbsent(group, new ArrayList<>());
+            if (groupMap[group] == null) {
+                //初始化
+                groupMap[group] = new ArrayList<>();
+            }
             //记录字符
-            groupMap.get(group).add(s.charAt(i));
+            groupMap[group].add(s.charAt(i));
         }
         //循环每个分组列表
-        for (List<Character> groupList : groupMap.values()) {
-            //排序
-            groupList.sort((a, b) -> a - b);
+        for (List<Character> groupList : groupMap) {
+            //判空
+            if (groupList != null) {
+                //排序
+                groupList.sort((a, b) -> a - b);
+            }
         }
 
         /**
@@ -111,7 +119,7 @@ public class Code25 {
             //获取分组
             int group = arr[i];
             //获取分组对应字符列表
-            List<Character> charList = groupMap.get(group);
+            List<Character> charList = groupMap[group];
             //获取最近的
             Character letter = charList.get(0);
             //删除之
