@@ -126,30 +126,25 @@ public class Code25 {
 
     //并查集,寻找并合并分组
     private int findAndSet(int[] arr, int num1, int num2) {
+        //准备计算头节点
+        int root;
         //如果是头节点
         if (arr[num1] == num1) {
-            //如果另一个也有组
-            if (arr[num2] != num2) {
-                //递归
-                findAndSet(arr, num1, arr[num2]);
-            }
-            //记录本次头结点
-            arr[num2] = num1;
-            //返回最终头结点
-            return num1;
+            //记录头节点
+            root = num1;
         } else {
             //递归,返回最终头结点
-            int root = findAndSet(arr, arr[num1], num1);
-            //如果不同
-            if (arr[num2] != num2) {
-                //递归
-                findAndSet(arr, root, arr[num2]);
-            }
-            //本次
-            arr[num2] = root;
-            //返回
-            return root;
+            root = findAndSet(arr, arr[num1], num1);
         }
+        //如果右边的不同分组
+        if (arr[num2] != num2) {
+            //递归右边的,同化
+            findAndSet(arr, root, arr[num2]);
+        }
+        //记录本次头结点结果
+        arr[num2] = root;
+        //返回
+        return root;
     }
 
     public static void main(String[] args) {
