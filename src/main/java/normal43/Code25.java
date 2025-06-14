@@ -120,12 +120,8 @@ public class Code25 {
         for (int i = 0; i < arr.length; i++) {
             //获取分组
             int group = arr[i];
-            //获取分组对应字符列表
-            List<Character> charList = groupMap[group];
-            //获取最近的
-            Character letter = charList.get(groupIndexArr[group]++);
-            //组装本次
-            str.append(letter);
+            //获取最近未使用的,使用之,+1
+            str.append(groupMap[group].get(groupIndexArr[group]++));
         }
 
         //返回结果
