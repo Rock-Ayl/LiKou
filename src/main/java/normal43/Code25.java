@@ -126,16 +126,8 @@ public class Code25 {
 
     //并查集,寻找并合并分组
     private int findAndSet(int[] arr, int num1, int num2) {
-        //准备计算头节点
-        int root;
-        //如果是头节点
-        if (arr[num1] == num1) {
-            //记录头节点
-            root = num1;
-        } else {
-            //递归,返回最终头结点
-            root = findAndSet(arr, arr[num1], num1);
-        }
+        //递归计算最终头节点
+        int root = arr[num1] == num1 ? num1 : findAndSet(arr, arr[num1], num1);
         //如果右边的不同分组
         if (arr[num2] != num2) {
             //递归右边的,同化
