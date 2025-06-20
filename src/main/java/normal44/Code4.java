@@ -1,8 +1,5 @@
 package normal44;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * @Author ayl
  * @Date 2025-06-20
@@ -44,19 +41,19 @@ public class Code4 {
 
     public int longestSubsequence(int[] arr, int difference) {
         //前置最大缓存
-        Map<Integer, Integer> maxMap = new HashMap<>();
+        int[] maxArr = new int[20002 + (Math.abs(difference) * 2)];
         //最大结果
         int max = 0;
         //循环
         for (int i = 0; i < arr.length; i++) {
-            //计算出上一个值
-            Integer last = arr[i] - difference;
-            //计算当前位置最大可能
-            Integer maxCount = maxMap.getOrDefault(last, 0) + 1;
+            //计算出缓存索引
+            int num = arr[i] + maxArr.length / 2;
+            //计算出上一个值,并计算出当前位置最大可能
+            int maxCount = maxArr[num - difference] + 1;
             //刷新最大
             max = Math.max(max, maxCount);
             //刷新最大
-            maxMap.put(arr[i], Math.max(maxCount, maxMap.getOrDefault(arr[i], 0)));
+            maxArr[num] = Math.max(maxCount, maxArr[num]);
         }
         //返回
         return max;
