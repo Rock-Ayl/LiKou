@@ -50,10 +50,10 @@ public class Code4 {
             int num = arr[i] + maxArr.length / 2;
             //计算出上一个值,并计算出当前位置最大可能
             int maxCount = maxArr[num - difference] + 1;
-            //刷新最大
+            //刷新最大结果
             max = Math.max(max, maxCount);
-            //刷新最大
-            maxArr[num] = Math.max(maxCount, maxArr[num]);
+            //记录该位置结果
+            maxArr[num] = maxCount;
         }
         //返回
         return max;
