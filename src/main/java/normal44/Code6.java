@@ -76,21 +76,11 @@ public class Code6 {
         int first = node1.num * node2.num;
         int second = node1.i * node2.num;
         int third = node1.num * node2.i;
-        int four;
-        //如果是最特殊的0
-        if (node1.i == 0 || node2.i == 0) {
-            //固定为0
-            four = 0;
-        }
-        //如果是-1、/1
-        else if (node1.i == node2.i) {
+        int four = node1.i * node2.i;
+        //特殊情况:如果 相同 and 不为0
+        if (node1.i != 0 && node1.i == node2.i) {
             //-1
             four = 1;
-        }
-        //默认
-        else {
-            //默认
-            four = node1.i * node2.i;
         }
         //转为新节点
         Node node = new Node(first - four, second + third);
