@@ -82,7 +82,7 @@ public class Code7 {
     }
 
     //每层节点
-    private List<List<Integer>> deepList = new ArrayList<>();
+    private List<List<SortNum>> deepList = new ArrayList<>();
     //最终结果操作次数
     private int result = 0;
 
@@ -100,7 +100,7 @@ public class Code7 {
          */
 
         //循环
-        for (List<Integer> sortList : this.deepList) {
+        for (List<SortNum> sortList : this.deepList) {
             //计算、叠加本次
             this.result += sort(sortList);
         }
@@ -121,15 +121,17 @@ public class Code7 {
             //初始化
             this.deepList.add(new ArrayList<>());
         }
-        //记录最近的结果
-        this.deepList.get(deep).add(node.val);
+        //获取目标列表
+        List<SortNum> sortNumList = this.deepList.get(deep);
+        //初始化本次节点并组装
+        sortNumList.add(new SortNum(node.val, sortNumList.size()));
         //继续递归
         deep(node.left, deep + 1);
         deep(node.right, deep + 1);
     }
 
     //排序并返回操作次数
-    private int sort(List<Integer> sortList) {
+    private int sort(List<SortNum> sortList) {
 
         /**
          * 特殊
@@ -142,25 +144,13 @@ public class Code7 {
         }
 
         /**
-         * 构造节点
-         */
-
-        //初始化节点列表
-        List<SortNum> sortNumList = new ArrayList<>();
-        //循环
-        for (int i = 0; i < sortList.size(); i++) {
-            //初始化节点
-            sortNumList.add(new SortNum(sortList.get(i), i));
-        }
-
-        /**
          * 计算其目标位置
          */
 
         //目标位置对应节点
         Map<Integer, SortNum> targetMap = new HashMap<>();
         //初始化另一个列表
-        List<SortNum> targetList = new ArrayList<>(sortNumList);
+        List<SortNum> targetList = new ArrayList<>(sortList);
         //排序
         targetList.sort((a, b) -> a.num - b.num);
         //循环
@@ -178,14 +168,14 @@ public class Code7 {
         //操作次数
         int change = 0;
         //循环
-        for (int i = 0; i < sortNumList.size(); i++) {
+        for (int i = 0; i < sortList.size(); i++) {
 
             /**
              * 获取、判断是否交换
              */
 
             //获取该位置当前节点
-            SortNum left = sortNumList.get(i);
+            SortNum left = sortList.get(i);
             //获取该位置目标节点
             SortNum right = targetMap.get(i);
             //如果是一个
@@ -203,8 +193,8 @@ public class Code7 {
             right.index = i;
 
             //交换节点
-            sortNumList.set(right.index, right);
-            sortNumList.set(left.index, left);
+            sortList.set(right.index, right);
+            sortList.set(left.index, left);
 
             //交换一次
             change++;
