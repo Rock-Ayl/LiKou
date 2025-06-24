@@ -1,9 +1,7 @@
 package normal44;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @Author ayl
@@ -63,11 +61,14 @@ import java.util.Map;
 public class Code7 {
 
     private static class TreeNode {
+
         int val;
+
         TreeNode left;
         TreeNode right;
 
         TreeNode() {
+
         }
 
         TreeNode(int val) {
@@ -79,6 +80,7 @@ public class Code7 {
             this.left = left;
             this.right = right;
         }
+
     }
 
     //每层节点
@@ -148,7 +150,7 @@ public class Code7 {
          */
 
         //目标位置对应节点
-        Map<Integer, SortNum> targetMap = new HashMap<>();
+        SortNum[] targetArr = new SortNum[sortList.size()];
         //初始化另一个列表
         List<SortNum> targetList = new ArrayList<>(sortList);
         //排序
@@ -157,8 +159,8 @@ public class Code7 {
         for (int i = 0; i < targetList.size(); i++) {
             //记录目标位置
             targetList.get(i).target = i;
-            //关联
-            targetMap.put(i, targetList.get(i));
+            //关联位置
+            targetArr[i] = targetList.get(i);
         }
 
         /**
@@ -177,7 +179,7 @@ public class Code7 {
             //获取该位置当前节点
             SortNum left = sortList.get(i);
             //获取该位置目标节点
-            SortNum right = targetMap.get(i);
+            SortNum right = targetArr[i];
             //如果是一个
             if (right == left) {
                 //本轮过
