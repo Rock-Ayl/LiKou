@@ -157,8 +157,6 @@ public class Code7 {
         targetList.sort((a, b) -> a.num - b.num);
         //循环
         for (int i = 0; i < targetList.size(); i++) {
-            //记录目标位置
-            targetList.get(i).target = i;
             //关联位置
             targetArr[i] = targetList.get(i);
         }
@@ -215,9 +213,6 @@ public class Code7 {
         //当前索引
         private int index;
 
-        //目标索引位置,默认-1
-        private int target = -1;
-
         //初始化
         public SortNum(int num, int index) {
             this.num = num;
@@ -227,7 +222,7 @@ public class Code7 {
         //方便调试
         @Override
         public String toString() {
-            return String.format("num=%s,index=%s,target=%s", this.num, this.index, this.target);
+            return String.format("num=%s,index=%s", this.num, this.index);
         }
 
     }
