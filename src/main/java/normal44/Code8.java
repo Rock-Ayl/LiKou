@@ -138,6 +138,11 @@ public class Code8 {
     }
 
     private List<String> next(Person[] personArr, List<Person> personList, int level, int targetLevel) {
+
+        /**
+         * 计算下一级节点
+         */
+
         //初始化下一级朋友列表
         List<Person> nextPersonList = new ArrayList<>();
         //循环
@@ -157,6 +162,11 @@ public class Code8 {
                 nextPersonList.add(child);
             }
         }
+
+        /**
+         * 输出结果 or 递归
+         */
+
         //如果是目标层级
         if (level == targetLevel) {
             //统计
@@ -183,9 +193,10 @@ public class Code8 {
                     //拆箱
                     .map(Video::toString)
                     .collect(Collectors.toList());
+        } else {
+            //递归
+            return next(personArr, nextPersonList, level + 1, targetLevel);
         }
-        //递归
-        return next(personArr, nextPersonList, level + 1, targetLevel);
     }
 
     public static void main(String[] args) {
