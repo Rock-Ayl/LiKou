@@ -1,8 +1,5 @@
 package normal44;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * @Author ayl
  * @Date 2025-07-05
@@ -98,21 +95,20 @@ public class Code17 {
          */
 
         //缓存
-        Map<Character, Character> minMap = new HashMap<>();
+        char[] groupMinArr = new char[123];
         //循环
         for (char i = 'a'; i <= 'z'; i++) {
             //当前分组
-            Character group = groupArr[i];
-            //如果存在
-            if (minMap.containsKey(group)) {
-                //如果更小
-                if (i < minMap.get(group)) {
-                    //覆盖
-                    minMap.put(group, i);
-                }
-            } else {
+            char group = groupArr[i];
+            //如果不存在
+            if (groupMinArr[group] == 0) {
                 //记录
-                minMap.put(group, i);
+                groupMinArr[group] = i;
+            }
+            //如果更小
+            else if (i < groupMinArr[group]) {
+                //覆盖
+                groupMinArr[group] = i;
             }
         }
 
@@ -125,7 +121,7 @@ public class Code17 {
         //循环
         for (int i = 0; i < baseStr.length(); i++) {
             //转移、组装
-            str.append(minMap.get(groupArr[baseStr.charAt(i)]));
+            str.append(groupMinArr[(groupArr[baseStr.charAt(i)])]);
         }
         //返回
         return str.toString();
