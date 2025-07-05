@@ -60,9 +60,9 @@ public class Code17 {
          */
 
         //数组
-        int[] groupArr = new int[26];
+        char[] groupArr = new char[123];
         //循环
-        for (char i = 0; i < groupArr.length; i++) {
+        for (char i = 'a'; i <= 'z'; i++) {
             //记录
             groupArr[i] = i;
         }
@@ -76,7 +76,7 @@ public class Code17 {
             //如果不同
             if (s1.charAt(i) != s2.charAt(i)) {
                 //并查集递归
-                findAndSet(groupArr, s1.charAt(i) - 'a', s2.charAt(i) - 'a');
+                findAndSet(groupArr, s1.charAt(i), s2.charAt(i));
             }
         }
 
@@ -85,7 +85,7 @@ public class Code17 {
          */
 
         //循环
-        for (int i = 0; i < groupArr.length; i++) {
+        for (char i = 'a'; i <= 'z'; i++) {
             //如果还不够
             if (groupArr[groupArr[i]] != groupArr[i]) {
                 //并查集递归
@@ -98,15 +98,18 @@ public class Code17 {
          */
 
         //缓存
-        Map<Integer, Integer> minMap = new HashMap<>();
+        Map<Character, Character> minMap = new HashMap<>();
         //循环
-        for (int i = 0; i < groupArr.length; i++) {
+        for (char i = 'a'; i <= 'z'; i++) {
             //当前分组
-            int group = groupArr[i];
+            Character group = groupArr[i];
             //如果存在
             if (minMap.containsKey(group)) {
-                //记录
-                minMap.put(group, Math.min(minMap.get(group), i));
+                //如果更小
+                if (i < minMap.get(group)) {
+                    //覆盖
+                    minMap.put(group, i);
+                }
             } else {
                 //记录
                 minMap.put(group, i);
@@ -122,16 +125,16 @@ public class Code17 {
         //循环
         for (int i = 0; i < baseStr.length(); i++) {
             //转移、组装
-            str.append((char) (minMap.get(groupArr[baseStr.charAt(i) - 'a']) + 'a'));
+            str.append(minMap.get(groupArr[baseStr.charAt(i)]));
         }
         //返回
         return str.toString();
     }
 
     //并查集递归
-    private int findAndSet(int[] groupArr, int left, int right) {
+    private char findAndSet(char[] groupArr, char left, char right) {
         //主节点
-        int root;
+        char root;
         //如果是头结点
         if (groupArr[left] == left) {
             //直接使用
