@@ -126,22 +126,7 @@ public class Code19 {
         }
 
         /**
-         * 修补剩下的
-         */
-
-        //循环
-        for (int i = 1; i < nodeArr.length; i++) {
-            //当前节点分组
-            int group = nodeArr[i].group;
-            //如果该分组不是主节点
-            if (nodeArr[group].group != group) {
-                //修补
-                findAndSet(nodeArr, nodeArr[i].group, i);
-            }
-        }
-
-        /**
-         * 按照分组,加入优先队列
+         * 按照分组,修补,并加入优先队列
          */
 
         //分组优先队列
@@ -152,6 +137,11 @@ public class Code19 {
             Node node = nodeArr[i];
             //其分组
             int group = node.group;
+            //如果该分组不是主节点
+            if (nodeArr[group].group != group) {
+                //修补
+                group = findAndSet(nodeArr, nodeArr[i].group, i);
+            }
             //初始化
             if (groupQueueArr[group] == null) {
                 //初始化优先队列
