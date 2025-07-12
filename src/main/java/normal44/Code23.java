@@ -1,7 +1,5 @@
 package normal44;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Stack;
 
 /**
@@ -43,8 +41,6 @@ public class Code23 {
     public boolean validateStackSequences(int[] pushed, int[] popped) {
         //栈
         Stack<Integer> stack = new Stack<>();
-        //已经进入栈的缓存
-        Set<Integer> set = new HashSet<>();
         //索引
         int pushedIndex = 0;
         int poppedIndex = 0;
@@ -52,29 +48,29 @@ public class Code23 {
         while (poppedIndex < popped.length) {
             //目标值
             int target = popped[poppedIndex];
-            //如果存在栈
-            if (set.contains(target) == true) {
-                //获取上一个
-                int pop = stack.pop();
-                //如果不同
-                if (pop != target) {
-                    //无法达成
-                    return false;
-                }
+            //获取上一个,如果是目标结果
+            if (stack.isEmpty() == false && stack.peek() == target) {
+                //拉取
+                stack.pop();
+                //下一个
+                poppedIndex++;
+                //本轮过
+                continue;
+            }
+            //如果越界
+            if (pushedIndex >= pushed.length) {
+                //不可以
+                return false;
+            }
+            //当前要插入的
+            int push = pushed[pushedIndex++];
+            //如果正好是目标值
+            if (push == target) {
                 //下一个
                 poppedIndex++;
             } else {
-                //当前要插入的
-                int push = pushed[pushedIndex++];
-                //如果正好是目标值
-                if (push == target) {
-                    //下一个
-                    poppedIndex++;
-                } else {
-                    //记录
-                    stack.push(push);
-                    set.add(push);
-                }
+                //记录
+                stack.push(push);
             }
         }
         //默认可以
