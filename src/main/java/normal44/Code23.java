@@ -61,13 +61,20 @@ public class Code23 {
                     //无法达成
                     return false;
                 }
+                //下一个
                 poppedIndex++;
             } else {
                 //当前要插入的
                 int push = pushed[pushedIndex++];
-                //记录
-                stack.push(push);
-                set.add(push);
+                //如果正好是目标值
+                if (push == target) {
+                    //下一个
+                    poppedIndex++;
+                } else {
+                    //记录
+                    stack.push(push);
+                    set.add(push);
+                }
             }
         }
         //默认可以
