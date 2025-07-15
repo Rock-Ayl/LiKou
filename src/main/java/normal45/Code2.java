@@ -133,14 +133,8 @@ public class Code2 {
 
         //循环
         for (int i = 0; i < nums.length; i++) {
-            //获取对应节点
-            Node node = nodeArr[i];
-            //获取节点对应分组
-            int group = node.group;
-            //获取其root
-            Node root = nodeArr[group];
-            //该位置对应数字
-            nums[i] = sortArr[root.groupIndex++].num;
+            ///获取对应节点的对应分组root,主节点下索引就是结果,记录并+1
+            nums[i] = sortArr[nodeArr[nodeArr[i].group].groupIndex++].num;
         }
 
         //返回结果
