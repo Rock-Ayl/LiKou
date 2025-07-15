@@ -1,6 +1,7 @@
 package normal45;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 /**
  * @Author ayl
@@ -104,7 +105,7 @@ public class Code2 {
         //克隆出新数组
         Node[] sortArr = nodeArr.clone();
         //排序
-        Arrays.sort(sortArr, (a, b) -> a.num - b.num);
+        Arrays.sort(sortArr, Comparator.comparingInt(a -> a.num));
         //指针
         int index = 0;
         //循环
@@ -113,15 +114,12 @@ public class Code2 {
             Node node = sortArr[index];
             //记录其分组索引
             node.groupIndex = index;
-            //下一个节点索引
-            index++;
-            //循环
-            while (index < sortArr.length && sortArr[index].num - node.num <= limit) {
+            //循环,+1并判断是否满足同一个分组条件
+            while (++index < sortArr.length && sortArr[index].num - node.num <= limit) {
                 //是同一个分组
                 sortArr[index].group = node.group;
                 //下一个
                 node = sortArr[index];
-                index++;
             }
         }
 
