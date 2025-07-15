@@ -114,17 +114,15 @@ public class Code2 {
             //记录其分组索引
             node.groupIndex = index;
             //下一个节点索引
-            int nextIndex = index + 1;
+            index++;
             //循环
-            while (nextIndex < sortArr.length && sortArr[nextIndex].num - node.num <= limit) {
+            while (index < sortArr.length && sortArr[index].num - node.num <= limit) {
                 //是同一个分组
-                sortArr[nextIndex].group = node.group;
+                sortArr[index].group = node.group;
                 //下一个
-                node = sortArr[nextIndex];
-                nextIndex++;
+                node = sortArr[index];
+                index++;
             }
-            //下一个分组
-            index = nextIndex;
         }
 
         /**
