@@ -75,11 +75,9 @@ public class Code19 {
                 int away = x - startX;
                 //计算出另一个x
                 int otherX = endX - away;
-                //获取数字
-                int num1 = grid[x][y];
-                int num2 = grid[otherX][y];
                 //交换
-                grid[x][y] = num2;
+                int num1 = grid[x][y];
+                grid[x][y] = grid[otherX][y];
                 grid[otherX][y] = num1;
             }
         }
