@@ -1,8 +1,5 @@
 package difficult3;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * @Author ayl
  * @Date 2025-08-11
@@ -68,7 +65,7 @@ public class Code13 {
         private int count = 0;
 
         //下一级节点
-        private Map<Character, Node> children = new HashMap<>();
+        private Node[] children = new Node[26];
 
     }
 
@@ -100,14 +97,14 @@ public class Code13 {
             return;
         }
         //当前字符
-        Character letter = word.charAt(index);
+        int letter = word.charAt(index) - 'a';
         //如果不存在
-        if (node.children.containsKey(letter) == false) {
+        if (node.children[letter] == null) {
             //初始化
-            node.children.put(letter, new Node());
+            node.children[letter] = new Node();
         }
         //获取下一个节点
-        Node nextNode = node.children.get(letter);
+        Node nextNode = node.children[letter];
         //+1
         nextNode.count++;
         //下一个
@@ -122,7 +119,7 @@ public class Code13 {
             return 0;
         }
         //当前字符,获取节点
-        Node nextNode = node.children.get(word.charAt(index));
+        Node nextNode = node.children[word.charAt(index) - 'a'];
         //返回结果和
         return nextNode.count + count(nextNode, word, index + 1);
     }
