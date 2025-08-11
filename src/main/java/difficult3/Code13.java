@@ -64,30 +64,16 @@ public class Code13 {
 
     private static class Node {
 
-        //当前字符
-        private Character letter;
-
         //到这里的单词书
         private int count = 0;
 
         //下一级节点
         private Map<Character, Node> children = new HashMap<>();
 
-        //初始化
-        public Node(Character letter) {
-            this.letter = letter;
-        }
-
-        //调试
-        @Override
-        public String toString() {
-            return String.format("letter=%s,count=%s,children=%s", this.letter, this.count, this.children.size());
-        }
-
     }
 
     //主节点
-    private Node root = new Node(null);
+    private Node root = new Node();
 
     public int[] sumPrefixScores(String[] words) {
         //循环
@@ -118,7 +104,7 @@ public class Code13 {
         //如果不存在
         if (node.children.containsKey(letter) == false) {
             //初始化
-            node.children.put(letter, new Node(letter));
+            node.children.put(letter, new Node());
         }
         //获取下一个节点
         Node nextNode = node.children.get(letter);
@@ -135,16 +121,10 @@ public class Code13 {
             //过
             return 0;
         }
-        //当前字符
-        Character letter = word.charAt(index);
-        //获取节点
-        Node nextNode = node.children.get(letter);
-        //结果,默认未该节点
-        int sum = nextNode.count;
-        //递归
-        sum += count(nextNode, word, index + 1);
-        //返回
-        return sum;
+        //当前字符,获取节点
+        Node nextNode = node.children.get(word.charAt(index));
+        //返回结果和
+        return nextNode.count + count(nextNode, word, index + 1);
     }
 
     public static void main(String[] args) {
