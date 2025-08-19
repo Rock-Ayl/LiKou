@@ -43,9 +43,6 @@ public class Code18 {
 
     private static class Node {
 
-        //索引
-        private int index;
-
         //数字
         private int number;
 
@@ -53,15 +50,14 @@ public class Code18 {
         private boolean used = false;
 
         //初始化
-        public Node(int index, int number) {
-            this.index = index;
+        public Node(int number) {
             this.number = number;
         }
 
         //调试
         @Override
         public String toString() {
-            return String.format("index=%s,number=%s,used=%s", this.index, this.number, this.used);
+            return String.format("number=%s,used=%s", this.number, this.used);
         }
 
     }
@@ -72,7 +68,7 @@ public class Code18 {
         //循环
         for (int i = 0; i < nodeArr.length; i++) {
             //初始化节点
-            nodeArr[i] = new Node(i, arr[i]);
+            nodeArr[i] = new Node(arr[i]);
         }
         //优先队列
         PriorityQueue<Node> queue = new PriorityQueue<>((a, b) -> a.number - b.number);
