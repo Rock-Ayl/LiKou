@@ -63,7 +63,7 @@ public class Code19 {
          */
 
         //初始化有效花朵列表
-        List<Integer> flowerList = new ArrayList<>();
+        List<Long> flowerList = new ArrayList<>();
         //有多少个2个椅子的数对
         int groupCount = 0;
         //有多少个有效花朵分组
@@ -73,7 +73,7 @@ public class Code19 {
         //循环
         while (index < corridor.length()) {
             //左边的花数量
-            int hit = 0;
+            long hit = 0L;
             //如果有左边的花并且持续连击
             while (index < corridor.length() && corridor.charAt(index) == 'P') {
                 //+1
@@ -109,7 +109,7 @@ public class Code19 {
             //+1
             groupCount++;
             //填充
-            flowerList.add(-1);
+            flowerList.add(-1L);
         }
 
         /**
@@ -134,35 +134,29 @@ public class Code19 {
         //循环
         for (int i = 0; i < flowerList.size(); i++) {
             //如果是填充
-            if (flowerList.get(i) == -1) {
+            if (flowerList.get(i) == -1L) {
                 //本轮过
                 continue;
             }
             //如果是左右边界
             if (i == 0 || i + 1 == flowerList.size()) {
                 //单纯是1
-                flowerList.set(i, 1);
+                flowerList.set(i, 1L);
                 //本轮过
                 continue;
             }
             //修复
-            flowerList.set(i, fix(flowerList.get(i)));
+            flowerList.set(i, flowerList.get(i) + 1L);
         }
         //删除之
         flowerList.removeIf(p -> p == -1);
         //循环
         for (int i = 1; i < flowerList.size(); i++) {
             //计算本次
-            flowerList.set(i, (int) (((long) (flowerList.get(i - 1) % 1000000007) * (flowerList.get(i) % 1000000007)) % 1000000007L));
+            flowerList.set(i, flowerList.get(i - 1) * flowerList.get(i) % 1000000007L);
         }
         //返回
-        return flowerList.get(flowerList.size() - 1);
-    }
-
-    //修正数量
-    private int fix(int count) {
-        //否则
-        return count + 1;
+        return flowerList.get(flowerList.size() - 1).intValue();
     }
 
     public static void main(String[] args) {
