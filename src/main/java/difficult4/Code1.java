@@ -176,14 +176,8 @@ public class Code1 {
         }
         //如果存在只有一个感染的、最大节点数量的分组
         if (maxNodeCount > 0) {
-            //循环
-            for (int infect : initial) {
-                //如果感染节点是目标结果
-                if (groupArr[infect] == maxNodeCountRootIndex) {
-                    //返回
-                    return infect;
-                }
-            }
+            //返回
+            return infectIndexArr[maxNodeCountRootIndex];
         }
 
         /**
