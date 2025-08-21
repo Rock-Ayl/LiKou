@@ -184,10 +184,8 @@ public class Code1 {
          * 第二次寻找结果,如果没有分组只有一个感染节点,那么就返回最小索引的
          */
 
-        //排序
-        Arrays.sort(initial);
-        //返回
-        return initial[0];
+        //返回最小的
+        return Arrays.stream(initial).min().getAsInt();
     }
 
     //递归并查集
