@@ -91,8 +91,8 @@ public class Code2 {
         //print(groupArr);
         //print(grid);
 
-        //最大连通岛屿数量,默认是单个岛屿最大
-        int maxCount = nodeCountList.stream().mapToInt(Integer::intValue).max().getAsInt();
+        //最大连通岛屿数量
+        int maxCount = 0;
         //循环
         for (int i = 0; i < grid.length; i++) {
             //循环2
@@ -103,17 +103,17 @@ public class Code2 {
                     continue;
                 }
                 //计算出如果填充该节点,可以获得的人工岛
-                int count = setAndCount(groupArr, grid, nodeCountList, i, j);
+                int count = setAndCount(groupArr, nodeCountList, i, j);
                 //刷新最大结果
                 maxCount = Math.max(maxCount, count);
             }
         }
-        //返回
-        return maxCount;
+        //返回结果,如果没有,则选择一个最大的普通岛屿
+        return maxCount != 0 ? maxCount : nodeCountList.stream().mapToInt(Integer::intValue).max().getAsInt();
     }
 
     //计算出如果填充该节点,可以获得的人工岛
-    private int setAndCount(int[][] groupArr, int[][] grid, List<Integer> nodeCountList, int x, int y) {
+    private int setAndCount(int[][] groupArr, List<Integer> nodeCountList, int x, int y) {
         //分组集合
         Set<Integer> groupSet = new HashSet<>(4);
         //获取可以连通的分组
