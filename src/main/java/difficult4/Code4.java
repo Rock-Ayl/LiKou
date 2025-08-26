@@ -89,10 +89,8 @@ public class Code4 {
 
     //构建字典树
     private void buildTree(String word, int index, Node node) {
-        //获取字符
-        char letter = word.charAt(index);
-        //计算出对应索引
-        int letterIndex = letter - 'a';
+        //获取字符,计算出对应索引
+        int letterIndex = word.charAt(index) - 'a';
         //如果没有初始化
         if (node.children == null) {
             //初始化
@@ -107,7 +105,7 @@ public class Code4 {
             //记录
             node.children[letterIndex] = nextNode;
         } else {
-            //使用已有的
+            //使用已有节点
             nextNode = node.children[letterIndex];
         }
         //如果是最后一个字符
@@ -140,10 +138,8 @@ public class Code4 {
             //没有
             return false;
         }
-        //获取字符
-        char letter = this.str.charAt(index);
-        //计算出对应索引
-        int letterIndex = letter - 'a';
+        //获取字符,计算出对应索引
+        int letterIndex = this.str.charAt(index) - 'a';
         //如果没有节点
         if (node.children[letterIndex] == null) {
             //没有
