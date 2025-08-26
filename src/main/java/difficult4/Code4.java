@@ -60,7 +60,7 @@ public class Code4 {
 
     public Code4(String[] words) {
         //主节点
-        this.root = new Node(' ');
+        this.root = new Node();
         //字符流缓存
         this.str = new StringBuilder();
         //循环
@@ -73,25 +73,11 @@ public class Code4 {
     //节点实体
     private static class Node {
 
-        //字符
-        private char letter;
-
         //该节点是否存在单词,默认不存在
         private boolean hadWord = false;
 
         //下一级节点
         private Node[] children;
-
-        //初始化
-        public Node(char letter) {
-            this.letter = letter;
-        }
-
-        //调试
-        @Override
-        public String toString() {
-            return String.format("letter=%s,hadWord=%s", this.letter, this.hadWord);
-        }
 
     }
 
@@ -117,7 +103,7 @@ public class Code4 {
         //判断之前是否有该节点
         if (node.children[letterIndex] == null) {
             //初始化
-            nextNode = new Node(letter);
+            nextNode = new Node();
             //记录
             node.children[letterIndex] = nextNode;
         } else {
