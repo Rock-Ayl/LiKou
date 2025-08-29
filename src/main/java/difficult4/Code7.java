@@ -85,7 +85,7 @@ public class Code7 {
                     //下一个和
                     int nextSum = (sum + num) % k;
                     //叠加本次count
-                    arr[i][j][nextSum] += count;
+                    arr[i][j][nextSum] = ((arr[i][j][nextSum] % 1000000007) + count) % 1000000007;
                 }
                 //循环
                 for (int sum = 0; sum < leftArr.length; sum++) {
