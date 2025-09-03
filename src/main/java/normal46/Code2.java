@@ -65,12 +65,8 @@ public class Code2 {
         for (int i = 0; i < words.length; i++) {
             //当前
             String word = words[i];
-            //当前前缀和,先判断单词是否符合规则
-            int sum = (cacheArr[word.charAt(0) - 'a'] == 1) && (cacheArr[word.charAt(word.length() - 1) - 'a'] == 1) ? 1 : 0;
-            //叠加前缀
-            sum += i > 0 ? arr[i - 1] : 0;
-            //记录本次
-            arr[i] = sum;
+            //记录前缀和
+            arr[i] = ((cacheArr[word.charAt(0) - 'a'] == 1) && (cacheArr[word.charAt(word.length() - 1) - 'a'] == 1) ? 1 : 0) + (i > 0 ? arr[i - 1] : 0);
         }
 
         /**
