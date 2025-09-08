@@ -54,23 +54,30 @@ package normal46;
 public class Code6 {
 
     public int minOperations(String s) {
-        //缓存
-        int[] arr = new int[26];
+        //默认
+        char def = '{';
+        //最小
+        char min = def;
         //循环
         for (char letter : s.toCharArray()) {
-            //+1
-            arr[letter - 'a']++;
-        }
-        //循环
-        for (int i = 1; i < arr.length; i++) {
-            //如果有了
-            if (arr[i] > 0) {
-                //返回
-                return 26 - i;
+            //如果是a
+            if (letter == 'a') {
+                //本轮过
+                continue;
+            }
+            //如果更小
+            if (letter < min) {
+                //刷新
+                min = letter;
             }
         }
-        //默认
-        return 0;
+        //如果没有其他的
+        if (min == def) {
+            //过
+            return 0;
+        }
+        //返回
+        return 26 - (min - 'a');
     }
 
     public static void main(String[] args) {
