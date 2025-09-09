@@ -68,9 +68,9 @@ public class Code7 {
                 result += one + two;
             }
             //下一个
-            a = (a - (a % 2)) / 2;
-            b = (b - (b % 2)) / 2;
-            c = (c - (c % 2)) / 2;
+            a = a >> 1;
+            b = b >> 1;
+            c = c >> 1;
         }
         //返回结果
         return result;
