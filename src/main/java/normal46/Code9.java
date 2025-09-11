@@ -95,10 +95,10 @@ public class Code9 {
                 continue;
             }
             //分别获取字符串
-            String a = word.substring(hadStart, hadEnd + 1);
-            String b = word.substring(targetStart, targetEnd + 1);
+            String had = word.substring(hadStart, hadEnd + 1);
+            String target = word.substring(targetStart, targetEnd + 1);
             //如果是结果
-            if (a.equals(b) == true) {
+            if (had.equals(target) == true) {
                 //返回结果
                 return i;
             }
