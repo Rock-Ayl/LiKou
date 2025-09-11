@@ -89,16 +89,18 @@ public class Code9 {
             //目标的
             int targetStart = 0;
             int targetEnd = hadEnd - hadStart;
-            //如果hash值一样
-            if (sum(arr, hadStart, hadEnd) == sum(arr, targetStart, targetEnd)) {
-                //分别获取字符串
-                String a = word.substring(hadStart, hadEnd + 1);
-                String b = word.substring(targetStart, targetEnd + 1);
-                //如果是结果
-                if (a.equals(b)) {
-                    //返回结果
-                    return i;
-                }
+            //如果hash值不一样
+            if (sum(arr, hadStart, hadEnd) != sum(arr, targetStart, targetEnd)) {
+                //本轮过
+                continue;
+            }
+            //分别获取字符串
+            String a = word.substring(hadStart, hadEnd + 1);
+            String b = word.substring(targetStart, targetEnd + 1);
+            //如果是结果
+            if (a.equals(b) == true) {
+                //返回结果
+                return i;
             }
         }
         //默认返回最大结果
