@@ -1,4 +1,4 @@
-package normal46;
+package easy41;
 
 import java.util.Arrays;
 
