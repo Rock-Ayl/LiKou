@@ -88,13 +88,13 @@ public class Code9 {
         private int count;
 
         //降低倍率
-        private int workerTime;
+        private long workerTime;
 
         //初始化
         public Worker(int workerTime) {
             this.workerTime = workerTime;
             this.count = 1;
-            this.nextTime = (long) (this.workerTime * this.count);
+            this.nextTime = this.workerTime * this.count;
         }
 
         //方便调试
@@ -124,30 +124,30 @@ public class Code9 {
          */
 
         //结果
-        long result = 0L;
+        long resultTime = 0L;
         //跳出
         out:
         //如果还需要降低
         while (mountainHeight > 0) {
-            //目标时间段
-            result = queue.peek().nextTime;
-            //如果还有
-            while (queue.peek().nextTime == result) {
-                //拉取
+            //目标时间
+            resultTime = queue.peek().nextTime;
+            //如果还有符合目标的工人
+            while (queue.peek().nextTime == resultTime) {
+                //拉取一个工人
                 Worker poll = queue.poll();
-                //-1,判断是否结束
+                //-1高度,判断是否结束
                 if (--mountainHeight == 0) {
                     //跳出
                     break out;
                 }
-                //计算下一次时间
-                poll.nextTime = poll.nextTime + ((long) poll.workerTime * ++poll.count);
-                //重新推送
+                //计算下一次该工人降低时间
+                poll.nextTime = poll.nextTime + (poll.workerTime * ++poll.count);
+                //重新推送队列
                 queue.add(poll);
             }
         }
         //返回
-        return result;
+        return resultTime;
     }
 
     public static void main(String[] args) {
