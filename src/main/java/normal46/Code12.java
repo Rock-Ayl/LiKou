@@ -82,7 +82,7 @@ public class Code12 {
              */
 
             //如果有
-            if (number >= 0 && number < firstArr.length) {
+            if (number < firstArr.length) {
                 //第一层初始化
                 firstArr[number]++;
             }
