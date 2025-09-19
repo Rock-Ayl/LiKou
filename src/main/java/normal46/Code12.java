@@ -1,7 +1,5 @@
 package normal46;
 
-import java.util.Arrays;
-
 /**
  * @Author ayl
  * @Date 2025-09-19
@@ -54,9 +52,6 @@ public class Code12 {
         int[] firstArr = new int[target + 1];
         int[] secondArr = new int[target + 1];
         int thirdArr = 0;
-        //填充-1视为未装填
-        Arrays.fill(firstArr, -1);
-        Arrays.fill(secondArr, -1);
         //循环
         for (int number : arr) {
 
@@ -67,7 +62,7 @@ public class Code12 {
             //所需第二层的结果
             int needSecondNumber = target - number;
             //如果有
-            if (needSecondNumber >= 0 && needSecondNumber < secondArr.length && secondArr[needSecondNumber] != -1) {
+            if (needSecondNumber >= 0 && needSecondNumber < secondArr.length) {
                 //叠加
                 thirdArr = (thirdArr + secondArr[needSecondNumber]) % 1000000007;
             }
@@ -78,16 +73,6 @@ public class Code12 {
 
             //循环
             for (int secondSum = number; secondSum < secondArr.length; secondSum++) {
-                //如果没有
-                if (firstArr[secondSum - number] == -1) {
-                    //本轮过
-                    continue;
-                }
-                //如果不存在
-                if (secondArr[secondSum] == -1) {
-                    //初始化
-                    secondArr[secondSum] = 0;
-                }
                 //叠加
                 secondArr[secondSum] = (secondArr[secondSum] + firstArr[secondSum - number]) % 1000000007;
             }
@@ -99,7 +84,7 @@ public class Code12 {
             //如果有
             if (number >= 0 && number < firstArr.length) {
                 //第一层初始化
-                firstArr[number] = (firstArr[number] == -1 ? 1 : firstArr[number] + 1);
+                firstArr[number]++;
             }
 
         }
