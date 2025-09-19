@@ -50,17 +50,14 @@ import java.util.Arrays;
 public class Code12 {
 
     public int threeSumMulti(int[] arr, int target) {
-        //动态规划数组
-        int[][] levelArr = new int[3][target + 1];
-        //循环
-        for (int[] ints : levelArr) {
-            //填充-1视为未装填
-            Arrays.fill(ints, -1);
-        }
         //三层
-        int[] firstArr = levelArr[0];
-        int[] secondArr = levelArr[1];
-        int[] thirdArr = levelArr[2];
+        int[] firstArr = new int[target + 1];
+        int[] secondArr = new int[target + 1];
+        int[] thirdArr = new int[target + 1];
+        //填充-1视为未装填
+        Arrays.fill(firstArr, -1);
+        Arrays.fill(secondArr, -1);
+        Arrays.fill(thirdArr, -1);
         //循环
         for (int number : arr) {
 
