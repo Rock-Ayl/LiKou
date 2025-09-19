@@ -50,14 +50,13 @@ import java.util.Arrays;
 public class Code12 {
 
     public int threeSumMulti(int[] arr, int target) {
-        //三层
+        //三层,第三层只需要最终结果
         int[] firstArr = new int[target + 1];
         int[] secondArr = new int[target + 1];
-        int[] thirdArr = new int[target + 1];
+        int thirdArr = 0;
         //填充-1视为未装填
         Arrays.fill(firstArr, -1);
         Arrays.fill(secondArr, -1);
-        Arrays.fill(thirdArr, -1);
         //循环
         for (int number : arr) {
 
@@ -69,13 +68,8 @@ public class Code12 {
             int needSecondNumber = target - number;
             //如果有
             if (needSecondNumber >= 0 && needSecondNumber < secondArr.length && secondArr[needSecondNumber] != -1) {
-                //如果是不存在
-                if (thirdArr[number + needSecondNumber] == -1) {
-                    //初始化
-                    thirdArr[number + needSecondNumber] = 0;
-                }
                 //叠加
-                thirdArr[number + needSecondNumber] = (thirdArr[number + needSecondNumber] + secondArr[needSecondNumber]) % 1000000007;
+                thirdArr = (thirdArr + secondArr[needSecondNumber]) % 1000000007;
             }
 
             /**
@@ -111,7 +105,7 @@ public class Code12 {
         }
 
         //返回
-        return thirdArr[target];
+        return thirdArr;
     }
 
     public static void main(String[] args) {
