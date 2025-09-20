@@ -78,14 +78,14 @@ public class Code13 {
             //叠加hash和
             hashSum += arr[i];
             //如果需要删除hash和
-            if (i - pattern.length > 0) {
+            if (i - pattern.length >= 0) {
                 //删除hash和
                 hashSum -= arr[i - pattern.length];
-            }
-            //排除第一个0,如果hash一样
-            if (i - pattern.length >= 0 && hashSum == targetHashSum) {
-                //计算本次
-                result += compareTo(arr, pattern, i);
+                //排除第一个0,如果hash一样
+                if (hashSum == targetHashSum) {
+                    //计算本次
+                    result += compareTo(arr, pattern, i);
+                }
             }
         }
         //返回
