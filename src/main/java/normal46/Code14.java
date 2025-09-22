@@ -74,18 +74,47 @@ public class Code14 {
         return result;
     }
 
-    //todo 二分 寻找是否存在指定区间的数字
+    //二分 寻找是否存在指定区间的数字
     private boolean findNumber(List<Integer> bIndexList, int start, int end, int targetStart, int targetEnd) {
-        //循环
-        for (Integer number : bIndexList) {
-            //如果是
-            if (number >= targetStart && number <= targetEnd) {
-                //返回
-                return true;
-            }
+        //如果越界
+        if (start > end) {
+            //过
+            return false;
         }
-        //默认不是
-        return false;
+        //如果只有一个
+        if (start == end) {
+            //返回
+            return target(bIndexList.get(start), targetStart, targetEnd);
+        }
+        //如果没有距离
+        if (start + 1 == end) {
+            //返回
+            return target(bIndexList.get(start), targetStart, targetEnd) ||
+                    target(bIndexList.get(end), targetStart, targetEnd);
+        }
+        //计算中间节点
+        int mid = (end - start) / 2 + start;
+        //对应数字
+        int midNumber = bIndexList.get(mid);
+        //如果是
+        if (target(midNumber, targetStart, targetEnd)) {
+            //返回
+            return true;
+        }
+        //如果更小
+        if (midNumber < targetStart) {
+            //右边继续
+            return findNumber(bIndexList, mid + 1, end, targetStart, targetEnd);
+        } else {
+            //左边继续
+            return findNumber(bIndexList, start, mid - 1, targetStart, targetEnd);
+        }
+    }
+
+    //判断是否为目标
+    private boolean target(int num, int targetStart, int targetEnd) {
+        //判断
+        return num >= targetStart && num <= targetEnd;
     }
 
     //寻找单词出现的节点
@@ -137,7 +166,7 @@ public class Code14 {
     }
 
     public static void main(String[] args) {
-        List<Integer> integers = new Code14().beautifulIndices("isawsquirrelnearmysquirrelhouseohmy", "my", "squirrel", 15);
+        List<Integer> integers = new Code14().beautifulIndices("rinzbrrr", "nzb", "r", 2);
         System.out.println();
     }
 
