@@ -140,7 +140,7 @@ public class Code12 {
                 //刷新最大结果
                 max = Math.max(max, leftNode.count);
             }
-            //循环左边
+            //循环右边
             for (int right = midNode.index + 1; right <= Math.min(nodeArr.length - 1, midNode.index + d); right++) {
                 //获取节点
                 Node rightNode = nodeArr[right];
