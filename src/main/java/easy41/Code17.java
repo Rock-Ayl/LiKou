@@ -53,16 +53,20 @@ public class Code17 {
     public int alternatingSum(int[] nums) {
         //结果
         int result = 0;
+        //正面
+        boolean right = true;
         //循环
         for (int i = 0; i < nums.length; i++) {
             //判断奇偶
-            if (i % 2 == 0) {
+            if (right == true) {
                 //叠加
                 result += nums[i];
             } else {
                 //叠加
                 result -= nums[i];
             }
+            //方向交换
+            right = !right;
         }
         //返回
         return result;
