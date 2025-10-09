@@ -1,9 +1,7 @@
 package difficult4;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @Author ayl
@@ -122,20 +120,28 @@ public class Code15 {
          */
 
         //不同分组的排序
-        Map<Integer, Group> groupMap = new HashMap<>();
+        Group[] groupMap = new Group[nums.length];
         //循环
         for (int i = 0; i < groupArr.length; i++) {
             //数字
             int num = nums[i];
             //对应分组
             int group = groupArr[i];
-            //初始化
-            groupMap.putIfAbsent(group, new Group());
+            //如果没有
+            if (groupMap[group] == null) {
+                //初始化
+                groupMap[group] = new Group();
+            }
             //加入数字
-            groupMap.get(group).numberList.add(num);
+            groupMap[group].numberList.add(num);
         }
         //循环
-        for (Group group : groupMap.values()) {
+        for (Group group : groupMap) {
+            //判空
+            if (group == null) {
+                //本轮过
+                continue;
+            }
             //排序
             group.numberList.sort((a, b) -> b.compareTo(a));
             //默认索引
@@ -152,7 +158,7 @@ public class Code15 {
         //循环
         for (int i = 0; i < groupArr.length; i++) {
             //对应分组
-            Group group = groupMap.get(groupArr[i]);
+            Group group = groupMap[groupArr[i]];
             //判断奇偶
             if (i % 2 == 0) {
                 //使用左边、并+1
@@ -195,7 +201,8 @@ public class Code15 {
                 new int[][]{
                         new int[]{0, 2},
                         new int[]{1, 2}
-                }));;
+                }));
+        ;
     }
 
 }
