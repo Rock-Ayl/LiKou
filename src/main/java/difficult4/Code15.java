@@ -155,18 +155,22 @@ public class Code15 {
 
         //结果
         long result = 0L;
+        //奇偶
+        boolean right = true;
         //循环
         for (int i = 0; i < groupArr.length; i++) {
             //对应分组
             Group group = groupMap[groupArr[i]];
             //判断奇偶
-            if (i % 2 == 0) {
+            if (right == true) {
                 //使用左边、并+1
                 result += group.numberList.get(group.start++);
             } else {
                 //使用右边、并-1
                 result -= group.numberList.get(group.end--);
             }
+            //换方向
+            right = !right;
         }
         //返回
         return result;
