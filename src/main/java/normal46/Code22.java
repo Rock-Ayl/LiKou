@@ -69,23 +69,19 @@ public class Code22 {
         //时间
         private int time;
 
-        //分数
-        private int score;
-
         //分数-前缀和
         private long scoreSum;
 
         //初始化
-        public Time(int time, int score, long scoreSum) {
+        public Time(int time, long scoreSum) {
             this.time = time;
-            this.score = score;
             this.scoreSum = scoreSum;
         }
 
         //方便调试
         @Override
         public String toString() {
-            return String.format("time=%s,score=%s,scoreSum=%s", this.time, this.score, this.scoreSum);
+            return String.format("time=%s,scoreSum=%s", this.time, this.scoreSum);
         }
 
     }
@@ -97,7 +93,7 @@ public class Code22 {
         //计算分数前缀和
         long scoreSum = (this.timeList.size() > 0 ? this.timeList.get(this.timeList.size() - 1).scoreSum : 0L) + score;
         //组装
-        this.timeList.add(new Time(time, score, scoreSum));
+        this.timeList.add(new Time(time, scoreSum));
     }
 
     public long totalScore(int startTime, int endTime) {
