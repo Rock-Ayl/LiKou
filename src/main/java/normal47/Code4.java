@@ -43,26 +43,20 @@ public class Code4 {
         //上一个节点y
         private int lastY;
 
-        //初始化1
-        public Node() {
-
-        }
-
         //初始化2
         public Node(int lastX, int lastY) {
             this.lastX = lastX;
             this.lastY = lastY;
         }
 
-        //调试
-        @Override
-        public String toString() {
-            return String.format("lastX=%s,lastY=%s", this.lastX, this.lastY);
-        }
-
     }
 
     public List<List<Integer>> pathWithObstacles(int[][] obstacleGrid) {
+
+        /**
+         * 简单验证
+         */
+
         //如果最后一个节点有障碍
         if (obstacleGrid[obstacleGrid.length - 1][obstacleGrid[0].length - 1] == 1) {
             //过
@@ -73,6 +67,11 @@ public class Code4 {
             //过
             return new ArrayList<>();
         }
+
+        /**
+         * 动态规划,计算每一个节点的上一个节点
+         */
+
         //动态规划
         Node[][] arr = new Node[obstacleGrid.length][obstacleGrid[0].length];
         //初始化开始节点
@@ -122,6 +121,11 @@ public class Code4 {
                 }
             }
         }
+
+        /**
+         * 从最后一个节点 -> 第一个节点
+         */
+
         //初始化
         List<List<Integer>> result = new ArrayList<>();
         //最后一个节点
