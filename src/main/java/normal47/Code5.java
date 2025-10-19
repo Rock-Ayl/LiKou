@@ -34,35 +34,32 @@ public class Code5 {
 
     public int[] findSwapValues(int[] array1, int[] array2) {
         //各自的和
-        int sum1 = 0;
-        int sum2 = 0;
+        int target = 0;
         //数组2的枚举
         Set<Integer> array2Set = new HashSet<>();
         //循环
         for (int num : array1) {
             //叠加
-            sum1 += num;
+            target += num;
         }
         //循环
         for (int num : array2) {
             //叠加
-            sum2 += num;
+            target -= num;
             //记录枚举
             array2Set.add(num);
         }
-        //1比2缺多少
-        int other = sum1 - sum2;
         //如果不是偶数
-        if (other % 2 != 0) {
+        if (target % 2 != 0) {
             //过
             return new int[]{};
         }
         //1需要增加的值
-        other = other / 2;
+        target = target / 2;
         //循环数字1
         for (int num : array1) {
             //所需
-            int need = num - other;
+            int need = num - target;
             //如果存在
             if (array2Set.contains(need) == true) {
                 //返回结果
