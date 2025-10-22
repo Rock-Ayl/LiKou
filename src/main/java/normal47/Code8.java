@@ -97,14 +97,10 @@ public class Code8 {
          * 优先计算乘除
          */
 
-        //节点列表
-        List<Node> nextNodeList = new ArrayList<>();
         //索引
         int index = 0;
         //重新从第一个索引开始
         node = nodeList.get(index++);
-        //组装到新列表
-        nextNodeList.add(node);
         //循环
         while (index < nodeList.size()) {
             //下一个节点
@@ -123,8 +119,6 @@ public class Code8 {
             else {
                 //换节点
                 node = nextNode;
-                //组装到新列表
-                nextNodeList.add(nextNode);
             }
         }
 
@@ -135,12 +129,14 @@ public class Code8 {
         //和
         int sum = 0;
         //循环
-        for (Node sumNode : nextNodeList) {
-            //判断加减
+        for (Node sumNode : nodeList) {
+            //如果是加
             if (sumNode.symbol == '+') {
                 //叠加
                 sum += sumNode.number;
-            } else {
+            }
+            //如果是减
+            if (sumNode.symbol == '-') {
                 //叠加
                 sum -= sumNode.number;
             }
