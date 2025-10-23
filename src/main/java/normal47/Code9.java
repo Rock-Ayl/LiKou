@@ -46,22 +46,20 @@ public class Code9 {
     //递归寻找
     private boolean find(int[][] matrix, int x, int y, int target) {
         //如果越界
-        if (x < 0 || y < 0 || x >= matrix.length || y >= matrix[0].length) {
+        if (y < 0 || x >= matrix.length) {
             //过
             return false;
-        }
-        //如果是目标
-        if (matrix[x][y] == target) {
-            //返回
-            return true;
         }
         //判断与目标相比大小
         if (matrix[x][y] < target) {
             //递归
             return find(matrix, x + 1, y, target);
-        } else {
+        } else if (matrix[x][y] > target) {
             //递归
             return find(matrix, x, y - 1, target);
+        } else {
+            //返回
+            return true;
         }
     }
 
