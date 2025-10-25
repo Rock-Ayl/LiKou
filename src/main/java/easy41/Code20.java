@@ -1,8 +1,5 @@
 package easy41;
 
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  * @Author ayl
  * @Date 2025-10-25
@@ -53,32 +50,37 @@ import java.util.Set;
 public class Code20 {
 
     public int missingMultiple(int[] nums, int k) {
-        //缓存
-        Set<Integer> set = new HashSet<>();
+        //数组长度
+        int[] arr = new int[nums.length + 2];
         //循环
         for (int num : nums) {
             //如果是
             if (num % k == 0) {
-                //加入缓存
-                set.add(num);
+                //计算索引
+                int index = num / k;
+                //如果值得加入
+                if (index < arr.length) {
+                    //加入缓存
+                    arr[index]++;
+                }
             }
         }
         //数字
-        int num = k;
+        int num = 1;
         //循环
         while (true) {
             //如果不存在
-            if (set.contains(num) == false) {
+            if (arr[num] == 0) {
                 //返回
-                return num;
+                return num * k;
             }
             //叠加
-            num += k;
+            num++;
         }
     }
 
     public static void main(String[] args) {
-        System.out.println(new Code20().missingMultiple(new int[]{8, 2, 3, 4, 6}, 2));
+        System.out.println(new Code20().missingMultiple(new int[]{99}, 99));
     }
 
 }
