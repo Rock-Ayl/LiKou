@@ -72,29 +72,20 @@ package normal47;
 public class Code11 {
 
     public String maxSumOfSquares(int num, int sum) {
-        //字符串
-        StringBuilder str = new StringBuilder();
-        //索引
-        int index = 0;
-        //循环
-        while (index < num) {
-            //循环
-            if (sum >= 9) {
-                //使用9
-                str.append(9);
-                sum -= 9;
-            } else {
-                //组装
-                str.append(sum);
-                sum -= sum;
-            }
-            //下一个
-            index++;
-        }
-        //如果还有
-        if (sum > 0) {
+        //如果不会有结果
+        if (num * 9 < sum) {
             //过
             return "";
+        }
+        //字符串
+        StringBuilder str = new StringBuilder(num);
+        //循环
+        while (str.length() < num) {
+            //所需数字
+            int need = sum >= 9 ? 9 : sum;
+            //结算
+            str.append(need);
+            sum -= need;
         }
         //返回
         return str.toString();
