@@ -75,32 +75,56 @@ public class Code16 {
         Map<Integer, Integer> ballMap = new HashMap<>();
         //每种颜色数量map
         Map<Integer, Integer> countMap = new HashMap<>();
+        //当前数量
+        int countSum = 0;
         //循环
         for (int i = 0; i < queries.length; i++) {
-            //获取球和颜色
-            int ball = queries[i][0];
-            int color = queries[i][1];
-            //获取之前的颜色
+
+            //获取当前球、颜色
+            Integer ball = queries[i][0];
+            Integer color = queries[i][1];
+            //获取该球之前的颜色
             Integer lastColor = ballMap.get(ball);
+
+            /**
+             * 旧颜色
+             */
+
             //如果之前染了颜色
             if (lastColor != null) {
                 //计算新的数量
                 int count = countMap.get(lastColor) - 1;
                 //如果没有了
                 if (count == 0) {
-                    //删除
-                    countMap.remove(lastColor);
-                } else {
-                    //覆盖
-                    countMap.put(lastColor, count);
+                    //-1
+                    countSum--;
                 }
+                //覆盖
+                countMap.put(lastColor, count);
             }
+
+            /**
+             * 新颜色
+             */
+
             //覆盖新的颜色
             ballMap.put(ball, color);
-            //颜色+1
-            countMap.put(color, countMap.getOrDefault(color, 0) + 1);
+            //新的数量
+            int newCount = countMap.getOrDefault(color, 0) + 1;
+            //如果新增颜色
+            if (newCount == 1) {
+                //+1
+                countSum++;
+            }
+            //覆盖
+            countMap.put(color, newCount);
+
+            /**
+             * 记录本次结果
+             */
+
             //记录本次结果
-            result[i] = countMap.size();
+            result[i] = countSum;
         }
         //返回结果
         return result;
