@@ -67,13 +67,8 @@ import java.util.Arrays;
 public class Code17 {
 
     public long maxProduct(int[] nums) {
-        //循环
-        for (int i = 0; i < nums.length; i++) {
-            //转为正数
-            nums[i] = Math.abs(nums[i]);
-        }
-        //排序
-        Arrays.sort(nums);
+        //转为正数、排序
+        nums = Arrays.stream(nums).map(Math::abs).sorted().toArray();
         //返回
         return 100000L * nums[nums.length - 2] * nums[nums.length - 1];
     }
