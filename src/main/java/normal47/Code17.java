@@ -1,6 +1,7 @@
 package normal47;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 /**
  * @Author ayl
@@ -67,10 +68,20 @@ import java.util.Arrays;
 public class Code17 {
 
     public long maxProduct(int[] nums) {
-        //转为正数、排序
-        nums = Arrays.stream(nums).map(Math::abs).sorted().toArray();
-        //返回
-        return 100000L * nums[nums.length - 2] * nums[nums.length - 1];
+        //转为正数、排序、相乘
+        return Arrays.stream(nums)
+                //转正数
+                .map(Math::abs)
+                //装箱
+                .boxed()
+                //转为long
+                .map(Long::valueOf)
+                //倒序排序
+                .sorted(Comparator.reverseOrder())
+                //需要前2个(第三个会被替换)
+                .limit(2)
+                //3个数字相乘
+                .reduce(100000L, (a, b) -> a * b);
     }
 
     public static void main(String[] args) {
