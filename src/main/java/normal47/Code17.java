@@ -74,11 +74,6 @@ public class Code17 {
         }
         //排序
         Arrays.sort(nums);
-        //如果不够
-        if (nums[nums.length - 2] == 0) {
-            //过
-            return 0L;
-        }
         //返回
         return 100000L * nums[nums.length - 2] * nums[nums.length - 1];
     }
