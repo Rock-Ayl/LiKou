@@ -31,15 +31,18 @@ public class Code19 {
     //合并数字
     private int merge(int num1, int num2) {
         //位移次数
-        int count = num2;
+        int count = 0;
+        //位移数字
+        int moveNumber = num2;
         //如果可以位移
-        while (count != 0) {
+        while (moveNumber != 0) {
             //位移
-            num1 = num1 << 1;
-            count = count >> 1;
+            moveNumber = moveNumber >> 1;
+            //+1
+            count++;
         }
-        //返回
-        return num1 + num2;
+        //数字1位移对应次数 + 数字2
+        return (num1 << count) + num2;
     }
 
     public static void main(String[] args) {
