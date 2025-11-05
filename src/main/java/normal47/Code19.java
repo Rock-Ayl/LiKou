@@ -24,9 +24,22 @@ public class Code19 {
 
     //构建数字
     private int build(int[] nums, int one, int two, int three) {
-        return Integer.parseInt(Integer.toBinaryString(nums[one]) +
-                Integer.toBinaryString(nums[two]) +
-                Integer.toBinaryString(nums[three]), 2);
+        //合并
+        return merge(merge(nums[one], nums[two]), nums[three]);
+    }
+
+    //合并数字
+    private int merge(int num1, int num2) {
+        //位移次数
+        int count = num2;
+        //如果可以位移
+        while (count != 0) {
+            //位移
+            num1 = num1 << 1;
+            count = count >> 1;
+        }
+        //返回
+        return num1 + num2;
     }
 
     public static void main(String[] args) {
