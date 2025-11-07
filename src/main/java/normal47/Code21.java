@@ -1,9 +1,8 @@
 package normal47;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * @Author ayl
@@ -68,14 +67,14 @@ public class Code21 {
         private Boolean walked;
 
         //关联节点
-        private Set<Node> nextNodeSet;
+        private List<Node> nextNodeSet;
 
         //初始化
         public Node(Integer number, Boolean apple) {
             this.number = number;
             this.apple = apple;
             this.walked = false;
-            this.nextNodeSet = new HashSet<>();
+            this.nextNodeSet = new ArrayList<>();
         }
 
         //方便调试
