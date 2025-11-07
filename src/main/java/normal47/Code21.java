@@ -57,9 +57,6 @@ public class Code21 {
 
     private static class Node {
 
-        //编号
-        private Integer number;
-
         //是否有苹果
         private Boolean apple;
 
@@ -70,22 +67,15 @@ public class Code21 {
         private List<Node> nextNodeSet;
 
         //初始化
-        public Node(Integer number, Boolean apple) {
-            this.number = number;
+        public Node(Boolean apple) {
             this.apple = apple;
             this.walked = false;
             this.nextNodeSet = new ArrayList<>();
         }
 
-        //方便调试
-        @Override
-        public String toString() {
-            return String.format("number=%s,apple=%s,walked=%s,nextNodeSet=%s", this.number, this.apple, this.walked, this.nextNodeSet.size());
-        }
-
     }
 
-    //统计苹果
+    //统计苹果总数
     private int result = 0;
 
     public int minTime(int n, int[][] edges, List<Boolean> hasApple) {
@@ -94,9 +84,7 @@ public class Code21 {
         //循环
         for (int i = 0; i < n; i++) {
             //初始化节点
-            Node node = new Node(i, hasApple.get(i));
-            //记录
-            nodeArr[i] = node;
+            nodeArr[i] = new Node(hasApple.get(i));
         }
         //循环
         for (int[] edge : edges) {
@@ -107,11 +95,9 @@ public class Code21 {
             node1.nextNodeSet.add(node2);
             node2.nextNodeSet.add(node1);
         }
-        //开始节点
-        Node root = nodeArr[0];
-        //开始收集并返回
-        next(root);
-        //返回结果
+        //从0节点开始收集并返回
+        next(nodeArr[0]);
+        //返回结果,去掉0节点的结果
         return this.result > 0 ? this.result - 2 : 0;
     }
 
