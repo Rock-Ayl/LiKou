@@ -82,12 +82,7 @@ public class Code24 {
             return;
         }
         //要删除的索引
-        int removeIndex = index + k - 1;
-        //如果越界
-        if (removeIndex >= list.size()) {
-            //删除之
-            removeIndex = removeIndex % list.size();
-        }
+        int removeIndex = (index + k - 1) % list.size();
         //删除
         list.remove(removeIndex);
         //递归删除
