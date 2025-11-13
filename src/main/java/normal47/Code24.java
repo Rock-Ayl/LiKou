@@ -69,24 +69,17 @@ public class Code24 {
             //初始化节点
             list.add(i);
         }
-        //递归删除
-        remove(list, 0, k);
+        //删除索引
+        int removeIndex = 0;
+        //循环
+        while (list.size() > 1) {
+            //要删除的索引
+            removeIndex = (removeIndex + k - 1) % list.size();
+            //删除
+            list.remove(removeIndex);
+        }
         //返回
         return list.get(0);
-    }
-
-    private void remove(List<Integer> list, int index, int k) {
-        //如果够了
-        if (list.size() < 2) {
-            //过
-            return;
-        }
-        //要删除的索引
-        int removeIndex = (index + k - 1) % list.size();
-        //删除
-        list.remove(removeIndex);
-        //递归删除
-        remove(list, removeIndex, k);
     }
 
     public static void main(String[] args) {
