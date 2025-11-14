@@ -98,21 +98,11 @@ public class Code25 {
             //循环
             for (int i = 2; i < numList.size(); i++) {
                 //计算并刷新最小值
-                min = Math.min(min, count(numList, i));
+                min = Math.min(min, (numList.get(i) - numList.get(i - 2)) * 2);
             }
         }
         //返回
         return min == Integer.MAX_VALUE ? -1 : min;
-    }
-
-    //计算距离
-    private int count(List<Integer> numList, int last) {
-        //三个索引
-        int a = numList.get(last - 2);
-        int b = numList.get(last - 1);
-        int c = numList.get(last);
-        //返回
-        return c - b + b - a + c - a;
     }
 
     public static void main(String[] args) {
