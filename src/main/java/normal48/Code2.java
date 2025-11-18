@@ -113,10 +113,12 @@ public class Code2 {
             //当前节点
             int element = elements[i];
             //如果走过了
-            if (++walked[element] > 1) {
+            if (walked[element] == 1) {
                 //本轮过
                 continue;
             }
+            //+1
+            walked[element]++;
             //叠加分片
             int part = element;
             //循环满足
