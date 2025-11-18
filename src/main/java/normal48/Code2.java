@@ -1,6 +1,8 @@
 package normal48;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @Author ayl
@@ -79,8 +81,10 @@ public class Code2 {
         Arrays.fill(result, -1);
         //最大值
         int max = 0;
+        //次数
+        int count = 0;
         //缓存
-        Map<Integer, List<Integer>> groupMap = new HashMap<>();
+        List<Integer>[] groupMap = new List[100001];
         //循环
         for (int i = 0; i < groups.length; i++) {
             //获取数字
@@ -88,19 +92,21 @@ public class Code2 {
             //刷新最大
             max = Math.max(max, group);
             //如果不存在
-            if (groupMap.containsKey(group) == false) {
+            if (groupMap[group] == null) {
                 //初始化
-                groupMap.put(group, new ArrayList<>());
+                groupMap[group] = new ArrayList<>();
+                //+1
+                count++;
             }
             //记录索引
-            groupMap.get(group).add(i);
+            groupMap[group].add(i);
         }
         //走过的缓存
         int[] walked = new int[100001];
         //循环
         for (int i = 0; i < elements.length; i++) {
             //如果没有了
-            if (groupMap.isEmpty()) {
+            if (count == 0) {
                 //跳出
                 break;
             }
@@ -116,14 +122,16 @@ public class Code2 {
             //循环满足
             while (element <= max) {
                 //如果本次满足
-                if (groupMap.containsKey(element)) {
+                if (groupMap[element] != null) {
                     //循环索引
-                    for (Integer index : groupMap.get(element)) {
+                    for (Integer index : groupMap[element]) {
                         //记录
                         result[index] = i;
                     }
                     //不再需要处理
-                    groupMap.remove(element);
+                    groupMap[element] = null;
+                    //-1
+                    count--;
                 }
                 //下一个
                 element += part;
