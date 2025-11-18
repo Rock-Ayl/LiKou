@@ -114,7 +114,7 @@ public class Code2 {
             //叠加分片
             int part = element;
             //循环满足
-            while (element >= 1 && element <= max) {
+            while (element <= max) {
                 //如果本次满足
                 if (groupMap.containsKey(element)) {
                     //循环索引
