@@ -96,7 +96,7 @@ public class Code2 {
             groupMap.get(group).add(i);
         }
         //走过的缓存
-        Set<Integer> walked = new HashSet<>();
+        int[] walked = new int[100001];
         //循环
         for (int i = 0; i < elements.length; i++) {
             //如果没有了
@@ -107,12 +107,10 @@ public class Code2 {
             //当前节点
             int element = elements[i];
             //如果走过了
-            if (walked.contains(element) == true) {
+            if (++walked[element] > 1) {
                 //本轮过
                 continue;
             }
-            //组装
-            walked.add(element);
             //叠加分片
             int part = element;
             //循环满足
