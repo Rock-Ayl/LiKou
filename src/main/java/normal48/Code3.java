@@ -1,8 +1,5 @@
 package normal48;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * @Author ayl
  * @Date 2025-11-19
@@ -61,20 +58,21 @@ import java.util.Map;
 public class Code3 {
 
     //缓存
-    private Map<String, Integer> cacheMap = new HashMap<>();
+    private int[][] arr;
 
     public Code3(int rows) {
-
+        //初始化
+        this.arr = new int[26][rows + 1];
     }
 
     public void setCell(String cell, int value) {
         //覆盖
-        this.cacheMap.put(cell, value);
+        this.arr[cell.charAt(0) - 'A'][Integer.valueOf(cell.substring(1))] = value;
     }
 
     public void resetCell(String cell) {
         //覆盖
-        this.cacheMap.put(cell, 0);
+        this.arr[cell.charAt(0) - 'A'][Integer.valueOf(cell.substring(1))] = 0;
     }
 
     public int getValue(String formula) {
@@ -91,7 +89,7 @@ public class Code3 {
         //如果是单元格
         if (c >= 'A' && c <= 'Z') {
             //获取,默认0
-            return this.cacheMap.getOrDefault(word, 0);
+            return this.arr[word.charAt(0) - 'A'][Integer.valueOf(word.substring(1))];
         } else {
             //返回数字
             return Integer.valueOf(word);
