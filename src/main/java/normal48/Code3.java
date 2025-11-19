@@ -67,12 +67,12 @@ public class Code3 {
 
     public void setCell(String cell, int value) {
         //覆盖
-        this.arr[cell.charAt(0) - 'A'][Integer.valueOf(cell.substring(1))] = value;
+        put(cell, value);
     }
 
     public void resetCell(String cell) {
         //覆盖
-        this.arr[cell.charAt(0) - 'A'][Integer.valueOf(cell.substring(1))] = 0;
+        put(cell, 0);
     }
 
     public int getValue(String formula) {
@@ -82,18 +82,24 @@ public class Code3 {
         return get(split[0]) + get(split[1]);
     }
 
-    //获取数字 or 字符
-    private int get(String word) {
+    //获取 字符 or 数字
+    private int get(String cell) {
         //获取数字
-        char c = word.charAt(0);
+        char c = cell.charAt(0);
         //如果是单元格
         if (c >= 'A' && c <= 'Z') {
             //获取,默认0
-            return this.arr[word.charAt(0) - 'A'][Integer.valueOf(word.substring(1))];
+            return this.arr[cell.charAt(0) - 'A'][Integer.valueOf(cell.substring(1))];
         } else {
             //返回数字
-            return Integer.valueOf(word);
+            return Integer.valueOf(cell);
         }
+    }
+
+    //覆盖
+    private void put(String cell, int value) {
+        //覆盖
+        this.arr[cell.charAt(0) - 'A'][Integer.valueOf(cell.substring(1))] = value;
     }
 
 }
