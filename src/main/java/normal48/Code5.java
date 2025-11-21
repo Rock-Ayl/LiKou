@@ -1,7 +1,6 @@
 package normal48;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
 
 /**
  * @Author ayl
@@ -54,7 +53,9 @@ public class Code5 {
         //前缀和
         int[] sumArr = new int[hours.length];
         //索引缓存
-        Map<Integer, Integer> indexMap = new HashMap<>();
+        int[] indexMap = new int[(hours.length + 1) * 2];
+        //填充负数
+        Arrays.fill(indexMap, -1);
         //循环
         for (int i = 0; i < sumArr.length; i++) {
             //计算本次
@@ -67,9 +68,9 @@ public class Code5 {
                 //所需
                 int need = sumArr[i] - 1;
                 //如果存在结果
-                if (indexMap.containsKey(need)) {
+                if (indexMap[need + hours.length + 1] != -1) {
                     //获取开始索引
-                    int start = indexMap.get(need);
+                    int start = indexMap[need + hours.length + 1];
                     //长度
                     int length = i - start;
                     //刷新最大
@@ -77,9 +78,9 @@ public class Code5 {
                 }
             }
             //如果没出现过
-            if (indexMap.containsKey(sumArr[i]) == false) {
+            if (indexMap[sumArr[i] + hours.length + 1] == -1) {
                 //记录索引
-                indexMap.put(sumArr[i], i);
+                indexMap[sumArr[i] + hours.length + 1] = i;
             }
         }
         //返回最大
