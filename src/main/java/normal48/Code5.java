@@ -1,7 +1,5 @@
 package normal48;
 
-import java.util.Arrays;
-
 /**
  * @Author ayl
  * @Date 2025-11-21
@@ -54,8 +52,6 @@ public class Code5 {
         int[] sumArr = new int[hours.length];
         //索引缓存
         int[] indexMap = new int[(hours.length + 1) * 2];
-        //填充负数
-        Arrays.fill(indexMap, -1);
         //循环
         for (int i = 0; i < sumArr.length; i++) {
             //计算本次
@@ -68,19 +64,17 @@ public class Code5 {
                 //所需
                 int need = sumArr[i] - 1;
                 //如果存在结果
-                if (indexMap[need + hours.length + 1] != -1) {
-                    //获取开始索引
-                    int start = indexMap[need + hours.length + 1];
-                    //长度
-                    int length = i - start;
+                if (indexMap[need + hours.length + 1] != 0) {
+                    //计算长度
+                    int length = i - indexMap[need + hours.length + 1] + 1;
                     //刷新最大
                     max = Math.max(max, length);
                 }
             }
             //如果没出现过
-            if (indexMap[sumArr[i] + hours.length + 1] == -1) {
+            if (indexMap[sumArr[i] + hours.length + 1] == 0) {
                 //记录索引
-                indexMap[sumArr[i] + hours.length + 1] = i;
+                indexMap[sumArr[i] + hours.length + 1] = i + 1;
             }
         }
         //返回最大
