@@ -52,15 +52,34 @@ import java.util.Map;
  */
 public class Code7 {
 
+    //节点
+    private static class Node {
+
+        //和
+        private Integer sum;
+
+        //count
+        private Integer count;
+
+        //初始化
+        public Node(Integer sum, Integer count) {
+            this.sum = sum;
+            this.count = count;
+        }
+
+    }
+
     public int lengthOfLongestSubsequence(List<Integer> nums, int target) {
         //缓存
         Map<Integer, Integer> map = new HashMap<>();
-        //下一级缓存
-        Map<Integer, Integer> nextMap = new HashMap<>();
         //第一种情况
         map.put(0, 0);
         //循环
         for (Integer num : nums) {
+            //临时缓存
+            Node[] nodeArr = new Node[map.size()];
+            //临时缓存索引
+            int nodeIndex = 0;
             //循环
             for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
                 //和
@@ -73,24 +92,24 @@ public class Code7 {
                 //数量
                 int count = entry.getValue() + 1;
                 //记录本次结果
-                nextMap.put(sum, count);
+                nodeArr[nodeIndex++] = new Node(sum, count);
             }
             //循环
-            for (Map.Entry<Integer, Integer> entry : nextMap.entrySet()) {
-                //获取内容
-                Integer key = entry.getKey();
-                Integer value = entry.getValue();
+            for (Node node : nodeArr) {
+                //判空
+                if (node == null) {
+                    //跳出
+                    break;
+                }
                 //如果存在
-                if (map.containsKey(key)) {
+                if (map.containsKey(node.sum)) {
                     //刷新最大
-                    map.put(key, Math.max(value, map.get(key)));
+                    map.put(node.sum, Math.max(node.count, map.get(node.sum)));
                 } else {
                     //记录
-                    map.put(key, value);
+                    map.put(node.sum, node.count);
                 }
             }
-            //清空
-            nextMap.clear();
         }
         //返回
         return map.getOrDefault(target, -1);
