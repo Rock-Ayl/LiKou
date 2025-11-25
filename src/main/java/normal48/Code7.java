@@ -116,7 +116,27 @@ public class Code7 {
     }
 
     public static void main(String[] args) {
-        System.out.println(new Code7().lengthOfLongestSubsequence(Arrays.asList(4, 1, 3, 2, 1, 5), 7));
+        System.out.println(new Code7().star(Arrays.asList(4, 1, 3, 2, 1, 5), 7));
+    }
+
+    //推到思路...
+    public int star(List<Integer> nums, int target) {
+        //缓存
+        int[] arr = new int[target + 1];
+        //填充
+        Arrays.fill(arr, Integer.MIN_VALUE);
+        //初始化0的情况
+        arr[0] = 0;
+        //循环
+        for (int num : nums) {
+            //循环2
+            for (int j = target; j >= num; j--) {
+                //最大
+                arr[j] = Math.max(arr[j], arr[j - num] + 1);
+            }
+        }
+        //返回结果
+        return arr[target] > 0 ? arr[target] : -1;
     }
 
 }
