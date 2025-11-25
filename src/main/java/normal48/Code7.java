@@ -55,12 +55,12 @@ public class Code7 {
     public int lengthOfLongestSubsequence(List<Integer> nums, int target) {
         //缓存
         Map<Integer, Integer> map = new HashMap<>();
+        //下一级缓存
+        Map<Integer, Integer> nextMap = new HashMap<>();
         //第一种情况
         map.put(0, 0);
         //循环
         for (Integer num : nums) {
-            //下一级缓存
-            Map<Integer, Integer> nextMap = new HashMap<>();
             //循环
             for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
                 //和
@@ -89,6 +89,8 @@ public class Code7 {
                     map.put(key, value);
                 }
             }
+            //清空
+            nextMap.clear();
         }
         //返回
         return map.getOrDefault(target, -1);
