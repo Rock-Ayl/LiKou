@@ -1,7 +1,5 @@
 package normal48;
 
-import java.util.Stack;
-
 /**
  * @Author ayl
  * @Date 2025-11-26
@@ -52,8 +50,8 @@ public class Code8 {
     public int numberOfGoodSubarraySplits(int[] nums) {
         //结果
         long result = 1L;
-        //栈
-        Stack<Integer> stack = new Stack<>();
+        //上一个
+        Integer last = null;
         //循环
         for (int i = 0; i < nums.length; i++) {
             //如果是0
@@ -62,23 +60,26 @@ public class Code8 {
                 continue;
             }
             //如果没有
-            if (stack.isEmpty()) {
+            if (last == null) {
                 //直接记录
-                stack.push(i);
+                last = i;
                 //本轮过
                 continue;
             }
-            //获取上一个
-            int last = stack.peek();
             //本次
             int count = i - last;
             //计算本次
             result = result * count % 1000000007L;
             //记录当前
-            stack.push(i);
+            last = i;
         }
-        //返回
-        return stack.size() < 2 ? stack.size() : ((int) (result));
+        //判空
+        if (last == null) {
+            //过
+            return 0;
+        }
+        //默认
+        return ((int) (result));
     }
 
     public static void main(String[] args) {
