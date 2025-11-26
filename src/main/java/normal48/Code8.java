@@ -51,7 +51,7 @@ public class Code8 {
         //结果
         long result = 1L;
         //上一个
-        Integer last = null;
+        int last = -1;
         //循环
         for (int i = 0; i < nums.length; i++) {
             //如果是0
@@ -60,26 +60,24 @@ public class Code8 {
                 continue;
             }
             //如果没有
-            if (last == null) {
+            if (last == -1) {
                 //直接记录
                 last = i;
                 //本轮过
                 continue;
             }
-            //本次
-            int count = i - last;
             //计算本次
-            result = result * count % 1000000007L;
-            //记录当前
+            result = result * (i - last) % 1000000007L;
+            //覆盖上一个索引
             last = i;
         }
         //判空
-        if (last == null) {
+        if (last == -1) {
             //过
             return 0;
         }
         //默认
-        return ((int) (result));
+        return (int) (result);
     }
 
     public static void main(String[] args) {
