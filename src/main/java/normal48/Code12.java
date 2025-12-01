@@ -83,10 +83,12 @@ public class Code12 {
             int left = nums[i];
             //计算出镜像
             int right = reverse(left);
+            //获取
+            Integer rightIndex = cacheMap.get(right);
             //如果存在
-            if (cacheMap.containsKey(right)) {
+            if (rightIndex != null) {
                 //计算结果,刷新最小
-                min = Math.min(min, cacheMap.get(right) - i);
+                min = Math.min(min, rightIndex - i);
             }
             //覆盖数字最近索引
             cacheMap.put(left, i);
