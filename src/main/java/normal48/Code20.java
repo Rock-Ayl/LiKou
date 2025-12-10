@@ -68,18 +68,16 @@ public class Code20 {
         int right = 0;
         //循环
         while (right < arr.length) {
-            //如果可以继续加
+            //判断 左滑 or 右滑
             if (arr[right] + cost <= maxCost) {
                 //刷新最大长度
                 maxLength = Math.max(maxLength, (right - left + 1));
                 //右滑
-                cost = arr[right] + cost;
-                right++;
-                //本轮过
-                continue;
+                cost += arr[right++];
+            } else {
+                //左滑
+                cost -= arr[left++];
             }
-            //左滑
-            cost = cost - arr[left++];
         }
         //返回
         return maxLength;
