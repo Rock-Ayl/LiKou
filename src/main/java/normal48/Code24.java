@@ -1,7 +1,6 @@
 package normal48;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 /**
  * @Author ayl
@@ -60,32 +59,31 @@ public class Code24 {
     public boolean canSortArray(int[] nums) {
         //索引
         int index = 0;
-        //上一个最大
-        int lastMax = 0;
+        //上一个最大的索引
+        int lastMaxIndex = -1;
         //循环
         while (index < nums.length) {
-            //初始化列表
-            List<Integer> numList = new ArrayList<>();
+            //开始结束索引
+            int start = index;
+            int end = index;
             //当前目标设置位
-            int bitCount = Integer.bitCount(nums[index]);
-            //记录数字
-            numList.add(nums[index]);
+            int bitCount = Integer.bitCount(nums[start]);
             //如果是连续的
-            while (index + 1 < nums.length && Integer.bitCount(nums[index + 1]) == bitCount) {
-                //+1并记录
-                numList.add(nums[++index]);
+            while (end + 1 < nums.length && Integer.bitCount(nums[end + 1]) == bitCount) {
+                //+1
+                end++;
             }
             //排序
-            numList.sort(Integer::compareTo);
+            Arrays.sort(nums, start, end + 1);
             //如果与上一个不匹配
-            if (numList.get(0) <= lastMax) {
+            if (lastMaxIndex >= 0 && nums[start] <= nums[lastMaxIndex]) {
                 //不行
                 return false;
             }
             //更新最大
-            lastMax = numList.get(numList.size() - 1);
+            lastMaxIndex = end;
             //下一个
-            index++;
+            index = end + 1;
         }
         //默认可以
         return true;
