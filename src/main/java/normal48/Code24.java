@@ -59,8 +59,8 @@ public class Code24 {
     public boolean canSortArray(int[] nums) {
         //索引
         int index = 0;
-        //上一个最大的索引
-        int lastMaxIndex = -1;
+        //上一个最大的数字
+        int lastMax = 0;
         //循环
         while (index < nums.length) {
             //开始结束索引
@@ -76,12 +76,12 @@ public class Code24 {
             //排序
             Arrays.sort(nums, start, end + 1);
             //如果与上一个不匹配
-            if (lastMaxIndex >= 0 && nums[start] <= nums[lastMaxIndex]) {
+            if (nums[start] <= lastMax) {
                 //不行
                 return false;
             }
-            //更新最大
-            lastMaxIndex = end;
+            //更新最大数字
+            lastMax = nums[end];
             //下一个
             index = end + 1;
         }
