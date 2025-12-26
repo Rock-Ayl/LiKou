@@ -44,14 +44,10 @@ package normal49;
 public class Code4 {
 
     public int maxAbsoluteSum(int[] nums) {
-        //前缀和
-        int[] sumArr = new int[nums.length];
-        //第一个
-        sumArr[0] = nums[0];
         //循环
-        for (int i = 1; i < sumArr.length; i++) {
-            //叠加
-            sumArr[i] = sumArr[i - 1] + nums[i];
+        for (int i = 1; i < nums.length; i++) {
+            //叠加前缀和
+            nums[i] = nums[i - 1] + nums[i];
         }
         //最小最大值
         int min = 0;
@@ -59,13 +55,13 @@ public class Code4 {
         //结果
         int result = 0;
         //循环
-        for (int i = 0; i < sumArr.length; i++) {
+        for (int i = 0; i < nums.length; i++) {
             //计算本次最大
-            result = Math.max(result, Math.abs(sumArr[i] - max));
-            result = Math.max(result, Math.abs(sumArr[i] - min));
+            result = Math.max(result, Math.abs(nums[i] - max));
+            result = Math.max(result, Math.abs(nums[i] - min));
             //刷新最小最大
-            min = Math.min(min, sumArr[i]);
-            max = Math.max(max, sumArr[i]);
+            min = Math.min(min, nums[i]);
+            max = Math.max(max, nums[i]);
         }
         //返回
         return result;
