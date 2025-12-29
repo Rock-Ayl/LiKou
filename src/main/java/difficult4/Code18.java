@@ -69,33 +69,16 @@ public class Code18 {
         //索引栈
         private Stack<Integer> indexStack;
 
-        //数量
-        private Integer count;
-
         //初始化
         public Node(int num) {
             this.num = num;
             this.indexStack = new Stack<>();
-            this.count = 0;
-        }
-
-        //增加索引
-        public void push(int index) {
-            //组装
-            this.count++;
-            this.indexStack.push(index);
-        }
-
-        //删除最后索引
-        public int pop() {
-            this.count--;
-            return this.indexStack.pop();
         }
 
         //排序
         public int compareTo(Node another) {
             //计算频率
-            int count = another.count.compareTo(this.count);
+            int count = another.indexStack.size() - this.indexStack.size();
             //如果不同
             if (count != 0) {
                 //返回
@@ -134,7 +117,7 @@ public class Code18 {
             this.treeSet.remove(node);
         }
         //记录本次索引
-        node.push(this.totalIndex++);
+        node.indexStack.push(this.totalIndex++);
         //加入树
         this.treeSet.add(node);
     }
@@ -142,12 +125,12 @@ public class Code18 {
     public int pop() {
         //拉取最优
         Node node = this.treeSet.pollFirst();
-        //删除以后一个
-        node.pop();
+        //删除最后一个
+        node.indexStack.pop();
         //本次目标
         int target = node.num;
         //如果还有
-        if (node.count > 0) {
+        if (node.indexStack.size() > 0) {
             //重新加入
             this.treeSet.add(node);
         }
