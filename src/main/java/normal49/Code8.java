@@ -112,15 +112,25 @@ public class Code8 {
         //左右索引
         int left = 0;
         int right = costs.length - 1;
+        //如果不满
+        while (leftQueue.size() < candidates && left < costs.length) {
+            //加入节点
+            leftQueue.add(nodeArr[left++]);
+        }
+        //如果不满
+        while (rightQueue.size() < candidates && right >= 0) {
+            //加入节点
+            rightQueue.add(nodeArr[right--]);
+        }
         //循环
         while (k > 0) {
             //如果不满
-            while (leftQueue.size() < candidates && left < costs.length) {
+            if (leftQueue.size() < candidates && left < costs.length) {
                 //加入节点
                 leftQueue.add(nodeArr[left++]);
             }
             //如果不满
-            while (rightQueue.size() < candidates && right >= 0) {
+            if (rightQueue.size() < candidates && right >= 0) {
                 //加入节点
                 rightQueue.add(nodeArr[right--]);
             }
