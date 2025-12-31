@@ -97,6 +97,11 @@ public class Code8 {
     }
 
     public long totalCost(int[] costs, int k, int candidates) {
+
+        /**
+         * 构建节点
+         */
+
         //节点缓存
         Node[] nodeArr = new Node[costs.length];
         //循环
@@ -104,6 +109,11 @@ public class Code8 {
             //初始化
             nodeArr[i] = new Node(i, costs[i]);
         }
+
+        /**
+         * 构建优先队列
+         */
+
         //左右队列
         PriorityQueue<Node> leftQueue = new PriorityQueue<>(Node::compareTo);
         PriorityQueue<Node> rightQueue = new PriorityQueue<>(Node::compareTo);
@@ -122,6 +132,11 @@ public class Code8 {
             //加入节点
             rightQueue.add(nodeArr[right--]);
         }
+
+        /**
+         * 不断选择最优的工人
+         */
+
         //循环
         while (k > 0) {
             //如果不满
