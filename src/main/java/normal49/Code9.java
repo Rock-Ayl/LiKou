@@ -1,7 +1,5 @@
 package normal49;
 
-import java.util.Arrays;
-
 /**
  * @Author ayl
  * @Date 2026-01-01
@@ -62,17 +60,23 @@ public class Code9 {
         long[] arr = new long[26];
         //和
         long sum = 0L;
+        //最大值
+        long max = 0L;
         //循环
         for (int i = 0; i < s.length(); i++) {
+            //key
+            int key = s.charAt(i) - 'a';
+            //代价
+            long count = cost[i];
             //叠加代价
-            arr[s.charAt(i) - 'a'] += cost[i];
+            arr[key] += count;
             //叠加和
-            sum += cost[i];
+            sum += count;
+            //刷新最大
+            max = Math.max(max, arr[key]);
         }
-        //排序,删除最大的,剩下的都删除
-        Arrays.sort(arr);
         //返回
-        return sum - arr[25];
+        return sum - max;
     }
 
     public static void main(String[] args) {
