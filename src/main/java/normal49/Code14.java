@@ -88,6 +88,7 @@ public class Code14 {
         //索引
         int index1 = 0;
         int index2 = 0;
+        int index2Last = node2Arr.length - 1;
 
         //循环
         while (index1 < node1Arr.length) {
@@ -100,21 +101,10 @@ public class Code14 {
                 node1.targetIndex = node2.index;
                 //+1
                 index2++;
+            } else {
+                //记录填充索引
+                node1.targetIndex = node2Arr[index2Last--].index;
             }
-        }
-        //重新来
-        index1 = 0;
-        //循环2
-        while (index2 < node2Arr.length) {
-            //获取当前节点,+1
-            Node node1 = node1Arr[index1++];
-            //如果已经有了
-            if (node1.targetIndex != -1) {
-                //本轮过
-                continue;
-            }
-            //获取节点2,+1,记录填充索引
-            node1.targetIndex = node2Arr[index2++].index;
         }
 
         /**
