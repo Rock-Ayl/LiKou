@@ -66,7 +66,6 @@ public class Code14 {
 
         Node[] node1Arr = new Node[nums1.length];
         Node[] node2Arr = new Node[nums2.length];
-
         //循环
         for (int i = 0; i < nums1.length; i++) {
             //初始化
@@ -89,7 +88,6 @@ public class Code14 {
         int index1 = 0;
         int index2 = 0;
         int index2Last = node2Arr.length - 1;
-
         //循环
         while (index1 < node1Arr.length) {
             //获取当前节点
@@ -102,7 +100,7 @@ public class Code14 {
                 //+1
                 index2++;
             } else {
-                //记录填充索引
+                //反向记录填充索引
                 node1.targetIndex = node2Arr[index2Last--].index;
             }
         }
