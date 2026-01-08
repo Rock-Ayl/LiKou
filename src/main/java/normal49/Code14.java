@@ -92,40 +92,29 @@ public class Code14 {
         //循环
         while (index1 < node1Arr.length) {
             //获取当前节点
-            Node node1 = node1Arr[index1];
+            Node node1 = node1Arr[index1++];
             Node node2 = node2Arr[index2];
             //如果优势
             if (node1.num > node2.num) {
                 //记录优势索引
                 node1.targetIndex = node2.index;
                 //+1
-                index1++;
                 index2++;
-            } else {
-                //+1
-                index1++;
             }
         }
         //重新来
         index1 = 0;
         //循环2
         while (index2 < node2Arr.length) {
-            //获取当前节点
-            Node node1 = node1Arr[index1];
+            //获取当前节点,+1
+            Node node1 = node1Arr[index1++];
             //如果已经有了
             if (node1.targetIndex != -1) {
-                //+1
-                index1++;
                 //本轮过
                 continue;
             }
-            //获取节点2
-            Node node2 = node2Arr[index2];
-            //记录填充索引
-            node1.targetIndex = node2.index;
-            //+1
-            index1++;
-            index2++;
+            //获取节点2,+1,记录填充索引
+            node1.targetIndex = node2Arr[index2++].index;
         }
 
         /**
