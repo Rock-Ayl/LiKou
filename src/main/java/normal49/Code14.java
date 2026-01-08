@@ -42,24 +42,18 @@ public class Code14 {
     private static class Node {
 
         //索引
-        private Integer index;
+        private int index;
 
         //数字
-        private Integer num;
+        private int num;
 
         //目标索引
-        private Integer targetIndex = -1;
+        private int targetIndex = -1;
 
         //初始化
-        public Node(Integer index, Integer num) {
+        public Node(int index, int num) {
             this.index = index;
             this.num = num;
-        }
-
-        //方便调试
-        @Override
-        public String toString() {
-            return String.format("index=%s,num=%s,targetIndex=%s", this.index, this.num, this.targetIndex);
         }
 
     }
@@ -138,10 +132,15 @@ public class Code14 {
          * 返回结果
          */
 
-        //排序
-        Arrays.sort(node1Arr, (a, b) -> a.targetIndex - b.targetIndex);
-        //返回
-        return Arrays.stream(node1Arr).mapToInt(p -> p.num).toArray();
+        //结果
+        return Arrays
+                .stream(node1Arr)
+                //排序
+                .sorted((a, b) -> a.targetIndex - b.targetIndex)
+                //拆箱
+                .mapToInt(p -> p.num)
+                //返回
+                .toArray();
     }
 
     public static void main(String[] args) {
