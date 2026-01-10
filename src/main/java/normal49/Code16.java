@@ -47,19 +47,21 @@ package normal49;
 public class Code16 {
 
     public int minimumPartition(String s, int k) {
-        //数字
+        //目标数字
+        long target = k;
+        //当前数字
         long num = 0;
-        //连击
-        int hit = 0;
+        //返回结果
+        int resultHit = 0;
         //索引
         int index = 0;
         //循环
         while (index < s.length()) {
-            //如果叠加本次数字有结果
+            //如果叠加,下一个数字是
             long nextNum = num * 10 + (s.charAt(index) - '0');
-            //如果 非零 and 未越界 and 目标值
-            if (nextNum <= k) {
-                //记录
+            //如果是 目标值
+            if (nextNum <= target) {
+                //使用该数字
                 num = nextNum;
                 //下一个
                 index++;
@@ -70,13 +72,13 @@ public class Code16 {
                     return -1;
                 }
                 //+1
-                hit++;
+                resultHit++;
                 //重置
                 num = 0;
             }
         }
         //返回
-        return hit + 1;
+        return resultHit + 1;
     }
 
     public static void main(String[] args) {
