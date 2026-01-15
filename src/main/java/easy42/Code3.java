@@ -32,24 +32,22 @@ public class Code3 {
 
     public int insertBits(int N, int M, int i, int j) {
         //如果N太小
-        if (N < M) {
+        if (N <= M) {
             //直接返回
             return M;
         }
-        //结果
+        //转为二进制
         StringBuffer str = new StringBuffer(Integer.toBinaryString(N));
         //区间
         int left = str.length() - j - 1;
         int right = str.length() - i - 1;
         //循环
         for (int k = Math.max(0, left); k <= Math.min(right, str.length() - 1); k++) {
-            //设置为0
+            //默认为0
             str.setCharAt(k, '0');
         }
-        //位移
-        int other = M << i;
-        //返回结果
-        return Integer.parseInt(str.toString(), 2) + other;
+        //返回结果 = (N 默认填充空间为0) + ( M 位移到指定位置)
+        return Integer.parseInt(str.toString(), 2) + (M << i);
     }
 
     public static void main(String[] args) {
