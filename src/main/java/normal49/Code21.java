@@ -116,7 +116,7 @@ public class Code21 {
         return str.toString();
     }
 
-    //计算组合数量
+    //计算组合数量,高斯算法
     private long count(int total) {
         //长度
         int length = total - 1;
