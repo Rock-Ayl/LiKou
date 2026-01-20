@@ -67,13 +67,11 @@ public class Code22 {
         for (int i = 1; i < arr.length; i++) {
             //循环
             for (int j = 0; j < partList.size(); j++) {
-                //获取当前
-                int part = partList.get(j);
-                //目标索引
-                int target = i - part;
+                //获取并计算当前目标索引
+                int target = i - partList.get(j);
                 //如果越界
                 if (target < 0) {
-                    //彻底跳出
+                    //说明之后的都不可能了,彻底跳出
                     break;
                 }
                 //如果没有
@@ -83,10 +81,10 @@ public class Code22 {
                 }
                 //两种情况
                 if (arr[i] == 0) {
-                    //记录本次
+                    //初始化
                     arr[i] = arr[target] + 1;
                 } else {
-                    //最小情况
+                    //取最小情况
                     arr[i] = Math.min(arr[i], arr[target] + 1);
                 }
             }
