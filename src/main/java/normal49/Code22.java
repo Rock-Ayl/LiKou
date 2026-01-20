@@ -65,14 +65,16 @@ public class Code22 {
         arr[0] = 1;
         //循环
         for (int i = 1; i < arr.length; i++) {
-            //循环积木
-            for (Integer part : partList) {
+            //循环
+            for (int j = 0; j < partList.size(); j++) {
+                //获取当前
+                int part = partList.get(j);
                 //目标索引
                 int target = i - part;
                 //如果越界
                 if (target < 0) {
-                    //本轮过
-                    continue;
+                    //彻底跳出
+                    break;
                 }
                 //如果没有
                 if (arr[target] == 0) {
