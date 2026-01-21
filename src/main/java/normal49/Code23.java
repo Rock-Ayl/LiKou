@@ -73,10 +73,8 @@ public class Code23 {
              * 右滑
              */
 
-            //当前数字
-            int num = nums[i];
-            //平移+1
-            cacheArr[num + 50]++;
+            //右滑数字,平移+1
+            cacheArr[nums[i] + 50]++;
 
             /**
              * 左滑
@@ -86,10 +84,8 @@ public class Code23 {
             int leftIndext = i - k;
             //如果未越界
             if (leftIndext >= 0) {
-                //当前数字
-                int leftNum = nums[leftIndext];
-                //平移-1
-                cacheArr[leftNum + 50]--;
+                //左滑数字,平移-1
+                cacheArr[nums[leftIndext] + 50]--;
             }
 
             /**
@@ -124,7 +120,7 @@ public class Code23 {
                 //如果是美丽的
                 if (target < 0) {
                     //记录本次
-                    result[index] = j - 50;
+                    result[index] = target;
                 }
                 //跳出
                 break;
