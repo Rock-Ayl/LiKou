@@ -96,32 +96,38 @@ public class Code23 {
              * 寻找本次目标
              */
 
-            //索引
+            //结果索引
             int index = i - k + 1;
-            //如果有
-            if (index >= 0) {
-                //当前目标
-                int count = x;
-                //循环
-                for (int j = 0; j < cacheArr.length; j++) {
-                    //如果是目标
-                    if (cacheArr[j] > 0) {
-                        //删除
-                        count -= cacheArr[j];
-                        //如果是目标
-                        if (count <= 0) {
-                            //目标结果
-                            int target = j - 50;
-                            //如果是美丽的
-                            if (target < 0) {
-                                //记录本次
-                                result[index] = j - 50;
-                            }
-                            //跳出
-                            break;
-                        }
-                    }
+            //如果没有目标值
+            if (index < 0) {
+                //本轮过
+                continue;
+            }
+            //当前预期需要的数字顺位
+            int count = x;
+            //循环
+            for (int j = 0; j < cacheArr.length; j++) {
+                //如果没有数字
+                if (cacheArr[j] == 0) {
+                    //本轮过
+                    continue;
                 }
+                //删除
+                count -= cacheArr[j];
+                //如果不是目标
+                if (count > 0) {
+                    //本轮过
+                    continue;
+                }
+                //目标结果
+                int target = j - 50;
+                //如果是美丽的
+                if (target < 0) {
+                    //记录本次
+                    result[index] = j - 50;
+                }
+                //跳出
+                break;
             }
 
         }
