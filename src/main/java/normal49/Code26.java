@@ -64,6 +64,8 @@ public class Code26 {
     public long maximumScore(int[] nums, String s) {
         //优先度列
         PriorityQueue<Integer> rankQueue = new PriorityQueue<>(Comparator.reverseOrder());
+        //卡位的
+        rankQueue.add(0);
         //结果
         long result = 0L;
         //循环
@@ -77,8 +79,8 @@ public class Code26 {
                 //本轮过
                 continue;
             }
-            //如果前面有 and 分数更大
-            if (rankQueue.isEmpty() == false && rankQueue.peek().compareTo(rank) > 0) {
+            //如果前面分数更大
+            if (rankQueue.peek().compareTo(rank) > 0) {
                 //拉取队列最大分数,叠加
                 result += rankQueue.poll();
                 //将当前分数放进去
