@@ -70,23 +70,22 @@ public class Code26 {
         for (int i = 0; i < nums.length; i++) {
             //当前分数
             Integer rank = nums[i];
-            //字符
-            char letter = s.charAt(i);
-            //根据字符操作
-            if (letter == '1') {
-                //如果前面分数更大
-                if (rankQueue.isEmpty() == false && rankQueue.peek().compareTo(rank) > 0) {
-                    //拉取队列最大分数,叠加
-                    result += rankQueue.poll();
-                    //将当前分数放进去
-                    rankQueue.add(rank);
-                } else {
-                    //叠加本次分数
-                    result += rank;
-                }
-            } else {
+            //如果是0
+            if (s.charAt(i) == '0') {
                 //加入队列
                 rankQueue.add(rank);
+                //本轮过
+                continue;
+            }
+            //如果前面有 and 分数更大
+            if (rankQueue.isEmpty() == false && rankQueue.peek().compareTo(rank) > 0) {
+                //拉取队列最大分数,叠加
+                result += rankQueue.poll();
+                //将当前分数放进去
+                rankQueue.add(rank);
+            } else {
+                //叠加本次分数
+                result += rank;
             }
         }
         //返回
