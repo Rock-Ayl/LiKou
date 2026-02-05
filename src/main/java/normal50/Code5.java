@@ -135,9 +135,9 @@ public class Code5 {
             //删除之
             this.riderQueue.pollFirst();
         }
-        //如果没有任何乘客、四级
+        //如果没有任何乘客、司机
         if (this.riderQueue.isEmpty() || this.driverQueue.isEmpty()) {
-            //过
+            //默认
             return DEF_ARR;
         }
         //返回
