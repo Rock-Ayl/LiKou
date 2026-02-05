@@ -140,7 +140,7 @@ public class Code5 {
             //默认
             return DEF_ARR;
         }
-        //返回
+        //拉取并返回
         return new int[]{this.driverQueue.pollFirst().id, this.riderQueue.pollFirst().id};
     }
 
