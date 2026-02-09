@@ -69,13 +69,6 @@ public class Code8 {
         Stack<Long> stack = new Stack<>();
         //循环
         for (long num : nums) {
-            //判空
-            if (stack.isEmpty()) {
-                //写入
-                stack.push(num);
-                //本轮过
-                continue;
-            }
             //当前数字
             long last = num;
             //如果还有
@@ -85,7 +78,7 @@ public class Code8 {
                 //计算和
                 last = last + last;
             }
-            //写入
+            //最终写入
             stack.push(last);
         }
         //返回
