@@ -76,23 +76,17 @@ public class Code8 {
                 //本轮过
                 continue;
             }
-            //如果相同
-            if (stack.peek() == num) {
-                //当前数字
-                long last = num;
-                //如果还有
-                while (stack.isEmpty() == false && stack.peek() == last) {
-                    //弹出
-                    stack.pop();
-                    //计算和
-                    last = last + last;
-                }
-                //写入
-                stack.push(last);
-            } else {
-                //写入
-                stack.push(num);
+            //当前数字
+            long last = num;
+            //如果还有
+            while (stack.isEmpty() == false && stack.peek() == last) {
+                //弹出
+                stack.pop();
+                //计算和
+                last = last + last;
             }
+            //写入
+            stack.push(last);
         }
         //返回
         return new ArrayList<>(stack);
