@@ -69,17 +69,15 @@ public class Code8 {
         Stack<Long> stack = new Stack<>();
         //循环
         for (long num : nums) {
-            //当前数字
-            long last = num;
             //如果还有
-            while (stack.isEmpty() == false && stack.peek() == last) {
+            while (stack.isEmpty() == false && stack.peek() == num) {
                 //弹出
                 stack.pop();
                 //计算和
-                last = last + last;
+                num = num + num;
             }
             //最终写入
-            stack.push(last);
+            stack.push(num);
         }
         //返回
         return new ArrayList<>(stack);
