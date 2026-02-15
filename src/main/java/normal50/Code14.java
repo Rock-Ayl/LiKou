@@ -82,6 +82,8 @@ import java.util.Map;
 public class Code14 {
 
     public int prefixConnected(String[] words, int k) {
+        //结果
+        int result = 0;
         //缓存
         Map<String, Integer> keyMap = new HashMap<>();
         //循环
@@ -93,15 +95,12 @@ public class Code14 {
             }
             //拆分key
             String key = word.substring(0, k);
-            //+1
-            keyMap.put(key, keyMap.getOrDefault(key, 0) + 1);
-        }
-        //结果
-        int result = 0;
-        //循环
-        for (Integer value : keyMap.values()) {
-            //如果满足
-            if (value > 1) {
+            //当前数量
+            int count = keyMap.getOrDefault(key, 0) + 1;
+            //覆盖
+            keyMap.put(key, count);
+            //如果分组成立
+            if (count == 2) {
                 //+1
                 result++;
             }
