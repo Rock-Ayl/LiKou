@@ -60,8 +60,6 @@ public class Code13 {
         int[] arr = new int[]{1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0};
         //索引
         int right = s.length() - 1;
-        //字符串
-        StringBuffer str = new StringBuffer();
         //循环
         while (right >= 0) {
             //如果不是元音
@@ -72,13 +70,8 @@ public class Code13 {
             //下一个
             right--;
         }
-        //循环
-        for (int i = 0; i <= right; i++) {
-            //组装
-            str.append(s.charAt(i));
-        }
         //返回
-        return str.toString();
+        return s.substring(0, right + 1);
     }
 
     public static void main(String[] args) {
