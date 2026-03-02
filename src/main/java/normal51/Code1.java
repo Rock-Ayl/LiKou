@@ -75,26 +75,15 @@ public class Code1 {
         //默认填充
         Arrays.fill(arr, -1);
         //字符串
-        StringBuffer str = new StringBuffer();
+        StringBuilder str = new StringBuilder();
         //循环
         for (int i = 0; i < s.length(); i++) {
             //字符
             char letter = s.charAt(i);
             //当前字符索引
             int key = letter - 'a';
-            //如果之前没有
-            if (arr[key] == -1) {
-                //写入
-                str.append(letter);
-                //记录索引
-                arr[key] = str.length() - 1;
-                //本轮过
-                continue;
-            }
-            //上一个索引
-            int lastIndex = arr[key];
-            //如果具体太远
-            if (str.length() - lastIndex - k > 0) {
+            //如果之前没有 or 如果距离上一个相同字符很远
+            if (arr[key] == -1 || str.length() - arr[key] - k > 0) {
                 //写入
                 str.append(letter);
                 //记录索引
