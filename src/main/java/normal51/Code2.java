@@ -103,30 +103,24 @@ public class Code2 {
         int sum = sumArr[nums.length - 1];
         //循环,从大到小
         for (int i = nums.length - 1; i >= 0; i--) {
-
             //当前异常值
             int num = nums[i];
             //抛出异常值的和
             int sum2 = sum - num;
-            //目标数字
-            int target = sum2 / 2;
-
-            //暂时删除异常值
-            countMap.put(nums[i], countMap.getOrDefault(nums[i], 0) - 1);
             //如果不是偶数
             if (sum2 % 2 != 0) {
-                //回滚
-                countMap.put(nums[i], countMap.getOrDefault(nums[i], 0) + 1);
                 //本轮过,肯定不行
                 continue;
             }
+            //目标数字
+            int target = sum2 / 2;
+            //目标数字至少存在的数量
+            int targetCount = num == target ? 2 : 1;
             //如果还有目标数字
-            if (countMap.getOrDefault(target, 0) > 0) {
+            if (countMap.getOrDefault(target, 0) >= targetCount) {
                 //找到异常值
                 return num;
             }
-            //回滚
-            countMap.put(nums[i], countMap.getOrDefault(nums[i], 0) + 1);
         }
         //默认
         return -1;
