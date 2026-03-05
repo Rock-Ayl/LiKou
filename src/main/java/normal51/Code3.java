@@ -68,6 +68,9 @@ public class Code3 {
 
     private static class Node {
 
+        //索引
+        private int index;
+
         //坐标
         private int x;
 
@@ -81,7 +84,8 @@ public class Code3 {
         private Set<Node> bombList = new HashSet<>();
 
         //初始化
-        public Node(int x, int y, int scope) {
+        public Node(int index, int x, int y, int scope) {
+            this.index = index;
             this.x = x;
             this.y = y;
             this.scope = scope;
@@ -91,7 +95,8 @@ public class Code3 {
         @Override
         public String toString() {
             return "Node{" +
-                    "x=" + x +
+                    "index=" + index +
+                    ", x=" + x +
                     ", y=" + y +
                     ", scope=" + scope +
                     ", bombList=" + bombList.size() +
@@ -111,7 +116,7 @@ public class Code3 {
         //循环
         for (int i = 0; i < bombs.length; i++) {
             //构建
-            nodeArr[i] = new Node(bombs[i][0], bombs[i][1], bombs[i][2]);
+            nodeArr[i] = new Node(i, bombs[i][0], bombs[i][1], bombs[i][2]);
         }
 
         /**
@@ -144,27 +149,27 @@ public class Code3 {
         //循环
         for (Node node : nodeArr) {
             //递归,并更新最大值
-            maxBombTotalCount = Math.max(maxBombTotalCount, dfs(node, new HashSet<>()));
+            maxBombTotalCount = Math.max(maxBombTotalCount, next(node, new int[nodeArr.length]));
         }
         //返回
         return maxBombTotalCount;
     }
 
     //深度递归,计算每个节点影响返回
-    private int dfs(Node node, Set<Node> waledSet) {
+    private int next(Node node, int[] waledSet) {
         //如果走过了
-        if (waledSet.contains(node)) {
+        if (waledSet[node.index] == 1) {
             //过
             return 0;
         }
         //记录走过了
-        waledSet.add(node);
+        waledSet[node.index] = 1;
         //当前也算
         int bombTotalCount = 1;
         //循环
         for (Node child : node.bombList) {
             //递归,并叠加
-            bombTotalCount += dfs(child, waledSet);
+            bombTotalCount += next(child, waledSet);
         }
         //返回
         return bombTotalCount;
