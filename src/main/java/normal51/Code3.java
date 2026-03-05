@@ -173,12 +173,11 @@ public class Code3 {
     //判断父亲是否能引爆儿子
     private boolean isInScope(Node father, Node child) {
         //计算距离
-        long xd = Math.abs(father.x - child.x);
-        long yd = Math.abs(father.y - child.y);
-        //计算父子距离,取正数
-        long distance = xd * xd + yd * yd;
-        //判断是否在范围内
-        return distance <= (long) father.scope * (long) father.scope;
+        long xd = father.x - child.x;
+        long yd = father.y - child.y;
+        long zd = father.scope;
+        //判断是否在范围内 x方 + y方 = z方
+        return xd * xd + yd * yd <= zd * zd;
     }
 
     public static void main(String[] args) {
