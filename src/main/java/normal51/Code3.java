@@ -1,6 +1,8 @@
 package normal51;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -81,7 +83,7 @@ public class Code3 {
         private int scope;
 
         //该节点能影响的其他节点
-        private Set<Node> bombList = new HashSet<>();
+        private List<Node> bombList = new ArrayList<>();
 
         //初始化
         public Node(int index, int x, int y, int scope) {
