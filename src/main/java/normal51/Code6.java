@@ -72,14 +72,14 @@ public class Code6 {
             int key = i + 2;
             //循环2
             for (int j = targetArr.length - 1; j >= 0; j--) {
-                //如果是0
+                //如果是0 or 本回合计算的结果
                 if (targetArr[j] == 0 || targetArr[j] == key) {
                     //本轮过
                     continue;
                 }
-                //下一个位置
+                //下一个位置索引
                 int next = j + num;
-                //如果满足
+                //如果未越界
                 if (next < targetArr.length) {
                     //记录
                     targetArr[next] = key;
