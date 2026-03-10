@@ -36,6 +36,11 @@ import java.util.Arrays;
 public class Code6 {
 
     public boolean canPartition(int[] nums) {
+
+        /**
+         * 特殊判定
+         */
+
         //求和
         int sum = Arrays.stream(nums).sum();
         //如果是奇数
@@ -43,6 +48,11 @@ public class Code6 {
             //不行
             return false;
         }
+
+        /**
+         * 01背包问题
+         */
+
         //目标和
         int target = sum / 2;
         //目标数组
@@ -51,6 +61,11 @@ public class Code6 {
         targetArr[0] = 1;
         //循环所有数字
         for (int i = 0; i < nums.length; i++) {
+
+            /**
+             * 当前情况计算结果
+             */
+
             //当前数字
             int num = nums[i];
             //对应key
@@ -70,6 +85,11 @@ public class Code6 {
                     targetArr[next] = key;
                 }
             }
+
+            /**
+             * 这个数字之后的判断结果
+             */
+
             //如果满足了
             if (targetArr[targetArr.length - 1] != 0) {
                 //返回
