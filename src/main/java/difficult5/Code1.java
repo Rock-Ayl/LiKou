@@ -48,8 +48,6 @@ public class Code1 {
     public Code1(String[] words) {
         //单词去重集合
         Set<String> set = new HashSet<>();
-        //初始化数组
-        this.wordNodeArr = new WordNode[words.length];
         //初始化缓存
         this.leftMap = new HashMap<>();
         this.rightMap = new HashMap<>();
@@ -64,8 +62,6 @@ public class Code1 {
             set.add(words[i]);
             //初始化单词接待您
             WordNode wordNode = new WordNode(i, words[i]);
-            //初始化并组装
-            this.wordNodeArr[i] = wordNode;
             //构建
             buildLeft(this.leftMap, wordNode, 0);
             buildRight(this.rightMap, wordNode, wordNode.word.length() - 1);
@@ -122,8 +118,6 @@ public class Code1 {
 
     }
 
-    //节点数组
-    private WordNode[] wordNodeArr;
     //前缀缓存
     private Map<Character, CharNode> leftMap;
     //后缀缓存
