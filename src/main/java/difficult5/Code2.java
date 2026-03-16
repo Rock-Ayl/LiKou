@@ -1,8 +1,5 @@
 package difficult5;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * 3093. 最长公共后缀查询
  * 算术评级: 6
@@ -93,18 +90,27 @@ public class Code2 {
         //下一级节点
         private Node[] children = new Node[26];
 
-        //节点包含单词集合
-        private List<Word> wordList = new ArrayList<>();
+        //目标单词节点
+        private Word word = null;
 
         //初始化节点
         public Node(Character letter) {
             this.letter = letter;
         }
 
+        //加入单词
+        public void addWord(Word word) {
+            //如果为空 or 新单词长度更小
+            if (this.word == null || this.word.word.length() > word.word.length()) {
+                //覆盖
+                this.word = word;
+            }
+        }
+
         //方便调试
         @Override
         public String toString() {
-            return String.format("letter=%s,wordList=%s", letter, wordList.size());
+            return String.format("letter=%s,word=%s", letter, word);
         }
 
     }
@@ -134,7 +140,7 @@ public class Code2 {
         //从主节点开始
         Node current = this.root;
         //记录单词
-        current.wordList.add(new Word(word, index));
+        current.addWord(new Word(word, index));
         //循环
         for (int i = word.length() - 1; i >= 0; i--) {
             //计算字符在数组中的索引
@@ -147,7 +153,7 @@ public class Code2 {
             //下一级
             current = current.children[key];
             //记录单词
-            current.wordList.add(new Word(word, index));
+            current.addWord(new Word(word, index));
         }
     }
 
@@ -163,15 +169,7 @@ public class Code2 {
             current = current.children[targetWord.charAt(--index) - 'a'];
         }
         //返回
-        return current.wordList
-                .stream()
-                //按照长度排序
-                .sorted((a, b) -> a.word.length() - b.word.length())
-                //只需要第一个
-                .findFirst()
-                //拆解索引
-                .map(p -> p.index)
-                .orElse(-1);
+        return current.word == null ? -1 : current.word.index;
     }
 
     public static void main(String[] args) {
