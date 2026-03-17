@@ -49,29 +49,16 @@ public class Code3 {
 
     private static class Node {
 
-        //字符
-        private Character letter;
-
         //子节点数组
         private Node[] children = null;
 
         //到此结尾的单词
         private List<String> wordList = new ArrayList<>();
 
-        //初始化
-        public Node(Character letter) {
-            this.letter = letter;
-        }
-
-        @Override
-        public String toString() {
-            return String.format("letter=[%s]", letter);
-        }
-
     }
 
     //主节点
-    private Node root = new Node(null);
+    private Node root = new Node();
 
     public List<String> findWords(char[][] board, String[] words) {
         //循环
@@ -111,7 +98,7 @@ public class Code3 {
             //判空
             if (node.children[key] == null) {
                 //初始化
-                node.children[key] = new Node(word.charAt(i));
+                node.children[key] = new Node();
             }
             //下一个
             node = node.children[key];
@@ -132,14 +119,10 @@ public class Code3 {
             //过
             return;
         }
-        //记录走过了
-        walkedArr[x][y] = 1;
         //计算本次key
         int key = board[x][y] - 'a';
         //判空
         if (node.children == null || node.children[key] == null) {
-            //回溯
-            walkedArr[x][y] = 0;
             //过
             return;
         }
@@ -147,6 +130,8 @@ public class Code3 {
         Node nextNode = node.children[key];
         //记录本次结果
         result.addAll(nextNode.wordList);
+        //记录走过了
+        walkedArr[x][y] = 1;
         //上下左右
         find(result, board, walkedArr, nextNode, x + 1, y);
         find(result, board, walkedArr, nextNode, x - 1, y);
