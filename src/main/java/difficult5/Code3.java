@@ -53,7 +53,7 @@ public class Code3 {
         private Node[] children = null;
 
         //到此结尾的单词
-        private List<String> wordList = new ArrayList<>();
+        private List<String> wordList = null;
 
     }
 
@@ -103,6 +103,11 @@ public class Code3 {
             //下一个
             node = node.children[key];
         }
+        //判空
+        if (node.wordList == null) {
+            //初始化
+            node.wordList = new ArrayList<>();
+        }
         //记录最终的单词
         node.wordList.add(word);
     }
@@ -128,8 +133,11 @@ public class Code3 {
         }
         //获取下一个节点
         Node nextNode = node.children[key];
-        //记录本次结果
-        result.addAll(nextNode.wordList);
+        //判空
+        if (nextNode.wordList != null) {
+            //记录本次结果
+            result.addAll(nextNode.wordList);
+        }
         //记录走过了
         walkedArr[x][y] = 1;
         //上下左右
