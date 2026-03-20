@@ -80,7 +80,7 @@ public class Code10 {
         }
 
         /**
-         * 构建路径(反过来)
+         * 构建路径(反过来),计算结果
          */
 
         //次数
@@ -93,12 +93,7 @@ public class Code10 {
                 count++;
             }
         }
-
-        /**
-         * 判断结果
-         */
-
-        //返回
+        //返回结果
         return count == max ? targetNumber : -1;
     }
 
