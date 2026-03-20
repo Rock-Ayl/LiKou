@@ -1,8 +1,5 @@
 package normal51;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * LCP 62. 交通枢纽
  * 同步题目状态
@@ -45,29 +42,6 @@ import java.util.List;
  */
 public class Code10 {
 
-    private static class Node {
-
-        //数字
-        private int number;
-
-        //下一级节点
-        private List<Node> nextNodeList = new ArrayList<>();
-
-        //初始化
-        public Node(int number) {
-            this.number = number;
-        }
-
-        @Override
-        public String toString() {
-            return "Node{" +
-                    "number=" + number +
-                    ", nextNodeList=" + nextNodeList.size() +
-                    '}';
-        }
-
-    }
-
     public int transportationHub(int[][] path) {
 
         /**
@@ -106,28 +80,18 @@ public class Code10 {
         }
 
         /**
-         * 构建节点
-         */
-
-        //数组
-        Node[] nodeArr = new Node[max + 1];
-        //循环
-        for (int i = 0; i <= max; i++) {
-            //初始化
-            nodeArr[i] = new Node(i);
-        }
-
-        /**
          * 构建路径(反过来)
          */
 
+        //次数
+        int count = 0;
         //循环
         for (int[] ints : path) {
-            //获取
-            Node child = nodeArr[ints[0]];
-            Node father = nodeArr[ints[1]];
-            //添加
-            father.nextNodeList.add(child);
+            //如果是目标节点
+            if (ints[1] == targetNumber) {
+                //+1
+                count++;
+            }
         }
 
         /**
@@ -135,7 +99,7 @@ public class Code10 {
          */
 
         //返回
-        return nodeArr[targetNumber].nextNodeList.size() == max ? targetNumber : -1;
+        return count == max ? targetNumber : -1;
     }
 
     public static void main(String[] args) {
