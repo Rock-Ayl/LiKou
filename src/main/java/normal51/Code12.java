@@ -85,7 +85,7 @@ public class Code12 {
             //当然可以
             return true;
         }
-        //如果没有基数
+        //如果没有奇数
         if (minSingle == Integer.MAX_VALUE) {
             //当然可以
             return true;
