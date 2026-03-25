@@ -91,7 +91,7 @@ public class Code14 {
     public long minCost(int m, int n, int[][] waitCost) {
         //动态规划
         long[][] arr = new long[m][n];
-        //固定开始位置为0
+        //固定开始为1(开始不用等待)
         arr[0][0] = 1;
         //循环
         for (int i = 1; i < arr.length; i++) {
@@ -117,7 +117,7 @@ public class Code14 {
                 arr[i][j] = (i + 1) * (j + 1) + waitCost[i][j] + last;
             }
         }
-        //返回
+        //返回(最后一次不用等待)
         return arr[m - 1][n - 1] - waitCost[m - 1][n - 1];
     }
 
