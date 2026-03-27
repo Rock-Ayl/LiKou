@@ -48,15 +48,15 @@ import java.util.Arrays;
 public class Code16 {
 
     public int longestSquareStreak(int[] nums) {
+        //排序
+        Arrays.sort(nums);
         //数组
-        int[] arr = new int[100001];
+        int[] arr = new int[nums[nums.length - 1] + 1];
         //循环
         for (int num : nums) {
             //记录
             arr[num] = 1;
         }
-        //排序
-        Arrays.sort(nums);
         //最大长度
         int max = 0;
         //循环
