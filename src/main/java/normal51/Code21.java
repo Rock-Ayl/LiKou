@@ -1,7 +1,5 @@
 package normal51;
 
-import java.lang.ref.PhantomReference;
-
 /**
  * 2429. 最小异或
  * 算术评级: 5
@@ -103,22 +101,20 @@ public class Code21 {
     private int big(int num1, int oneCount, int twoCount) {
         //转为数字
         String binaryString = Integer.toBinaryString(num1);
-        //字符串
-        StringBuffer str = new StringBuffer();
+        //数字
+        int num = 0;
         //循环
         for (int i = 0; i < binaryString.length(); i++) {
+            //位移
+            num <<= 1;
             //如果还有
-            if (binaryString.charAt(i) == '1' && twoCount > 0) {
-                //使用1
-                str.append('1');
-                twoCount--;
-            } else {
-                //使用0
-                str.append('0');
+            if (binaryString.charAt(i) == '1' && twoCount-- > 0) {
+                //额外+1
+                num++;
             }
         }
         //返回
-        return Integer.parseInt(str.toString(), 2);
+        return num;
     }
 
     public static void main(String[] args) {
