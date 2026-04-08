@@ -65,22 +65,23 @@ public class Code3 {
                 charArray[i] = '0';
                 //操作+1
                 count++;
-            } else {
-                //索引
-                int index = i;
-                //如果满足
-                while (index > 0 && charArray[index] == '1') {
-                    //进位
-                    charArray[index--] = '0';
-                }
-                //如果进位到最前面
-                if (index >= 0) {
-                    //记录
-                    charArray[index] = '1';
-                }
-                //操作+1
-                count++;
+                //本轮过
+                continue;
             }
+            //索引
+            int index = i;
+            //如果当前是1(不考虑首位)
+            while (index > 0 && charArray[index] == '1') {
+                //当前1变为0
+                charArray[index--] = '0';
+            }
+            //最前面的0变为1
+            if (index >= 0) {
+                //记录
+                charArray[index] = '1';
+            }
+            //操作+1
+            count++;
         }
         //返回
         return count;
