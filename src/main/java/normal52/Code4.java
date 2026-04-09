@@ -62,7 +62,7 @@ public class Code4 {
         while (right < nums.length) {
 
             /**
-             * 计算右边的数字1的位置
+             * 右滑：记录右边的数字1的位置
              */
 
             //当前数字
@@ -71,25 +71,19 @@ public class Code4 {
             int rightNumIndex = 0;
             //如果还有
             while (rightNum > 0) {
-                //本位置是否有1
-                boolean hadOne = rightNum % 2 == 1;
-                //如果有1
-                if (hadOne == true) {
-                    //记录本位置
-                    if (++arr[rightNumIndex++] == 2) {
-                        //增加重复
-                        errorCount++;
-                    }
-                } else {
-                    //+1
-                    rightNumIndex++;
+                //如果有1,记录
+                if ((rightNum % 2 == 1) == true && ++arr[rightNumIndex] == 2) {
+                    //增加重复
+                    errorCount++;
                 }
+                //+1
+                rightNumIndex++;
                 //位移
                 rightNum = rightNum >> 1;
             }
 
             /**
-             * 不能有任何重复
+             * 不断左滑：不能有重复的1
              */
 
             //如果重复了
@@ -100,19 +94,13 @@ public class Code4 {
                 int leftNumIndex = 0;
                 //如果还有
                 while (leftNum > 0) {
-                    //本位置是否有1
-                    boolean hadOne = leftNum % 2 == 1;
-                    //如果有1
-                    if (hadOne == true) {
-                        //记录本位置
-                        if (--arr[leftNumIndex++] == 1) {
-                            //减少重复
-                            errorCount--;
-                        }
-                    } else {
-                        //+1
-                        leftNumIndex++;
+                    //如果有1,记录
+                    if ((leftNum % 2 == 1) == true && --arr[leftNumIndex] == 1) {
+                        //减少重复
+                        errorCount--;
                     }
+                    //+1
+                    leftNumIndex++;
                     //位移
                     leftNum = leftNum >> 1;
                 }
