@@ -70,7 +70,7 @@ public class Code23 {
             //当前数字
             int num = nums[i];
             //如果一个满足
-            if (num > k || (num & k) == k) {
+            if (num >= k) {
                 //直接
                 return 1;
             }
@@ -79,7 +79,7 @@ public class Code23 {
                 //叠加
                 num |= nums[j];
                 //如果一个满足
-                if (num > k || (num & k) == k) {
+                if (num >= k) {
                     //刷新最小
                     min = Math.min(min, j - i + 1);
                     //跳出
