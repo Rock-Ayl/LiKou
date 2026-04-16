@@ -99,18 +99,16 @@ public class Code8 {
          */
 
         //最大结果
-        int max = groupList.get(0);
+        int maxLength = groupList.get(0);
         //循环
         for (int i = 1; i < groupList.size(); i++) {
-            //本次组合
-            int lenght = Math.min(groupList.get(i), groupList.get(i - 1)) * 2;
-            //刷新最大
-            max = Math.max(max, lenght);
-            //刷新最大2
-            max = Math.max(max, groupList.get(i));
+            //刷新最大-相邻组合
+            maxLength = Math.max(maxLength, Math.min(groupList.get(i), groupList.get(i - 1)) * 2);
+            //刷新最大-仅考虑自己
+            maxLength = Math.max(maxLength, groupList.get(i));
         }
         //返回结果
-        return max / 2;
+        return maxLength / 2;
     }
 
     public static void main(String[] args) {
