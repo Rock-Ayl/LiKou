@@ -65,18 +65,18 @@ public class Code10 {
          * 计算结果
          */
 
-        //同分组结果和
-        long sum = 0L;
+        //如果所有数字都是坏组合的可能
+        long result = count(nums.length);
         //循环
         for (Integer count : groupMap.values()) {
-            //叠加本次
-            sum += count(count);
+            //计算出本分组有多少个好组合,删除之
+            result -= count(count);
         }
         //最终结果
-        return count(nums.length) - sum;
+        return result;
     }
 
-    //根据分组数量计算本次预期结果(高斯算法)
+    //计算分组下,好组合数量(高斯算法)
     private long count(int count) {
         //长度
         long length = count - 1;
