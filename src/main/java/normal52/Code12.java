@@ -148,11 +148,6 @@ public class Code12 {
             //坐标
             int x = colorGroup.x;
             int y = colorGroup.y;
-            //如果越界
-            if (x < 0 || y < 0 || x >= gridArr.length || y >= gridArr[0].length) {
-                //本轮过
-                continue;
-            }
             //如果是前几轮着色
             if (gridArr[x][y] > 0) {
                 //本轮过
