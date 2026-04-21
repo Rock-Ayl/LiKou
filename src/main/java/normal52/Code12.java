@@ -104,24 +104,6 @@ public class Code12 {
             this(colorGroup[0], colorGroup[1], colorGroup[2]);
         }
 
-        @Override
-        public int hashCode() {
-            //hash
-            return x + y;
-        }
-
-        public boolean equals(Object obj) {
-            //强转
-            Node another = (Node) obj;
-            //比较坐标
-            return this.x == another.x && this.y == another.y;
-        }
-
-        @Override
-        public String toString() {
-            return String.format("x=%d,y=%d,color=%d", x, y, color);
-        }
-
     }
 
     public int[][] colorGrid(int n, int m, int[][] sources) {
