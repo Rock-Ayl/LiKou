@@ -130,8 +130,8 @@ public class Code12 {
          * 填充当前颜色
          */
 
-        //下一轮着色的单元格
-        Map<String, Node> nextColoredMap = new HashMap<>();
+        //下一轮着色的单元格map
+        Map<String, Node> nextColorMap = new HashMap<>();
 
         //记录已着色的单元格
         int[][] coloredArr = new int[corlorList.size()][3];
@@ -175,10 +175,10 @@ public class Code12 {
              */
 
             //记录着色单元格
-            addNextNode(gridArr, nextColoredMap, x + 1, y, gridArr[x][y]);
-            addNextNode(gridArr, nextColoredMap, x - 1, y, gridArr[x][y]);
-            addNextNode(gridArr, nextColoredMap, x, y + 1, gridArr[x][y]);
-            addNextNode(gridArr, nextColoredMap, x, y - 1, gridArr[x][y]);
+            addNextNode(gridArr, nextColorMap, x + 1, y, gridArr[x][y]);
+            addNextNode(gridArr, nextColorMap, x - 1, y, gridArr[x][y]);
+            addNextNode(gridArr, nextColorMap, x, y + 1, gridArr[x][y]);
+            addNextNode(gridArr, nextColorMap, x, y - 1, gridArr[x][y]);
 
         }
 
@@ -197,7 +197,7 @@ public class Code12 {
             gridArr[x][y] = Math.abs(gridArr[x][y]);
         }
         //转为列表
-        List<Node> nextCorlorList = new ArrayList<>(nextColoredMap.values());
+        List<Node> nextCorlorList = new ArrayList<>(nextColorMap.values());
         //循环
         for (Node node : nextCorlorList) {
             //修改为正数
@@ -212,7 +212,8 @@ public class Code12 {
         next(gridArr, nextCorlorList);
     }
 
-    private void addNextNode(int[][] gridArr, Map<String, Node> nextColoredMap, int x, int y, int thisColor) {
+    //添加下一轮着色的单元格
+    private void addNextNode(int[][] gridArr, Map<String, Node> nextColorMap, int x, int y, int thisColor) {
         //如果越界
         if (x < 0 || y < 0 || x >= gridArr.length || y >= gridArr[0].length) {
             //本轮过
@@ -226,13 +227,13 @@ public class Code12 {
         //唯一key
         String key = x + "," + y;
         //获取已存在节点
-        Node oldNode = nextColoredMap.get(key);
+        Node oldNode = nextColorMap.get(key);
         //如果没有
         if (oldNode == null) {
-            //初始化
-            nextColoredMap.put(key, new Node(x, y, thisColor));
+            //初始化节点
+            nextColorMap.put(key, new Node(x, y, thisColor));
         } else {
-            //刷新最小
+            //刷新最小颜色
             oldNode.color = Math.min(oldNode.color, thisColor);
         }
     }
