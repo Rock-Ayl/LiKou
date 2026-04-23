@@ -74,15 +74,13 @@ public class Code14 {
         queue.add(lastNode);
         //循环
         for (int i = 1; i < nums.length; i++) {
-            //如果最近不可以被使用
+            //如果最大分数的节点,不可以被使用
             while (canUse(i, k, queue) == false) {
-                //弹出
+                //删除之
                 queue.poll();
             }
-            //本次与前者最大值组合的分数
-            int rank = queue.peek().rank + nums[i];
-            //当前节点
-            Node node = new Node(i, rank);
+            //本次与前者最大值组合的分数,初始化节点
+            Node node = new Node(i, queue.peek().rank + nums[i]);
             //加入队列
             queue.add(node);
             //记录最后一个节点
