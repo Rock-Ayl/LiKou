@@ -75,7 +75,7 @@ public class Code14 {
         //循环
         for (int i = 1; i < nums.length; i++) {
             //如果最大分数的节点,不可以被使用
-            while (canUse(i, k, queue) == false) {
+            while (queue.peek().index + k < i) {
                 //删除之
                 queue.poll();
             }
@@ -88,17 +88,6 @@ public class Code14 {
         }
         //返回
         return lastNode.rank;
-    }
-
-    //如果最近的可以被使用
-    private boolean canUse(int i, int k, PriorityQueue<Node> queue) {
-        //如果没超出范围
-        if (queue.peek().index + k >= i) {
-            //可以被使用
-            return true;
-        }
-        //默认无法被使用
-        return false;
     }
 
     public static void main(String[] args) {
