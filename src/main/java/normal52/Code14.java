@@ -1,5 +1,7 @@
 package normal52;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.PriorityQueue;
 
 /**
@@ -94,8 +96,40 @@ public class Code14 {
         Code14 code14 = new Code14();
         int[] nums = {1, -1, -2, 4, -7, 3};
         int k = 2;
-        int maxResult = code14.maxResult(nums, k);
+        int maxResult = code14.star(nums, k);
         System.out.println(maxResult);
+    }
+
+    public int star(int[] nums, int k) {
+        //长度
+        int length = nums.length;
+        //数组
+        int[] arr = new int[length];
+        //初始化开始位置
+        arr[0] = nums[0];
+        //双端队列
+        Deque<Integer> queue = new ArrayDeque<>();
+        //加入开始位置
+        queue.add(0);
+        //循环
+        for (int i = 1; i < length; i++) {
+            //如果过期了
+            if (queue.peekFirst() < i - k) {
+                //弹出
+                queue.pollFirst();
+            }
+            //记录本次最大值
+            arr[i] = arr[queue.peekFirst()] + nums[i];
+            //如果当前值,大于队列中的值,则弹出队列中的值
+            while (queue.isEmpty() == false && arr[i] >= arr[queue.peekLast()]) {
+                //弹出队列中的值
+                queue.pollLast();
+            }
+            //加入当前值
+            queue.add(i);
+        }
+        //返回
+        return arr[length - 1];
     }
 
 }
