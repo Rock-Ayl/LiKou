@@ -68,10 +68,12 @@ public class Code16 {
         for (int i = 1; i < nums.length; i++) {
             //计算新数字,覆盖到新数组
             arr[i] = nums[i] + add;
+            //计算差值
+            long diff = arr[i - 1] - arr[i];
             //如果当前数字小于前一个数字
-            if (arr[i] < arr[i - 1]) {
+            if (diff > 0) {
                 //叠加新的差值
-                add += arr[i - 1] - arr[i];
+                add += diff;
                 //更新当前数字
                 arr[i] = arr[i - 1];
             }
