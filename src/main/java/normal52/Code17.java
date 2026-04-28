@@ -77,30 +77,21 @@ package normal52;
 public class Code17 {
 
     public int compareBitonicSums(int[] nums) {
-        //上一个数字
-        int lastNum = 0;
         //和
         long sum = 0L;
         //循环
         for (int i = 1; i < nums.length; i++) {
             //判断递增递减
-            if (nums[i] > lastNum) {
+            if (nums[i] > nums[i - 1]) {
                 //叠加
                 sum += nums[i - 1];
             } else {
                 //递减
                 sum -= nums[i];
             }
-            //更新上一个数字
-            lastNum = nums[i];
-        }
-        //如果相同
-        if (sum == 0) {
-            //返回
-            return -1;
         }
         //返回
-        return sum > 0 ? 0 : 1;
+        return sum == 0L ? -1 : (sum > 0L ? 0 : 1);
     }
 
     public static void main(String[] args) {
