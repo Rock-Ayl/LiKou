@@ -67,7 +67,7 @@ public class Code18 {
     private static class Node {
 
         //字符
-        private Character letter;
+        private char letter;
 
         //数量,默认0
         private int count = 0;
@@ -76,7 +76,7 @@ public class Code18 {
         private int firstIndex = -1;
 
         //初始化
-        public Node(Character letter) {
+        public Node(char letter) {
             this.letter = letter;
         }
 
@@ -95,7 +95,7 @@ public class Code18 {
 
         //计数器
         int[] indexArr = new int[26];
-        //元音记录索引
+        //元音节点的索引/同时视为其是元音节点
         indexArr[0] = 1;
         indexArr[4] = 2;
         indexArr[8] = 3;
@@ -108,8 +108,8 @@ public class Code18 {
 
         //计数器
         Node[] nodeArr = new Node[6];
-        //初始化节点
-        nodeArr[0] = new Node(null);
+        //初始化节点,第0个随意填充
+        nodeArr[0] = new Node('a');
         nodeArr[1] = new Node('a');
         nodeArr[2] = new Node('e');
         nodeArr[3] = new Node('i');
@@ -129,12 +129,14 @@ public class Code18 {
                 //本轮过
                 continue;
             }
+            //获取节点
+            Node node = nodeArr[index];
             //+1
-            nodeArr[index].count++;
+            node.count++;
             //如果是第一次出现
-            if (nodeArr[index].firstIndex == -1) {
+            if (node.firstIndex == -1) {
                 //记录
-                nodeArr[index].firstIndex = i;
+                node.firstIndex = i;
             }
         }
 
@@ -152,29 +154,28 @@ public class Code18 {
         //索引
         int nodeIndex = 0;
         //字符串
-        StringBuffer str = new StringBuffer();
+        StringBuffer result = new StringBuffer();
         //循环
         for (int i = 0; i < s.length(); i++) {
             //获取索引
             int index = indexArr[s.charAt(i) - 'a'];
-            //判断 元音 or 辅音
-            if (index > 0) {
-                //如果没了
-                if (nodeArr[nodeIndex].count == 0) {
-                    //+1
-                    nodeIndex++;
-                }
-                //组装字符
-                str.append(nodeArr[nodeIndex].letter);
-                //扣减
-                nodeArr[nodeIndex].count--;
-            } else {
+            //如果是辅音
+            if (index == 0) {
                 //直接组装
-                str.append(s.charAt(i));
+                result.append(s.charAt(i));
+                //本轮过
+                continue;
+            }
+            //组装字符
+            result.append(nodeArr[nodeIndex].letter);
+            //扣减,如果没了
+            if (--nodeArr[nodeIndex].count == 0) {
+                //下一个
+                nodeIndex++;
             }
         }
         //返回
-        return str.toString();
+        return result.toString();
     }
 
     public static void main(String[] args) {
