@@ -88,16 +88,26 @@ public class Code18 {
     }
 
     public String sortVowels(String s) {
+
+        /**
+         * 初始化 索引数组
+         */
+
         //计数器
         int[] indexArr = new int[26];
-        //计数器
-        Node[] nodeArr = new Node[6];
         //元音记录索引
         indexArr[0] = 1;
         indexArr[4] = 2;
         indexArr[8] = 3;
         indexArr[14] = 4;
         indexArr[20] = 5;
+
+        /**
+         * 初始化 节点(计数器)数组
+         */
+
+        //计数器
+        Node[] nodeArr = new Node[6];
         //初始化节点
         nodeArr[0] = new Node(null);
         nodeArr[1] = new Node('a');
@@ -105,6 +115,11 @@ public class Code18 {
         nodeArr[3] = new Node('i');
         nodeArr[4] = new Node('o');
         nodeArr[5] = new Node('u');
+
+        /**
+         * 元音计数、记录首次出现索引
+         */
+
         //循环
         for (int i = 0; i < s.length(); i++) {
             //获取索引
@@ -122,8 +137,18 @@ public class Code18 {
                 nodeArr[index].firstIndex = i;
             }
         }
+
+        /**
+         * 为元音排序
+         */
+
         //给节点排序
         Arrays.sort(nodeArr, (o1, o2) -> o2.count == o1.count ? o1.firstIndex - o2.firstIndex : o2.count - o1.count);
+
+        /**
+         * 组装最终结果
+         */
+
         //索引
         int nodeIndex = 0;
         //字符串
