@@ -72,19 +72,19 @@ public class Code19 {
             int end = r[i];
             //获取对应子数组、并排序
             int[] childArr = Arrays.stream(nums, start, end + 1).sorted().toArray();
-            //获取柴智
+            //获取差
             int diff = childArr[1] - childArr[0];
             //循环
             for (int j = 2; j < childArr.length; j++) {
                 //判断是否等差
                 if (childArr[j] - childArr[j - 1] != diff) {
-                    //不是
+                    //记录不是
                     resultList.add(false);
                     //本轮过
                     continue out;
                 }
             }
-            //是
+            //记录是
             resultList.add(true);
         }
         //返回结果
