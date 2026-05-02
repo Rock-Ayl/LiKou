@@ -66,27 +66,20 @@ public class Code5 {
             //过
             return false;
         }
-        //统计x的个数
-        int count = 0;
+        //是否有x
+        boolean had = false;
         //循环
         while (n > 9) {
-            //当前数字
-            int part = n % 10;
             //如果当前数字是x
-            if (part == x) {
-                //+1
-                count++;
+            if ((n % 10) == x) {
+                //有
+                had = true;
             }
             //下一个
             n = n / 10;
         }
-        //如果开头是最后一个数字
-        if (n == x) {
-            //过
-            return false;
-        }
         //返回结果
-        return count > 0;
+        return n != x && had;
     }
 
     public static void main(String[] args) {
