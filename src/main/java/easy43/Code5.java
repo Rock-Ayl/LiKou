@@ -61,11 +61,6 @@ package easy43;
 public class Code5 {
 
     public boolean validDigit(int n, int x) {
-        //如果太小
-        if (n < 10) {
-            //过
-            return false;
-        }
         //是否有x
         boolean had = false;
         //循环
