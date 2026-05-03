@@ -67,8 +67,6 @@ public class Code20 {
             //如果到头了，说明匹配成功
             return true;
         }
-        //当前key
-        String key = index1 + "," + index2;
         //如果走过了
         if (++keySet[index1][index2] > 1) {
             //过
