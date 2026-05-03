@@ -1,8 +1,5 @@
 package normal52;
 
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  * LCR 096. 交错字符串
  * 同步题目状态
@@ -72,7 +69,6 @@ public class Code20 {
             //过
             return false;
         }
-        //添加
         //获取当前目标
         char target = s3.charAt(index3);
         //可能1
