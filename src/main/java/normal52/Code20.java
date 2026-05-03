@@ -57,11 +57,11 @@ public class Code20 {
             return false;
         }
         //实现
-        return next(s1, s2, s3, 0, 0, 0, new HashSet<>());
+        return next(s1, s2, s3, 0, 0, 0, new int[s1.length() + 1][s2.length() + 1]);
     }
 
     //递归
-    private boolean next(String s1, String s2, String s3, int index1, int index2, int index3, Set<String> keySet) {
+    private boolean next(String s1, String s2, String s3, int index1, int index2, int index3, int[][] keySet) {
         //如果到头了
         if (index3 == s3.length()) {
             //如果到头了，说明匹配成功
@@ -70,12 +70,11 @@ public class Code20 {
         //当前key
         String key = index1 + "," + index2;
         //如果走过了
-        if (keySet.contains(key)) {
+        if (++keySet[index1][index2] > 1) {
             //过
             return false;
         }
         //添加
-        keySet.add(key);
         //获取当前目标
         char target = s3.charAt(index3);
         //可能1
