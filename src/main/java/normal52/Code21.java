@@ -122,49 +122,25 @@ public class Code21 {
         for (int i = 0; i < result.length; i++) {
             //本次查询
             int[] query = queries[i];
+            //开始结束
+            int start = query[0];
+            int end = query[1];
+            //如果相同
+            if (start == end) {
+                //本轮过
+                continue;
+            }
             //判断方向
-            if (query[0] < query[1]) {
+            if (start < end) {
                 //左到右
-                result[i] = countLeftToRight(leftToRightMoveArr, query[0], query[1]);
+                result[i] = leftToRightMoveArr[end - 1] - (start == 0 ? 0 : leftToRightMoveArr[start - 1]);
             } else {
                 //右到左
-                result[i] = countRightToLeft(rightToLeftMoveArr, query[0], query[1]);
+                result[i] = rightToLeftMoveArr[end + 1] - (start == rightToLeftMoveArr.length - 1 ? 0 : rightToLeftMoveArr[start + 1]);
             }
         }
         //返回
         return result;
-    }
-
-    //左到右
-    private int countLeftToRight(int[] leftToRightMoveArr, int start, int end) {
-        //特殊
-        if (start == end) {
-            //过
-            return 0;
-        }
-        //最大
-        int right = leftToRightMoveArr[end - 1];
-        int left = start == 0 ? 0 : leftToRightMoveArr[start - 1];
-        //本次结果
-        int sum = right - left;
-        //返回
-        return sum;
-    }
-
-    //右到左
-    private int countRightToLeft(int[] rightToLeftMoveArr, int start, int end) {
-        //特殊
-        if (start == end) {
-            //过
-            return 0;
-        }
-        //最大
-        int right = rightToLeftMoveArr[end + 1];
-        int left = start == rightToLeftMoveArr.length - 1 ? 0 : rightToLeftMoveArr[start + 1];
-        //本次结果
-        int sum = right - left;
-        //返回
-        return sum;
     }
 
     public static void main(String[] args) {
