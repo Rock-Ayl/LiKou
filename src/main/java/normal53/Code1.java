@@ -86,20 +86,54 @@ public class Code1 {
 
     //计算本次波动值
     private int count(int num) {
-        //本次结果
-        int sum = 0;
-        //转为字符串
-        String str = String.valueOf(num);
+
+        /**
+         * 初始化最后三个数字
+         */
+
+        //初始化右
+        int right = num % 10;
+        num = num / 10;
+        //初始化中
+        int mid = num % 10;
+        num = num / 10;
+        //初始化左
+        int left = num % 10;
+        num = num / 10;
+
+        /**
+         * 计算
+         */
+
+        //初始化本次结果
+        int sum = check(left, mid, right);
         //循环
-        for (int i = 1; i < str.length() - 1; i++) {
-            //如果是峰或谷
-            if (str.charAt(i) > str.charAt(i - 1) && str.charAt(i) > str.charAt(i + 1)) {
-                //峰
-                sum++;
-            } else if (str.charAt(i) < str.charAt(i - 1) && str.charAt(i) < str.charAt(i + 1)) {
-                //谷
-                sum++;
-            }
+        while (num > 0) {
+            //下一个
+            right = mid;
+            mid = left;
+            left = num % 10;
+            num = num / 10;
+            //叠加本次
+            sum += check(left, mid, right);
+        }
+        //返回
+        return sum;
+    }
+
+    //计算峰谷
+    private int check(int left, int mid, int right) {
+        //结果
+        int sum = 0;
+        //判断是否为峰
+        if (left < mid && mid > right) {
+            //+1
+            sum++;
+        }
+        //判断是否为谷
+        if (left > mid && mid < right) {
+            //+1
+            sum++;
         }
         //返回
         return sum;
