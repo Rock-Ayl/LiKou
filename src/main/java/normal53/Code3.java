@@ -90,11 +90,8 @@ public class Code3 {
         List<Integer> result = new ArrayList<>();
         //循环
         for (int i = k; i < nums.length - k; i++) {
-            //判断
-            int a = downArr[i - 1];
-            int b = upArr[i + k];
             //如果是好下标
-            if (a >= k && b >= k) {
+            if (downArr[i - 1] >= k && upArr[i + k] >= k) {
                 //记录
                 result.add(i);
             }
