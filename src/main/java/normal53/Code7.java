@@ -124,10 +124,15 @@ public class Code7 {
              * 不断右滑
              */
 
-            //循环
-            while (count != 4 && (right + 1 < s.length())) {
+            //如果不满足
+            while (count != 4) {
+                //如果不可以右滑了
+                if (right + 1 >= s.length()) {
+                    //跳出
+                    break;
+                }
                 //-1,如果本次不超了
-                if (right + 1 < s.length() && --arr[s.charAt(++right) - 'A'] == targetCount) {
+                if (--arr[s.charAt(++right) - 'A'] == targetCount) {
                     //记录符合
                     count++;
                 }
