@@ -101,7 +101,7 @@ public class Code7 {
             }
         }
         //初始化最小情况
-        int min = right - left + 1;
+        int min = right - left;
 
         /**
          * 不断滑动
@@ -130,7 +130,7 @@ public class Code7 {
             while (count != 4) {
                 //如果不可以右滑了
                 if (right + 1 >= s.length()) {
-                    //跳出
+                    //彻底跳出
                     break out;
                 }
                 //-1,如果本次不超了
@@ -144,11 +144,8 @@ public class Code7 {
              * 记录本次结果
              */
 
-            //如果是结果
-            if (count == 4) {
-                //更新最小情况
-                min = Math.min(min, (right - left + 1));
-            }
+            //更新最小情况
+            min = Math.min(min, (right - left));
 
         }
 
@@ -157,7 +154,7 @@ public class Code7 {
          */
 
         //返回结果
-        return min;
+        return min + 1;
     }
 
     public static void main(String[] args) {
