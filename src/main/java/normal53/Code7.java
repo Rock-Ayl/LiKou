@@ -107,6 +107,8 @@ public class Code7 {
          * 不断滑动
          */
 
+        //跳出
+        out:
         //循环
         while (left < s.length()) {
 
@@ -129,7 +131,7 @@ public class Code7 {
                 //如果不可以右滑了
                 if (right + 1 >= s.length()) {
                     //跳出
-                    break;
+                    break out;
                 }
                 //-1,如果本次不超了
                 if (--arr[s.charAt(++right) - 'A'] == targetCount) {
