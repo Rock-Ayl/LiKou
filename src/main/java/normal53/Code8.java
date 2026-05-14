@@ -45,38 +45,30 @@ public class Code8 {
 
     public int minimumSum(int n, int k) {
         //不允许的元素集合
-        Set<Integer> notSet = new HashSet<>();
+        Set<Integer> notSet = new HashSet<>(n);
         //当前和
         int sum = 0;
-        //数字
-        int num = 1;
-        //当前计数器
-        int count = 0;
+        //当前最小数字
+        int minNum = 1;
         //循环
-        while (count < n) {
-            //如果被禁止了
-            if (notSet.contains(num)) {
-                //+1
-                num++;
-                //本轮过
-                continue;
+        while (notSet.size() < n) {
+            //如果没有被禁止
+            if (notSet.contains(minNum) == false) {
+                //叠加
+                sum += minNum;
+                //记录被禁止的
+                notSet.add(k - minNum);
             }
-            //叠加
-            sum += num;
-            //记录被禁止的
-            notSet.add(k - num);
-            //+1
-            count++;
             //下一个
-            num++;
-
+            minNum++;
         }
         //返回
         return sum;
     }
 
     public static void main(String[] args) {
-        System.out.println(new Code8().minimumSum(5, 4));;
+        System.out.println(new Code8().minimumSum(5, 4));
+        ;
     }
 
 }
