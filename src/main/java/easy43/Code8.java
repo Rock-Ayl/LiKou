@@ -32,6 +32,11 @@ package easy43;
 public class Code8 {
 
     public boolean isThree(int n) {
+        //如果是偶数
+        if (n % 2 == 0) {
+            //只有4是
+            return n == 4;
+        }
         //次数
         int count = 0;
         //循环
