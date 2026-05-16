@@ -73,10 +73,12 @@ public class Code9 {
             for (int j = i; j < s.length(); j++) {
                 //+1,记录当前数字
                 int target = ++arr[s.charAt(j) - 'a'];
-                //如果是
-                if (check(arr, target)) {
+                //本次长度
+                int length = j - i + 1;
+                //如果更大 and 是
+                if (length > max && check(arr, target)) {
                     //刷新最大
-                    max = Math.max(max, j - i + 1);
+                    max = length;
                 }
             }
         }
