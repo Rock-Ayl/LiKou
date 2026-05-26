@@ -85,24 +85,14 @@ public class Code15 {
                 //直接就符合,刷新本次最大
                 maxLength = Math.max(maxLength, rightIndex - leftIndex + 1);
             } else {
-                //刷新本次最大
-                maxLength = Math.max(maxLength, execute(begativeIndexingList, leftIndex, rightIndex));
+                //两种情况,不要第一个,不要最后一个
+                maxLength = Math.max(maxLength, rightIndex - begativeIndexingList.get(0));
+                maxLength = Math.max(maxLength, begativeIndexingList.get(begativeIndexingList.size() - 1) - leftIndex);
             }
             //下一个
             index = rightIndex + 1;
         }
         //返回最大
-        return maxLength;
-    }
-
-    //计算区间最大长度(里面只有正负数)
-    public int execute(List<Integer> begativeIndexingList, int leftIndex, int rightIndex) {
-        //最大长度
-        int maxLength = 0;
-        //两种情况
-        maxLength = Math.max(maxLength, rightIndex - begativeIndexingList.get(0));
-        maxLength = Math.max(maxLength, begativeIndexingList.get(begativeIndexingList.size() - 1) - leftIndex);
-        //返回
         return maxLength;
     }
 
