@@ -45,34 +45,24 @@ public class Code16 {
     public int[] prevPermOpt1(int[] arr) {
 
         /**
-         * 计算每个位置及之后最小的元素
+         * 找到左边要交换的索引,从后往前,如果当前数字在后面有更小的,视为左边交换索引
          */
 
-        //对应位置及后面最小的元素
-        int[] minArr = new int[arr.length];
-        //默认第一个
-        minArr[arr.length - 1] = arr[arr.length - 1];
-        //循环
-        for (int i = arr.length - 2; i >= 0; i--) {
-            //刷新
-            minArr[i] = Math.min(minArr[i + 1], arr[i]);
-        }
-
-        /**
-         * 找到左边要交换的索引
-         */
-
+        //最小数字
+        int min = arr[arr.length - 1];
         //左边索引
         int leftIndex = -1;
         //循环
-        for (int i = arr.length - 1; i >= 0; i--) {
+        for (int i = arr.length - 2; i >= 0; i--) {
             //如果当前更大
-            if (arr[i] > minArr[i]) {
+            if (arr[i] > min) {
                 //记录索引
                 leftIndex = i;
                 //跳出
                 break;
             }
+            //刷新最小
+            min = Math.min(min, arr[i]);
         }
         //如果没有找到
         if (leftIndex == -1) {
