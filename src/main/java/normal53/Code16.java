@@ -85,16 +85,10 @@ public class Code16 {
                 //本轮过
                 continue;
             }
-            //如果是第一次记录
-            if (rightIndex == -1) {
-                //直接记录
+            //如果是第一次记录 or (如果更大 or 相同)
+            if (rightIndex == -1 || (arr[i] >= arr[rightIndex])) {
+                //更大,所以记录
                 rightIndex = i;
-            } else {
-                //如果更大 or 相同
-                if (arr[i] >= arr[rightIndex]) {
-                    //记录
-                    rightIndex = i;
-                }
             }
         }
 
