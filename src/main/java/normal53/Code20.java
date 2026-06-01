@@ -56,11 +56,11 @@ public class Code20 {
         //结果集
         Set<Integer> resultSet = new HashSet<>();
         //循环
-        for (Integer one : num1List) {
+        for (Integer first : num1List) {
             //循环2
-            for (Integer two : num2List) {
+            for (Integer second : num2List) {
                 //本次结果
-                int sum = one + two;
+                int sum = first + second;
                 //如果满足条件
                 if (sum <= bound) {
                     //记录
@@ -92,6 +92,7 @@ public class Code20 {
             //下一个
             enumNum = enumNum * num;
         }
+        //返回结果
         return result;
     }
 
