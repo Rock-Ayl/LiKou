@@ -87,10 +87,8 @@ import java.util.Map;
  */
 public class Code21 {
 
+    //乘客节点
     private static class UserNode {
-
-        //乘客id
-        private Integer id;
 
         //开始地点
         private String start;
@@ -104,42 +102,16 @@ public class Code21 {
         //结束时间
         private Integer endTime;
 
-        //初始化
-        public UserNode(Integer id) {
-            this.id = id;
-        }
-
-        //方便调试
-        @Override
-        public String toString() {
-            return String.format("UserNode{id=%d, start='%s', startTime=%d, end='%s', endTime=%d}", id, start, startTime, end, endTime);
-        }
-
     }
 
+    //地铁节点
     private static class StationNode {
 
-        //地铁唯一key
-        private String key;
-
         //总次数
-        private Integer countSum;
+        private Integer countSum = 0;
 
         //总时间
-        private Integer timeSum;
-
-        //初始化
-        public StationNode(String key) {
-            this.key = key;
-            this.countSum = 0;
-            this.timeSum = 0;
-        }
-
-        //方便调试
-        @Override
-        public String toString() {
-            return String.format("StationNode{key='%s', countSum=%d, timeSum=%d}", key, countSum, timeSum);
-        }
+        private Integer timeSum = 0;
 
     }
 
@@ -156,7 +128,7 @@ public class Code21 {
         //如果不存在
         if (this.userNodeMap.containsKey(id) == false) {
             //初始化
-            this.userNodeMap.put(id, new UserNode(id));
+            this.userNodeMap.put(id, new UserNode());
         }
         //获取节点
         UserNode node = this.userNodeMap.get(id);
@@ -177,7 +149,7 @@ public class Code21 {
 
     public double getAverageTime(String startStation, String endStation) {
         //唯一key
-        String key = startStation + "_" + endStation;
+        String key = key(startStation, endStation);
         //获取
         StationNode stationNode = this.stationNodeMap.get(key);
         //返回平均时间
@@ -187,17 +159,23 @@ public class Code21 {
     //记录本次出行日志
     private void addLog(UserNode node) {
         //唯一key
-        String key = node.start + "_" + node.end;
+        String key = key(node.start, node.end);
         //如果不存在
         if (this.stationNodeMap.containsKey(key) == false) {
             //初始化
-            this.stationNodeMap.put(key, new StationNode(key));
+            this.stationNodeMap.put(key, new StationNode());
         }
         //获取
         StationNode stationNode = this.stationNodeMap.get(key);
         //记录
         stationNode.countSum++;
         stationNode.timeSum += node.endTime - node.startTime;
+    }
+
+    //构建key
+    public String key(String startStation, String endStation) {
+        //唯一key
+        return startStation + "_" + endStation;
     }
 
 }
