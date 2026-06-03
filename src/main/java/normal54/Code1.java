@@ -3,7 +3,6 @@ package normal54;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -91,13 +90,6 @@ public class Code1 {
                 .stream()
                 .max(Long::compareTo)
                 .orElse(0L);
-        //获取最大数量对应的分组集合
-        Set<Integer> maxCountGroupKeySet = countGroupMap
-                .entrySet()
-                .stream()
-                .filter(p -> p.getValue().equals(maxCount))
-                .map(Map.Entry::getKey)
-                .collect(Collectors.toSet());
 
         /**
          * 寻找结果
@@ -105,10 +97,15 @@ public class Code1 {
 
         //结果
         int minNum = Integer.MAX_VALUE;
-        //循环所有目标分组key
-        for (Integer maxCountGroupKey : maxCountGroupKeySet) {
+        //循环
+        for (Map.Entry<Integer, Long> entry : countGroupMap.entrySet()) {
+            //如果不是最大
+            if (entry.getValue().equals(maxCount) == false) {
+                //本轮过
+                continue;
+            }
             //获取对应最小数字
-            Integer num = groupMinMap.get(maxCountGroupKey);
+            Integer num = groupMinMap.get(entry.getKey());
             //刷新最小
             minNum = Math.min(num, minNum);
         }
