@@ -75,7 +75,7 @@ public class Code1 {
         }
 
         /**
-         * 最大分组数量
+         * 转为map
          */
 
         //数量分组
@@ -84,30 +84,28 @@ public class Code1 {
                 .boxed()
                 //分组统计数量
                 .collect(Collectors.groupingBy(p -> p, Collectors.counting()));
-        //统计所有分组最大数量
-        Long maxCount = countGroupMap
-                .values()
-                .stream()
-                .max(Long::compareTo)
-                .orElse(0L);
 
         /**
          * 寻找结果
          */
 
+        //分组最大数量
+        Long maxCount = 0L;
         //结果
         int minNum = Integer.MAX_VALUE;
         //循环
         for (Map.Entry<Integer, Long> entry : countGroupMap.entrySet()) {
-            //如果不是最大
-            if (entry.getValue().equals(maxCount) == false) {
-                //本轮过
-                continue;
+            //对比当前数量
+            int compare = entry.getValue().compareTo(maxCount);
+            //如果更大
+            if (compare > 0) {
+                //覆盖最大记录
+                minNum = groupMinMap.get(entry.getKey());
+                maxCount = entry.getValue();
+            } else if (compare == 0) {
+                //单独刷新最小数字
+                minNum = Math.min(groupMinMap.get(entry.getKey()), minNum);
             }
-            //获取对应最小数字
-            Integer num = groupMinMap.get(entry.getKey());
-            //刷新最小
-            minNum = Math.min(num, minNum);
         }
         //返回
         return minNum;
