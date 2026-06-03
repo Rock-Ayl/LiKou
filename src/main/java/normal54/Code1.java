@@ -63,16 +63,16 @@ public class Code1 {
 
         //每个分组最小数字map
         Map<Integer, Integer> groupMinMap = new HashMap<>();
-        //每个数字都属于哪个分组
-        int[] groupArr = new int[nums.length];
         //循环
         for (int i = 0; i < nums.length; i++) {
+            //当前数字
+            int num = nums[i];
             //当前分组
-            int gourp = nums[i] % space;
-            //记录
-            groupArr[i] = gourp;
+            int gourp = num % space;
+            //将数字覆盖为分组
+            nums[i] = gourp;
             //记录当前分组最小数字
-            groupMinMap.put(gourp, Math.min(nums[i], groupMinMap.getOrDefault(gourp, nums[i])));
+            groupMinMap.put(gourp, Math.min(num, groupMinMap.getOrDefault(gourp, num)));
         }
 
         /**
@@ -80,7 +80,7 @@ public class Code1 {
          */
 
         //数量分组
-        Map<Integer, Long> countGroupMap = Arrays.stream(groupArr)
+        Map<Integer, Long> countGroupMap = Arrays.stream(nums)
                 //装箱
                 .boxed()
                 //分组统计数量
