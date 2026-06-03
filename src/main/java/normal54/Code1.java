@@ -61,9 +61,9 @@ public class Code1 {
          * 统计分组
          */
 
-        //每个分组最小数字
+        //每个分组最小数字map
         Map<Integer, Integer> groupMinMap = new HashMap<>();
-        //计算分组
+        //每个数字都属于哪个分组
         int[] groupArr = new int[nums.length];
         //循环
         for (int i = 0; i < nums.length; i++) {
@@ -71,10 +71,8 @@ public class Code1 {
             int gourp = nums[i] % space;
             //记录
             groupArr[i] = gourp;
-            //获取当前分组最小数字
-            int groupMinNum = groupMinMap.getOrDefault(gourp, nums[i]);
             //记录当前分组最小数字
-            groupMinMap.put(gourp, Math.min(nums[i], groupMinNum));
+            groupMinMap.put(gourp, Math.min(nums[i], groupMinMap.getOrDefault(gourp, nums[i])));
         }
 
         /**
@@ -87,8 +85,9 @@ public class Code1 {
                 .boxed()
                 //分组统计数量
                 .collect(Collectors.groupingBy(p -> p, Collectors.counting()));
-        //寻找最大数量
-        Long maxCount = countGroupMap.values()
+        //统计所有分组最大数量
+        Long maxCount = countGroupMap
+                .values()
                 .stream()
                 .max(Long::compareTo)
                 .orElse(0L);
