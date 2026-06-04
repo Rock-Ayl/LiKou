@@ -59,6 +59,13 @@ package easy43;
  */
 public class Code14 {
 
+    /**
+     * 2026-6-5 日 不得不提前做
+     *
+     * @param nums
+     * @param k
+     * @return
+     */
     public int[] limitOccurrences(int[] nums, int k) {
         //双指针
         int left = 1;
