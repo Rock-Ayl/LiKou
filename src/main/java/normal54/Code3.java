@@ -87,18 +87,21 @@ public class Code3 {
             //过
             return;
         }
+        //上一个是否为1
+        boolean lastIsOne = str.length() == 0 || str.charAt(str.length() - 1) == '0';
         //第一种情况
         str.append('0');
         //下一个
         build(result, str, n, k, sum);
-        //回溯
-        str.deleteCharAt(str.length() - 1);
-        //如果前面不是1
-        if (str.length() == 0 || str.charAt(str.length() - 1) == '0') {
-            //第二种情况
-            str.append('1');
+        //如果上一个是1
+        if (lastIsOne == true) {
+            //回溯、第二种情况
+            str.setCharAt(str.length() - 1, '1');
             //下一个
             build(result, str, n, k, sum + str.length() - 1);
+            //回溯
+            str.deleteCharAt(str.length() - 1);
+        } else {
             //回溯
             str.deleteCharAt(str.length() - 1);
         }
