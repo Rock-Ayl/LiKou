@@ -84,7 +84,7 @@ public class Code4 {
         //真实时间列表
         List<int[]> timeList = new ArrayList<>();
         //初始化第一个
-        timeList.add(new int[]{intervals[0][0], intervals[0][1]});
+        timeList.add(intervals[0]);
         //循环
         for (int i = 1; i < intervals.length; i++) {
             //当前
@@ -97,7 +97,7 @@ public class Code4 {
                 lastArr[1] = Math.max(lastArr[1], intervalArr[1]);
             } else {
                 //添加新的
-                timeList.add(new int[]{intervalArr[0], intervalArr[1]});
+                timeList.add(intervalArr);
             }
         }
 
