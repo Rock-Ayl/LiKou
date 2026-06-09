@@ -1,8 +1,6 @@
 package normal54;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * 3951. 维持亮度的最小总能量
@@ -91,12 +89,12 @@ public class Code4 {
             int[] lastArr = intervals[lastIndex];
             //如果需要合并
             if (intervalArr[0] <= lastArr[1]) {
-                //合并
+                //合并二者为前者
                 lastArr[1] = Math.max(lastArr[1], intervalArr[1]);
-                //当前置空
+                //后者失效
                 intervals[i] = null;
             } else {
-                //记录最新的
+                //更换最后一个索引
                 lastIndex = i;
             }
         }
@@ -105,10 +103,8 @@ public class Code4 {
          * 计算结果
          */
 
-        //单位时间内消耗
-        long use = (brightness / 3) + (brightness % 3 == 0 ? 0 : 1);
-        //时间
-        long times = 0;
+        //单位时间
+        int times = 0;
         //循环
         for (int[] interval : intervals) {
             //判空
@@ -119,8 +115,8 @@ public class Code4 {
             //叠加
             times += interval[1] - interval[0] + 1;
         }
-        //返回
-        return use * times;
+        //一个单位的消耗 * 时间
+        return (long) ((brightness / 3) + (brightness % 3 == 0 ? 0 : 1)) * times;
     }
 
     public static void main(String[] args) {
