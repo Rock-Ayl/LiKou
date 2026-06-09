@@ -81,23 +81,23 @@ public class Code4 {
 
         //排序
         Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
-        //真实时间列表
-        List<int[]> timeList = new ArrayList<>();
-        //初始化第一个
-        timeList.add(intervals[0]);
+        //上一个索引
+        int lastIndex = 0;
         //循环
         for (int i = 1; i < intervals.length; i++) {
             //当前
             int[] intervalArr = intervals[i];
             //获取上一个
-            int[] lastArr = timeList.get(timeList.size() - 1);
+            int[] lastArr = intervals[lastIndex];
             //如果需要合并
             if (intervalArr[0] <= lastArr[1]) {
                 //合并
                 lastArr[1] = Math.max(lastArr[1], intervalArr[1]);
+                //当前置空
+                intervals[i] = null;
             } else {
-                //添加新的
-                timeList.add(intervalArr);
+                //记录最新的
+                lastIndex = i;
             }
         }
 
@@ -110,7 +110,12 @@ public class Code4 {
         //时间
         long times = 0;
         //循环
-        for (int[] interval : timeList) {
+        for (int[] interval : intervals) {
+            //判空
+            if (interval == null) {
+                //本轮过
+                continue;
+            }
             //叠加
             times += interval[1] - interval[0] + 1;
         }
