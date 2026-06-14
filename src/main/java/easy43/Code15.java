@@ -50,21 +50,18 @@ public class Code15 {
     public boolean consecutiveSetBits(int n) {
         //次数
         int count = 0;
-        //上一个数字
+        //当前最后数字
         int last = n % 2;
-        //下一个
+        //位移一次
         n = n >> 1;
         //循环
         while (n > 0) {
-            //当前
+            //当前最后数字
             int num = n % 2;
-            //如果是
-            if (num == 1 && last == 1) {
-                //+1,如果超了
-                if (++count > 1) {
-                    //不行
-                    return false;
-                }
+            //如果满足一次,+1,并判断是否超了
+            if (num == 1 && last == 1 && ++count > 1) {
+                //不行
+                return false;
             }
             //下一个
             last = num;
