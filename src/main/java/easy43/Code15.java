@@ -59,15 +59,15 @@ public class Code15 {
             //当前最后数字
             int num = n % 2;
             //如果满足一次,+1,并判断是否超了
-            if (num == 1 && last == 1 && ++count > 1) {
-                //不行
+            if (num == 1 && last == 1 && ++count == 2) {
+                //直接返回不行
                 return false;
             }
             //下一个
             last = num;
             n = n >> 1;
         }
-        //返回
+        //判断是否满足1
         return count == 1;
     }
 
