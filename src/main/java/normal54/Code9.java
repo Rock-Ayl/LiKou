@@ -75,24 +75,31 @@ import java.util.Arrays;
 public class Code9 {
 
     public long maxRatings(int[][] units) {
-        //如果太小
-        if (units[0].length < 2) {
+        //如果每行只有一个
+        if (units[0].length == 1) {
             //求和
-            return Arrays.stream(units).map(p -> Long.valueOf(p[0])).mapToLong(Long::longValue).sum();
+            long sum = 0L;
+            //循环
+            for (int[] unit : units) {
+                //叠加
+                sum += unit[0];
+            }
+            //返回
+            return sum;
         }
         //循环
         for (int[] unit : units) {
             //内层排序
             Arrays.sort(unit);
         }
-        //外层排序
+        //外层排序,先拍索引=1的数字,再排索引=0的数字
         Arrays.sort(units, (a, b) -> a[1] != b[1] ? a[1] - b[1] : a[0] - b[0]);
         //初始化和
         long sum = units[0][0];
         //循环
-        for (int[] unit : units) {
-            //刷新最小
-            sum = Math.min(unit[0], sum);
+        for (int i = 1; i < units.length; i++) {
+            //刷新第一列最小数字
+            sum = Math.min(units[i][0], sum);
         }
         //循环
         for (int i = 1; i < units.length; i++) {
