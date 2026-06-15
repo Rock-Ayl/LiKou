@@ -87,10 +87,21 @@ public class Code9 {
             //返回
             return sum;
         }
-        //循环
+        //循环1
         for (int[] unit : units) {
-            //内层排序
-            Arrays.sort(unit);
+            //循环2,寻找最小的前2个值
+            for (int i = 0; i < 2; i++) {
+                //循环3
+                for (int j = unit.length - 1; j > i; j--) {
+                    //如果更小
+                    if (unit[j] < unit[j - 1]) {
+                        //交换
+                        int temp = unit[j];
+                        unit[j] = unit[j - 1];
+                        unit[j - 1] = temp;
+                    }
+                }
+            }
         }
         //外层排序,先拍索引=1的数字,再排索引=0的数字
         Arrays.sort(units, (a, b) -> a[1] != b[1] ? a[1] - b[1] : a[0] - b[0]);
