@@ -1,9 +1,9 @@
 package normal54;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -77,14 +77,29 @@ public class Code10 {
             Map<Integer, Integer> countMap = new HashMap<>();
             //循环2
             for (int j = i; j < nums.length; j++) {
+
+                /**
+                 * 获取必要数据
+                 */
+
                 //当前数字key
                 Integer num = nums[j];
                 //获取旧频率
                 Integer oldCount = numCountMap.getOrDefault(num, 0);
-                //新频率
+                //计算新频率
                 Integer newCount = oldCount + 1;
+
+                /**
+                 * 更新数字map
+                 */
+
                 //覆盖数字频率
                 numCountMap.put(num, newCount);
+
+                /**
+                 * 更新频率map
+                 */
+
                 //如果有旧频率
                 if (oldCount > 0) {
                     //计算旧频率
@@ -100,6 +115,11 @@ public class Code10 {
                 }
                 //刷新新频率的次数
                 countMap.put(newCount, countMap.getOrDefault(newCount, 0) + 1);
+
+                /**
+                 * 计算本次结果
+                 */
+
                 //当前长度
                 int length = j - i + 1;
                 //如果可能更大 and 满足条件
@@ -125,21 +145,10 @@ public class Code10 {
             //直接失败
             return false;
         }
-        //获取key
-        List<Integer> countList = new ArrayList<>(countMap.keySet());
-        //两种可能
-        Integer first = countList.get(0);
-        Integer second = countList.get(1);
-        //对比大小
-        int big = Math.max(first, second);
-        int small = Math.min(first, second);
-        //如果不符合条件
-        if (small * 2 != big) {
-            //直接失败
-            return false;
-        }
-        //满足条件
-        return true;
+        //将key转为列表,并排序
+        List<Integer> countList = countMap.keySet().stream().sorted(Integer::compareTo).collect(Collectors.toList());
+        //比较小值是否为大值的一倍
+        return countList.get(0) * 2 == countList.get(1);
     }
 
     public static void main(String[] args) {
