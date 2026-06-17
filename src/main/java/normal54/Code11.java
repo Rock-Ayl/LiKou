@@ -46,6 +46,11 @@ public class Code11 {
             int targetCount = 0;
             //不同字符的数量
             int notSameCount = 0;
+            //如果和上一个字符相同,跳过,无效计算
+            if (i > 0 && s.charAt(i) == s.charAt(i - 1)) {
+                //本轮过
+                continue;
+            }
             //循环2
             for (int j = i; j < s.length(); j++) {
                 //索引
