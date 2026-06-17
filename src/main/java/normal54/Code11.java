@@ -50,15 +50,13 @@ public class Code11 {
             for (int j = i; j < s.length(); j++) {
                 //索引
                 int index = s.charAt(j) - 'a';
-                //+1
-                arr[index]++;
                 //如果第一次出现
-                if (arr[index] == 1) {
+                if (arr[index] == 0) {
                     //+1
                     notSameCount++;
                 }
-                //如果满足k次
-                if (arr[index] == k) {
+                //+1,如果满足k次
+                if (++arr[index] == k) {
                     //+1
                     targetCount++;
                 }
