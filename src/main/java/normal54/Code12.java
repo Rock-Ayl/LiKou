@@ -68,7 +68,7 @@ public class Code12 {
                 //覆盖
                 firstNum = 0;
             } else {
-                //叠加数字
+                //叠加计数
                 firstTopCount += top == firstNum ? 1 : 0;
                 firstBottomCount += bottom == firstNum ? 1 : 0;
             }
@@ -77,6 +77,7 @@ public class Code12 {
                 //覆盖
                 secondNum = 0;
             } else {
+                //叠加计数
                 secondTopCount += top == secondNum ? 1 : 0;
                 secondBottomCount += bottom == secondNum ? 1 : 0;
             }
