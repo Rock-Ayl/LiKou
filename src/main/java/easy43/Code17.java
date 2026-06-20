@@ -64,7 +64,7 @@ public class Code17 {
         //开始结束区间
         int start = Math.max(n - k, 1);
         int end = Math.max(n + k, start);
-        //好人
+        //和
         int sum = 0;
         //循环
         while (start <= end) {
