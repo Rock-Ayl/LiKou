@@ -84,21 +84,22 @@ public class Code15 {
 
     //检查是否满足条件
     private boolean check(long sum, int x) {
-        //数字
-        long num = sum;
-        //个位数字
-        long a = num % 10;
-        //循环
-        while (num > 9) {
-            //下一个
-            num = num / 10;
+        //先判断个位数字
+        if (sum % 10 != x) {
+            //过
+            return false;
         }
-        //判断
-        return a == x && num == x;
+        //循环
+        while (sum > 9) {
+            //下一个
+            sum = sum / 10;
+        }
+        //判断首位
+        return sum == x;
     }
 
     public static void main(String[] args) {
-        System.out.println(new Code15().countValidSubarrays(new int[]{1000000000,1,1000000000,1,1000000000,1,1000000000}, 3));
+        System.out.println(new Code15().countValidSubarrays(new int[]{1000000000, 1, 1000000000, 1, 1000000000, 1, 1000000000}, 3));
     }
 
 }
