@@ -180,7 +180,39 @@ public class Code16 {
     }
 
     public static void main(String[] args) {
-        System.out.println(new Code16().minLights(new int[]{0, 0, 0, 0}));
+        System.out.println(new Code16().star(new int[]{0, 0, 0, 0, 1, 0, 0, 2}));
+    }
+
+    /**
+     * 差分-经典
+     *
+     * @param lights
+     * @return
+     */
+    public int star(int[] lights) {
+        int n = lights.length;
+        int[] diff = new int[n + 1];
+        for (int i = 0; i < n; i++) {
+            int v = lights[i];
+            if (v > 0) {
+                // 照亮 [max(i-v, 0), min(i+v, n-1)]
+                diff[Math.max(i - v, 0)] += 1;
+                diff[Math.min(i + v + 1, n)] -= 1;
+            }
+        }
+
+        int ans = 0;
+        int sumD = 0;
+        for (int i = 0; i < n; i++) {
+            sumD += diff[i];
+            if (sumD == 0) {
+                // 在 i+1 装一个灯泡，照亮 [i, i+2]
+                ans += 1;
+                sumD += 1; // diff[i]++ 直接更新到 sumD 中
+                diff[Math.min(i + 3, n)] -= 1;
+            }
+        }
+        return ans;
     }
 
 }
