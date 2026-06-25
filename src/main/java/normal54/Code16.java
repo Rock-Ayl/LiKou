@@ -166,23 +166,12 @@ public class Code16 {
          * 计算需要的额外灯泡
          */
 
-        //上一个特殊照亮的位置
-        int lastLight = -1;
         //额外灯泡数量
         int count = 0;
         //循环
         for (Node node : notLightNodeList) {
-            //开始位置,要考虑之前的亮灯
-            int start = Math.max(lastLight + 1, node.start);
-            //结束位置
-            int end = node.end;
-            //如果完全覆盖
-            if (start > end) {
-                //本轮过
-                continue;
-            }
             //距离
-            int length = end - start + 1;
+            int length = node.end - node.start + 1;
             //本次额外灯泡数量
             count += (length / 3) + (length % 3 == 0 ? 0 : 1);
         }
