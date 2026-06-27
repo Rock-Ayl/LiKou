@@ -145,19 +145,13 @@ public class Code18 {
 
     //检查当前数组是否满足
     private boolean check(int[] addArr, int[] subArr, int index) {
-        //左边区间
-        int addStart = 0;
-        int addEnd = index;
         //如果不满足
-        if (addArr[addEnd] != addEnd + 1) {
+        if (addArr[index] != index + 1) {
             //不行
             return false;
         }
-        //右边区间
-        int subStart = index + 1;
-        int subEnd = subArr.length - 1;
         //如果不满足
-        if (subArr[subStart] != (subEnd - subStart + 1)) {
+        if (subArr[index + 1] != ((subArr.length - 1) - (index + 1)) + 1) {
             //不行
             return false;
         }
