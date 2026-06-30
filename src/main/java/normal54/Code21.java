@@ -130,14 +130,14 @@ public class Code21 {
             if (freeStart >= mergeArr[0]) {
                 //记录左半
                 resultList.add(toList(new int[]{mergeArr[0], freeStart - 1}));
-                //彻底放弃本数组,本轮过
+                //本轮过
                 continue;
             }
             //如果半相交2
             if (freeEnd <= mergeArr[1]) {
                 //记录右半
                 resultList.add(toList(new int[]{freeEnd + 1, mergeArr[1]}));
-                //彻底放弃本数组,本轮过
+                //本轮过
                 continue;
             }
         }
