@@ -148,15 +148,8 @@ public class Code21 {
 
     //数组转列表
     private List<Integer> toList(int[] arr) {
-        //初始化
-        List<Integer> list = new ArrayList<>();
-        //循环
-        for (int i : arr) {
-            //组装
-            list.add(i);
-        }
         //返回
-        return list;
+        return Arrays.asList(arr[0], arr[1]);
     }
 
     public static void main(String[] args) {
