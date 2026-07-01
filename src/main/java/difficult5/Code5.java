@@ -53,7 +53,7 @@ public class Code5 {
         int count = 0;
         //差分数组
         int[] arr = new int[nums.length + 1];
-        //当前位置操作次数
+        //当前位置-是否改变,奇数为改变,偶数不改变
         int change = 0;
         //循环
         for (int i = 0; i < nums.length; i++) {
@@ -62,7 +62,7 @@ public class Code5 {
              * 计算当前位置数字
              */
 
-            //叠加(其实是减少过期的操作次数)
+            //减去过期的差分
             change += arr[i];
             //如果操作次数为奇数
             if (change % 2 != 0) {
@@ -80,7 +80,7 @@ public class Code5 {
              */
 
             //如果接下来不满k个
-            if (nums.length - i  < k) {
+            if (nums.length - i < k) {
                 //操作不了,返回
                 return -1;
             }
@@ -89,9 +89,8 @@ public class Code5 {
             //从这里操作一次,改为操作后数字
             nums[i] = 1;
             //差分
-            arr[i]++;
-            arr[i + k]--;
             change++;
+            arr[i + k]--;
 
         }
         //返回
