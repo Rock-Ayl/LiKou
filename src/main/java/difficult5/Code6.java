@@ -62,12 +62,10 @@ public class Code6 {
          * 计算每个位置要增加减少的操作次数
          */
 
-        //每个位置要增加的多少
-        int[] addArr = new int[nums.length];
         //循环
         for (int i = 0; i < nums.length; i++) {
             //计算
-            addArr[i] = target[i] - nums[i];
+            nums[i] = target[i] - nums[i];
         }
 
         /**
@@ -75,50 +73,45 @@ public class Code6 {
          */
 
         //操作次数,默认第一个操作位置
-        long result = Math.abs(addArr[0]);
+        long result = Math.abs(nums[0]);
         //判断是否为正数
-        boolean add = addArr[0] >= 0;
+        boolean add = nums[0] >= 0;
         //上一个操作位置的大小
-        int last = addArr[0];
+        int last = nums[0];
         //循环
-        for (int i = 1; i < addArr.length; i++) {
-            //如果与上一个相同
-            if (addArr[i] == last) {
-                //本轮过
-                continue;
-            }
+        for (int i = 1; i < nums.length; i++) {
             //如果 一个正数、一个负数
-            if (last >= 0 && addArr[i] < 0 || last < 0 && addArr[i] >= 0) {
+            if (last >= 0 && nums[i] < 0 || last < 0 && nums[i] >= 0) {
                 //交换
                 add = !add;
-                last = addArr[i];
+                last = nums[i];
                 //叠加,本次
-                result += Math.abs(addArr[i]);
+                result += Math.abs(nums[i]);
                 //本轮过
                 continue;
             }
             //如果都是正数
             if (add == true) {
                 //如果新的更大
-                if (addArr[i] > last) {
+                if (nums[i] > last) {
                     //叠加,本次
-                    result += addArr[i] - last;
+                    result += nums[i] - last;
                     //更新更大
-                    last = addArr[i];
+                    last = nums[i];
                 } else {
                     //削减
-                    last = addArr[i];
+                    last = nums[i];
                 }
             } else {
                 //如果新的更小
-                if (addArr[i] < last) {
+                if (nums[i] < last) {
                     //叠加,本次
-                    result += last - addArr[i];
+                    result += last - nums[i];
                     //更新更小
-                    last = addArr[i];
+                    last = nums[i];
                 } else {
                     //削减
-                    last = addArr[i];
+                    last = nums[i];
                 }
             }
         }
