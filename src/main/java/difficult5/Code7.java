@@ -119,17 +119,15 @@ public class Code7 {
 
             //如果没有项目
             if (queue.isEmpty()) {
-                //返回
-                return w;
+                //跳出
+                break;
             }
+            //出队,资本增加
+            w += queue.poll().profit;
 
-            //出队
-            Node node = queue.poll();
-            //资本增加
-            w += node.profit;
         }
 
-        //返回
+        //返回最终资本
         return w;
     }
 
