@@ -1,5 +1,7 @@
 package normal55;
 
+import java.util.Arrays;
+
 /**
  * 3719. 最长平衡子数组 I
  * 算术评级: 4
@@ -66,10 +68,12 @@ public class Code4 {
     public int longestBalanced(int[] nums) {
         //最大长度
         int maxLength = 0;
+        //最大数字并+1
+        int maxNum = Arrays.stream(nums).max().getAsInt() + 1;
         //循环
         for (int i = 0; i < nums.length; i++) {
             //缓存
-            int[] countArr = new int[100001];
+            int[] countArr = new int[maxNum];
             //奇偶平衡
             int count = 0;
             //循环
