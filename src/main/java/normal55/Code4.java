@@ -66,14 +66,14 @@ import java.util.Arrays;
 public class Code4 {
 
     public int longestBalanced(int[] nums) {
+        //计算最大数组长度
+        int countArrLength = Arrays.stream(nums).max().getAsInt() + 1;
         //最大长度
         int maxLength = 0;
-        //最大数字并+1
-        int maxNum = Arrays.stream(nums).max().getAsInt() + 1;
         //循环
         for (int i = 0; i < nums.length; i++) {
             //缓存
-            int[] countArr = new int[maxNum];
+            int[] countArr = new int[countArrLength];
             //奇偶平衡
             int count = 0;
             //循环
@@ -83,13 +83,7 @@ public class Code4 {
                 //+1,如果是第一次
                 if (++countArr[num] == 1) {
                     //判断奇偶
-                    if (num % 2 == 0) {
-                        //+1
-                        count++;
-                    } else {
-                        //-1
-                        count--;
-                    }
+                    count += (num % 2 == 0 ? 1 : -1);
                 }
                 //如果平衡,更新最大长度
                 if (count == 0 && (j - i + 1) > maxLength) {
