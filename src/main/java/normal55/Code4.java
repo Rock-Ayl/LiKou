@@ -76,26 +76,21 @@ public class Code4 {
             for (int j = i; j < nums.length; j++) {
                 //当前数字
                 int num = nums[j];
-                //判断奇偶
-                if (num % 2 == 0) {
-                    //+1,如果是第一次
-                    if (++countArr[num] == 1) {
+                //+1,如果是第一次
+                if (++countArr[num] == 1) {
+                    //判断奇偶
+                    if (num % 2 == 0) {
                         //+1
                         count++;
-                    }
-                } else {
-                    //+1,如果是第一次
-                    if (++countArr[num] == 1) {
+                    } else {
                         //-1
                         count--;
                     }
                 }
-                //长度
-                int length = j - i + 1;
                 //如果平衡,更新最大长度
-                if (length > maxLength && count == 0) {
+                if (count == 0 && (j - i + 1) > maxLength) {
                     //更新
-                    maxLength = length;
+                    maxLength = j - i + 1;
                 }
             }
         }
