@@ -115,30 +115,30 @@ public class Code8 {
          * 统计出所有 和 的可能
          */
 
-        //和
-        int sum2 = 0;
+        //结束位置和
+        int endSum = 0;
         //初始化节点列表
         List<Node> nodeList = new ArrayList<>();
         //循环
         for (int i = 0; i < arr.length; i++) {
             //当前和
-            sum2 += arr[i];
+            endSum += arr[i];
             //如果相同
-            if (sum2 == target) {
+            if (endSum == target) {
                 //记录
                 nodeList.add(new Node(0, i));
                 //本轮过
                 continue;
             }
             //目标开始和
-            int start = sum2 - target;
+            int startSum = endSum - target;
             //如果不存在
-            if (sumIndexMap.containsKey(start) == false) {
+            if (sumIndexMap.containsKey(startSum) == false) {
                 //本轮过
                 continue;
             }
             //记录
-            nodeList.add(new Node(sumIndexMap.get(start) + 1, i));
+            nodeList.add(new Node(sumIndexMap.get(startSum) + 1, i));
         }
         //如果不够
         if (nodeList.size() < 2) {
