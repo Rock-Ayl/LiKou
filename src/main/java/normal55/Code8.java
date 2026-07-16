@@ -1,9 +1,7 @@
 package normal55;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 1477. 找两个和为目标值且不重叠的子数组
@@ -94,27 +92,13 @@ public class Code8 {
     public int minSumOfLengths(int[] arr, int target) {
 
         /**
-         * 前缀和
-         */
-
-        //索引缓存
-        Map<Integer, Integer> sumIndexMap = new HashMap<>();
-        //和
-        int sum = arr[0];
-        //记录索引
-        sumIndexMap.put(sum, 0);
-        //循环
-        for (int i = 1; i < arr.length; i++) {
-            //叠加本次
-            sum += arr[i];
-            //记录索引
-            sumIndexMap.put(sum, i);
-        }
-
-        /**
          * 统计出所有 和 的可能
          */
 
+        //开始索引
+        int startIndex = 0;
+        //开始索引和
+        int startSum = 0;
         //结束位置和
         int endSum = 0;
         //初始化节点列表
@@ -123,6 +107,11 @@ public class Code8 {
         for (int i = 0; i < arr.length; i++) {
             //当前和
             endSum += arr[i];
+            //如果太小了
+            if (endSum < target) {
+                //本轮过
+                continue;
+            }
             //如果相同
             if (endSum == target) {
                 //记录
@@ -131,14 +120,19 @@ public class Code8 {
                 continue;
             }
             //目标开始和
-            int startSum = endSum - target;
+            int tagetStartSum = endSum - target;
+            //如果还不够
+            while (startSum + arr[startIndex] <= tagetStartSum) {
+                //叠加,下一个
+                startSum += arr[startIndex++];
+            }
             //如果不存在
-            if (sumIndexMap.containsKey(startSum) == false) {
+            if (startSum < tagetStartSum) {
                 //本轮过
                 continue;
             }
             //记录
-            nodeList.add(new Node(sumIndexMap.get(startSum) + 1, i));
+            nodeList.add(new Node(startIndex, i));
         }
         //如果不够
         if (nodeList.size() < 2) {
@@ -193,7 +187,7 @@ public class Code8 {
     }
 
     public static void main(String[] args) {
-        System.out.println(new Code8().minSumOfLengths(new int[]{3, 1, 1, 1, 5, 1, 2, 1}, 3));
+        System.out.println(new Code8().minSumOfLengths(new int[]{4, 3, 2, 6, 2, 3, 4}, 6));
     }
 
 }
