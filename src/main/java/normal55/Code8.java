@@ -99,39 +99,39 @@ public class Code8 {
 
         //索引缓存
         Map<Integer, Integer> sumIndexMap = new HashMap<>();
-        //前缀和数组
-        int[] sumArr = new int[arr.length];
-        //初始化第一个
-        sumArr[0] = arr[0];
+        //和
+        int sum = arr[0];
         //记录索引
-        sumIndexMap.put(sumArr[0], 0);
+        sumIndexMap.put(sum, 0);
         //循环
         for (int i = 1; i < arr.length; i++) {
-            //叠加
-            sumArr[i] = sumArr[i - 1] + arr[i];
+            //叠加本次
+            sum += arr[i];
             //记录索引
-            sumIndexMap.put(sumArr[i], i);
+            sumIndexMap.put(sum, i);
         }
 
         /**
          * 统计出所有 和 的可能
          */
 
+        //和
+        int sum2 = 0;
         //初始化节点列表
         List<Node> nodeList = new ArrayList<>();
         //循环
         for (int i = 0; i < arr.length; i++) {
             //当前和
-            int end = sumArr[i];
+            sum2 += arr[i];
             //如果相同
-            if (end == target) {
+            if (sum2 == target) {
                 //记录
                 nodeList.add(new Node(0, i));
                 //本轮过
                 continue;
             }
             //目标开始和
-            int start = end - target;
+            int start = sum2 - target;
             //如果不存在
             if (sumIndexMap.containsKey(start) == false) {
                 //本轮过
