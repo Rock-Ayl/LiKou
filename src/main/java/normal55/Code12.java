@@ -87,8 +87,6 @@ public class Code12 {
          * 计算出最大可能
          */
 
-        //排序
-        groupList.sort((a, b) -> a[0] - b[0]);
         //结果,默认视为全部可以组合成一个
         int count = groupList.size();
         //上一个索引
