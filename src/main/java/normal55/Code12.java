@@ -1,6 +1,9 @@
 package normal55;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 1546. 和为目标值且不重叠的非空子数组的最大数目
@@ -84,6 +87,8 @@ public class Code12 {
          * 计算出最大可能
          */
 
+        //结果,默认视为全部可以组合成一个
+        int count = groupList.size();
         //排序
         groupList.sort((a, b) -> a[0] - b[0]);
         //上一个所以n
@@ -103,20 +108,14 @@ public class Code12 {
             }
             //如果新的被老的完全包含
             if (thisSpaceArr[1] <= lastSpaceArr[1]) {
-                //老的完全被废弃
-                groupList.set(lastIndex, null);
                 //更新
                 lastIndex = i;
-                //本轮过
-                continue;
             }
-            //走到这里,说明有交叉,废弃新的
-            groupList.set(i, null);
+            //删除一个
+            count--;
         }
-        //删除空的
-        groupList.removeIf(Objects::isNull);
         //返回
-        return groupList.size();
+        return count;
     }
 
     public static void main(String[] args) {
