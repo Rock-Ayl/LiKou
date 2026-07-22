@@ -64,14 +64,14 @@ public class Code12 {
         Map<Integer, Integer> lastSumIndexMap = new HashMap<>();
         //默认开始索引
         lastSumIndexMap.put(0, -1);
-        //前缀和数组
-        int[] sumArr = new int[nums.length];
+        //当前和
+        int sum = 0;
         //循环
-        for (int i = 0; i < sumArr.length; i++) {
+        for (int i = 0; i < nums.length; i++) {
             //叠加
-            sumArr[i] = nums[i] + (i > 0 ? sumArr[i - 1] : 0);
+            sum = nums[i] + sum;
             //需要减去多少
-            int targetSum = sumArr[i] - target;
+            int targetSum = sum - target;
             //获取索引
             Integer lastSumIndex = lastSumIndexMap.get(targetSum);
             //如果有
@@ -80,7 +80,7 @@ public class Code12 {
                 groupList.add(new int[]{lastSumIndex + 1, i});
             }
             //结束、覆盖
-            lastSumIndexMap.put(sumArr[i], i);
+            lastSumIndexMap.put(sum, i);
         }
 
         /**
