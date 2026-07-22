@@ -64,11 +64,11 @@ public class Code12 {
         Map<Integer, Integer> lastSumIndexMap = new HashMap<>();
         //默认开始索引
         lastSumIndexMap.put(0, -1);
-        //当前和
+        //当前和(前缀和)
         int sum = 0;
         //循环
         for (int i = 0; i < nums.length; i++) {
-            //叠加
+            //叠加本次前缀和
             sum = nums[i] + sum;
             //需要减去多少
             int targetSum = sum - target;
@@ -87,11 +87,11 @@ public class Code12 {
          * 计算出最大可能
          */
 
-        //结果,默认视为全部可以组合成一个
-        int count = groupList.size();
         //排序
         groupList.sort((a, b) -> a[0] - b[0]);
-        //上一个所以n
+        //结果,默认视为全部可以组合成一个
+        int count = groupList.size();
+        //上一个索引
         int lastIndex = 0;
         //循环
         for (int i = 1; i < groupList.size(); i++) {
