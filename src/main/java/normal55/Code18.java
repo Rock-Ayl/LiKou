@@ -80,7 +80,7 @@ public class Code18 {
 
     public List<Integer> flipMatchVoyage(TreeNode root, int[] voyage) {
         //初始化结果
-        List<Integer> result = new ArrayList<>();
+        List<Integer> result = new ArrayList<>(voyage.length);
         //递归
         int index = next(root, voyage, 0, result);
         //如果不可能
@@ -104,15 +104,13 @@ public class Code18 {
             //失败
             return -1;
         }
-        //如果右节点等于当前左边,则需要翻转
-        boolean change = node.left != null && node.right != null && node.right.val == voyage[voyageIndx];
-        //如果需要翻转
-        if (change == true) {
+        //判断是否需要交换
+        if (node.left != null && node.right != null && node.right.val == voyage[voyageIndx] == true) {
             //交换
             TreeNode mid = node.left;
             node.left = node.right;
             node.right = mid;
-            //记录
+            //记录本次交换
             result.add(node.val);
         }
         //递归左节点
@@ -122,14 +120,8 @@ public class Code18 {
             //失败
             return -1;
         }
-        //递归右节点
-        voyageIndx = next(node.right, voyage, voyageIndx, result);
-        //直接返回
-        return voyageIndx;
-    }
-
-    public static void main(String[] args) {
-
+        //递归右节点,直接返回
+        return next(node.right, voyage, voyageIndx, result);
     }
 
 }
