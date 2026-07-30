@@ -94,12 +94,12 @@ public class Code18 {
 
     //递归
     private int next(TreeNode node, int[] voyage, int voyageIndx, List<Integer> result) {
-        //判空
-        if (node == null) {
-            //过
+        //判空 or 已经失败了
+        if (node == null || voyageIndx == -1) {
+            //直接返回
             return voyageIndx;
         }
-        //如果当前不是
+        //判断当前节点
         if (voyage[voyageIndx++] != node.val) {
             //失败
             return -1;
@@ -115,11 +115,6 @@ public class Code18 {
         }
         //递归左节点
         voyageIndx = next(node.left, voyage, voyageIndx, result);
-        //如果失败了
-        if (voyageIndx == -1) {
-            //失败
-            return -1;
-        }
         //递归右节点,直接返回
         return next(node.right, voyage, voyageIndx, result);
     }
