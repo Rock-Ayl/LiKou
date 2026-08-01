@@ -1,9 +1,5 @@
 package easy43;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  * 263. 丑数
  * 尝试过
@@ -44,41 +40,54 @@ import java.util.Set;
  */
 public class Code25 {
 
-    //丑数的质因数
-    private static final Set<Integer> SET = new HashSet<>(Arrays.asList(2, 3, 5));
-
     public boolean isUgly(int n) {
         //如果不够大
         if (n < 1) {
             //不是
             return false;
         }
-        //如果是1
-        if (n == 1) {
-            //是
-            return true;
-        }
-        //如果存在
-        if (SET.contains(n)) {
+        //如果是最基础的
+        if (n == 2 || n == 5 || n == 3 || n == 1) {
             //是
             return true;
         }
         //可以整除的数量
         int count = 0;
-        //循环
-        for (int num : SET) {
-            //如果可以整除
-            if (n % num == 0) {
-                //计算出来
-                int next = n / num;
-                //如果其不是
-                if (isUgly(next) == false) {
-                    //不是
-                    return false;
-                }
-                //+1
-                count++;
+        //如果可以整除
+        if (n % 2 == 0) {
+            //计算出来
+            int next = n / 2;
+            //如果其不是
+            if (isUgly(next) == false) {
+                //不是
+                return false;
             }
+            //+1
+            count++;
+        }
+        //如果可以整除
+        if (n % 3 == 0) {
+            //计算出来
+            int next = n / 3;
+            //如果其不是
+            if (isUgly(next) == false) {
+                //不是
+                return false;
+            }
+            //+1
+            count++;
+        }
+        //如果可以整除
+        if (n % 5 == 0) {
+            //计算出来
+            int next = n / 5;
+            //如果其不是
+            if (isUgly(next) == false) {
+                //不是
+                return false;
+            }
+            //+1
+            count++;
         }
         //至少要有一次
         return count > 0;
