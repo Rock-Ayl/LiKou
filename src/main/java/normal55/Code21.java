@@ -86,7 +86,7 @@ public class Code21 {
         }
 
         /**
-         * 计算结果
+         * 寻找最后能白嫖的位置,以及最后的加成
          */
 
         //当前额外加成
@@ -97,7 +97,7 @@ public class Code21 {
         int index = 0;
         //循环
         for (int i = 0; i < monsters.length; i++) {
-            //当前加成
+            //差分计算当前位置加成
             other += sumArr[i];
             //如果怪物更强,说明这里无法白嫖
             if (monsters[i] > other) {
@@ -109,17 +109,17 @@ public class Code21 {
         }
 
         /**
-         * 求和
+         * 结果
          */
 
         //结果
         long sum = 0L;
         //循环
         for (int i = 0; i < Math.min(monsters.length, index); i++) {
-            //叠加
+            //必要的怪物能力和
             sum += monsters[i];
         }
-        //返回
+        //必要的怪物能力和 - 最后的加成
         return sum - lastOther;
     }
 
