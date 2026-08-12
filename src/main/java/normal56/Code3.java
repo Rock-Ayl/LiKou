@@ -70,14 +70,12 @@ public class Code3 {
     private boolean reverse(int left, int right) {
         //反转后数字
         int reversed = 0;
-        //默认
-        int x = left;
         //如果还有
-        while (x != 0) {
+        while (left != 0) {
             //叠加
-            reversed = reversed * 10 + x % 10;
+            reversed = reversed * 10 + left % 10;
             //下一个
-            x /= 10;
+            left = left / 10;
         }
         //判断
         return reversed == right;
