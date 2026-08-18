@@ -77,18 +77,15 @@ public class Code9 {
             //获取左右字符
             char left = word.charAt(startIndex);
             char right = word.charAt(endIndex);
-            //计算本次距离
+            //计算本次距离,选两种情况最小的
             count += Math.min(change(left, right), change(right, left));
-            //下一个
-            startIndex++;
-            endIndex--;
-            //如果超了
-            if (startIndex >= word.length()) {
+            //下一个,如果超了
+            if (++startIndex >= word.length()) {
                 //重置
                 startIndex = 0;
             }
-            //如果超了
-            if (endIndex < 0) {
+            //下一个,如果超了
+            if (--endIndex < 0) {
                 //重置
                 endIndex = word.length() - 1;
             }
@@ -112,8 +109,8 @@ public class Code9 {
             result += 'z' - left + 1;
             left = 'a';
         }
-        //返回
-        return right - left + result;
+        // + 更小 并返回
+        return (right - left) + result;
     }
 
     public static void main(String[] args) {
