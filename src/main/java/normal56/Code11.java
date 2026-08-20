@@ -90,7 +90,7 @@ public class Code11 {
 
     public int minPenalty(int period, int[] lights, int[] arrivalTime) {
         //结果
-        int minPenalty = 0;
+        int max = 0;
         //最大
         int maxLight = Arrays.stream(lights).max().getAsInt();
         //循环
@@ -102,11 +102,11 @@ public class Code11 {
                 //本轮过
                 continue;
             }
-            //刷新最小
-            minPenalty = Math.max(minPenalty, period - time);
+            //刷新最大
+            max = Math.max(max, period - time);
         }
         //返回
-        return minPenalty;
+        return max;
     }
 
     public static void main(String[] args) {
