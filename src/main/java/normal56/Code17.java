@@ -66,14 +66,8 @@ public class Code17 {
         int result = k;
         //循环
         for (int i = 2; i <= k; i++) {
-            //增加多少次
-            int add = i - 1;
-            //乘以多少次
-            int mul = k / i + (k % i == 0 ? 0 : 1) - 1;
-            //本次次数
-            int count = add + mul;
-            //刷新最小
-            result = Math.min(result, count);
+            //增加多少次 + 乘以多少次 ,并刷新最小
+            result = Math.min(result, (i - 1) + (k / i + (k % i == 0 ? 0 : 1) - 1));
         }
         //返回
         return result;
