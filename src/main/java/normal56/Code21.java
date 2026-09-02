@@ -1,8 +1,5 @@
 package normal56;
 
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  * 822. 翻转卡片游戏
  * 算术评级: 5
@@ -56,14 +53,14 @@ public class Code21 {
          * 计算哪些是正反相同的数字
          */
 
-        //正反相同集合
-        Set<Integer> notSet = new HashSet<>();
+        //缓存
+        int[] arr = new int[2001];
         //循环
         for (int i = 0; i < fronts.length; i++) {
             //如果正反相同,不符合要求
             if (fronts[i] == backs[i]) {
                 //记录
-                notSet.add(fronts[i]);
+                arr[fronts[i]] = 1;
             }
         }
 
@@ -74,17 +71,14 @@ public class Code21 {
         int minNum = Integer.MAX_VALUE;
         //循环
         for (int i = 0; i < fronts.length; i++) {
-            //如果正反相同,不符合要求
-            if (fronts[i] == backs[i]) {
-                //本轮过
-                continue;
-            }
             //如果不存在 and 更小
-            if (notSet.contains(fronts[i]) == false && fronts[i] < minNum) {
+            if (arr[fronts[i]] != 1 && fronts[i] < minNum) {
+                //更新
                 minNum = fronts[i];
             }
             //如果不存在 and 更小
-            if (notSet.contains(backs[i]) == false && backs[i] < minNum) {
+            if (arr[backs[i]] != 1 && backs[i] < minNum) {
+                //更新
                 minNum = backs[i];
             }
         }
