@@ -47,7 +47,6 @@ public class Code22 {
     public int minSteps(String s, String t) {
         //数组
         int[] arr = new int[26];
-        int[] arr2 = new int[26];
         //循环
         for (int i = 0; i < s.length(); i++) {
             //+1
@@ -55,15 +54,15 @@ public class Code22 {
         }
         //循环
         for (int i = 0; i < t.length(); i++) {
-            //+1
-            arr2[t.charAt(i) - 'a']++;
+            //-1
+            arr[t.charAt(i) - 'a']--;
         }
         //操作结果
         int count = 0;
         //循环
         for (int i = 0; i < arr.length; i++) {
             //叠加本次
-            count += Math.abs(arr[i] - arr2[i]);
+            count += Math.abs(arr[i]);
         }
         //返回
         return count;
