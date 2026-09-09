@@ -70,7 +70,7 @@ public class Code5 {
         //循环
         for (int i = 0; i < s.length(); i++) {
             //本次
-            int score = count(i, s);
+            int score = count(i, s, k);
             //如果是
             if (score == k) {
                 //+1
@@ -82,7 +82,7 @@ public class Code5 {
     }
 
     //计算本次
-    private int count(int start, String s) {
+    private int count(int start, String s, int k) {
         //分数
         int score = 0;
         //操作次数
@@ -103,7 +103,10 @@ public class Code5 {
             //如果相同
             if (a == b) {
                 //+1
-                score++;
+                if (++score > k) {
+                    //失败
+                    return -1;
+                }
             }
             //下一个,如果越界了
             if (++start >= s.length()) {
