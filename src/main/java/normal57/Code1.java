@@ -62,7 +62,7 @@ public class Code1 {
             //默认
             permArr[i] = i;
         }
-        //第一恶数组
+        //记录首次数组
         int[] firstArr = permArr.clone();
         //先变一次
         permArr = changeArr(permArr);
@@ -71,9 +71,7 @@ public class Code1 {
         //循环
         while (Arrays.equals(permArr, firstArr) == false) {
             //变换一次
-            int[] newArr = changeArr(permArr);
-            //交换
-            permArr = newArr;
+            permArr = changeArr(permArr);
             //+1
             count++;
         }
@@ -87,22 +85,17 @@ public class Code1 {
         int[] newArr = new int[permArr.length];
         //循环
         for (int i = 0; i < permArr.length; i++) {
-            //变换数字
-            newArr[i] = change(i, permArr);
+            //判断是否是偶数
+            if (i % 2 == 0) {
+                //是偶数
+                newArr[i] = permArr[i / 2];
+            } else {
+                //是奇数
+                newArr[i] = permArr[permArr.length / 2 + (i - 1) / 2];
+            }
         }
+        //返回
         return newArr;
-    }
-
-    //变换数字
-    private int change(int index, int[] permArr) {
-        //判断是否是偶数
-        if (index % 2 == 0) {
-            //是偶数
-            return permArr[index / 2];
-        } else {
-            //是奇数
-            return permArr[permArr.length / 2 + (index - 1) / 2];
-        }
     }
 
     public static void main(String[] args) {
