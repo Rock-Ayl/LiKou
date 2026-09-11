@@ -69,26 +69,23 @@ import java.util.List;
 public class Code2 {
 
     public List<Integer> maxScoreIndices(int[] nums) {
-        //当前数量
-        int zeroCount = 0;
-        int oneCount = Arrays.stream(nums).sum();
+        //当前分数
+        int rank = Arrays.stream(nums).sum();
         //最大分数,默认
-        int maxRank = oneCount;
+        int maxRank = rank;
         //最大分数索引,默认0
         List<Integer> maxRankIndexList = new ArrayList<>(Arrays.asList(0));
         //循环
         for (int i = 0; i < nums.length; i++) {
             //滑动
-            zeroCount += nums[i] == 0 ? 1 : 0;
-            oneCount -= nums[i] == 1 ? 1 : 0;
-            //当前分数
-            int thisRank = oneCount + zeroCount;
+            rank += nums[i] == 0 ? 1 : 0;
+            rank -= nums[i] == 1 ? 1 : 0;
             //如果更大
-            if (thisRank > maxRank) {
+            if (rank > maxRank) {
                 //大更新
                 maxRankIndexList = new ArrayList<>(Arrays.asList(i + 1));
-                maxRank = thisRank;
-            } else if (thisRank == maxRank) {
+                maxRank = rank;
+            } else if (rank == maxRank) {
                 //叠加
                 maxRankIndexList.add(i + 1);
             }
