@@ -78,8 +78,7 @@ public class Code2 {
         //循环
         for (int i = 0; i < nums.length; i++) {
             //滑动
-            rank += nums[i] == 0 ? 1 : 0;
-            rank -= nums[i] == 1 ? 1 : 0;
+            rank = rank + (nums[i] == 0 ? 1 : 0) - (nums[i] == 1 ? 1 : 0);
             //如果更大
             if (rank > maxRank) {
                 //大更新
