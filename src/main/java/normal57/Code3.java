@@ -91,14 +91,11 @@ public class Code3 {
             this.isSpecial = isSpecial;
         }
 
-        @Override
-        public String toString() {
-            return String.format("num:%d,lastIndex:%d,count:%d,way:%d,isSpecial:%s", num, lastIndex, count, way, isSpecial ? "是" : "否");
-        }
-
     }
 
     public int countSpecialIntegers(int[] nums) {
+        //结果
+        int count = 0;
         //初始化map
         Map<Integer, Node> map = new HashMap<>();
         //循环
@@ -134,20 +131,18 @@ public class Code3 {
             if (thisWay != node.way) {
                 //标记
                 node.isSpecial = false;
+                //如果已经记录
+                if (node.count >= 3) {
+                    //-1
+                    count--;
+                }
                 //本轮过
                 continue;
             }
             //更新上一个索引
             node.lastIndex = i;
             //更新出现次数
-            node.count++;
-        }
-        //结果
-        int count = 0;
-        //循环
-        for (Node value : map.values()) {
-            //如果是
-            if (value.isSpecial == true && value.count >= 3) {
+            if (++node.count == 3) {
                 //+1
                 count++;
             }
@@ -157,7 +152,7 @@ public class Code3 {
     }
 
     public static void main(String[] args) {
-        System.out.println(new Code3().countSpecialIntegers(new int[]{1,8,1,5,1,5,8,5}));
+        System.out.println(new Code3().countSpecialIntegers(new int[]{1, 8, 1, 5, 1, 5, 8, 5}));
     }
 
 }
