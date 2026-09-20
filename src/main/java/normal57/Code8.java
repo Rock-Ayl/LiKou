@@ -88,6 +88,29 @@ public class Code8 {
     }
 
     public static void main(String[] args) {
-        System.out.println(new Code8().minimumDeletions("bbbbbbbaabbbbbaaabbbabbbbaabbbbbbaabbaaabaabbbaaaabaaababbbabbabbaaaabbbabbbbbaabbababbbaaaaaababaaababaabbabbbaaaabbbbbabbabaaaabbbaba"));
+        System.out.println(new Code8().star("aababbab"));
     }
+
+    //动态规划
+    public int star(String s) {
+        //结果
+        int result = 0;
+        //b数量
+        int count = 0;
+        //循环
+        for (char c : s.toCharArray()) {
+            //如果是b
+            if (c == 'b') {
+                //+1
+                count++;
+            } else {
+                //刷新最小结果
+                result = Math.min(result + 1, count);
+            }
+        }
+        //返回
+        return result;
+    }
+
+
 }
