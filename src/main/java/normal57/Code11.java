@@ -54,15 +54,14 @@ public class Code11 {
         return sum;
     }
 
-    //最大因数数量(不包含1和num)
-    private static final int MAX = 4 - 2;
-
     //计算本次和
     private int sum(int num) {
         //因数数量
         int count = 0;
         //本次和(包含num、1)
         int sum = num + 1;
+        //最大因数数量(不包含1和num)
+        int max = 2;
         //循环
         for (int i = 2; i < num; i++) {
             //如果i是num的因数
@@ -72,14 +71,14 @@ public class Code11 {
                 //叠加本次
                 sum += i;
                 //如果超了
-                if (count > MAX) {
+                if (count > max) {
                     //跳出
                     break;
                 }
             }
         }
         //返回结果
-        return count == MAX ? sum : 0;
+        return count == max ? sum : 0;
     }
 
     public static void main(String[] args) {
