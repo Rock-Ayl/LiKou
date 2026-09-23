@@ -61,7 +61,7 @@ public class Code11 {
     private int sum(int num) {
         //因数数量
         int count = 0;
-        //本次和
+        //本次和(包含num、1)
         int sum = num + 1;
         //循环
         for (int i = 2; i < num; i++) {
@@ -73,8 +73,8 @@ public class Code11 {
                 sum += i;
                 //如果超了
                 if (count > MAX) {
-                    //直接返回0
-                    return 0;
+                    //跳出
+                    break;
                 }
             }
         }
