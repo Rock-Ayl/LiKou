@@ -61,17 +61,17 @@ public class Code12 {
 
     public int numberOfArrays(int[] differences, int lower, int upper) {
         //前缀和
-        long[] sumArr = new long[differences.length + 1];
+        long sum = 0L;
         //最大最小
         long min = Integer.MAX_VALUE;
         long max = Integer.MIN_VALUE;
         //循环
-        for (int i = 1; i < sumArr.length; i++) {
+        for (int i = 0; i < differences.length; i++) {
             //前缀和
-            sumArr[i] = sumArr[i - 1] + differences[i - 1];
+            sum += differences[i];
             //更新最大最小
-            min = Math.min(min, sumArr[i]);
-            max = Math.max(max, sumArr[i]);
+            min = Math.min(min, sum);
+            max = Math.max(max, sum);
         }
         //区间
         long left = Math.max(lower, lower - min);
