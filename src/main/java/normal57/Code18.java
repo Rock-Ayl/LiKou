@@ -90,6 +90,13 @@ public class Code18 {
         return build(new StringBuilder("c"), n, k, bEnd + 1, maxCount);
     }
 
+    //下一个字符数组
+    private static final char[][] NEXT_CHAR_ARR = {
+            {'b', 'c'},
+            {'a', 'c'},
+            {'a', 'b'}
+    };
+
     //构建字符串并返回
     private String build(StringBuilder str, int n, int k, int start, int end) {
         //如果长度到了
@@ -99,47 +106,12 @@ public class Code18 {
         }
         //计算本次中间位置
         int mid = (end - start) / 2 + start;
-        //判断是左边还是右边
-        boolean left = k <= mid;
-        //上一个字符
-        char lastLetter = str.charAt(str.length() - 1);
-        //根据上一个字符处理
-        switch (lastLetter) {
-            case 'a':
-                //如果左边
-                if (left) {
-                    //添加b
-                    str.append('b');
-                } else {
-                    //添加c
-                    str.append('c');
-                }
-                break;
-            case 'b':
-                //如果左边
-                if (left) {
-                    //添加a
-                    str.append('a');
-                } else {
-                    //添加c
-                    str.append('c');
-                }
-                break;
-            case 'c':
-                //如果左边
-                if (left) {
-                    //添加a
-                    str.append('a');
-                } else {
-                    //添加b
-                    str.append('b');
-                }
-                break;
-            default:
-                break;
-        }
+        //判断是左边还是右边,0=左边,1=右边
+        int left = k <= mid ? 0 : 1;
+        //添加下一个字符
+        str.append(NEXT_CHAR_ARR[str.charAt(str.length() - 1) - 'a'][left]);
         //判断左右
-        if (left) {
+        if (left == 0) {
             //返回
             return build(str, n, k, start, mid);
         } else {
