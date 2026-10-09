@@ -1,7 +1,5 @@
 package normal57;
 
-import java.util.Arrays;
-
 /**
  * 3138. 同位字符串连接的最小长度
  * 算术评级: 5
@@ -77,24 +75,21 @@ public class Code19 {
 
     //是否可行
     private boolean check(String s, int part) {
-        //第一个
-        int[] firstArr = null;
+        //初始化第一个
+        int[] firstArr = new int[26];
         //循环
-        for (int i = 0; i < s.length(); i += part) {
+        for (int j = 0; j < part; j++) {
+            //+1
+            firstArr[s.charAt(j) - 'a']++;
+        }
+        //循环
+        for (int i = part; i < s.length(); i += part) {
             //当前
-            int[] thisArr = new int[26];
+            int[] thisArr = firstArr.clone();
             //循环
             for (int j = i; j < i + part; j++) {
-                //+1
-                thisArr[s.charAt(j) - 'a']++;
-            }
-            //初始化 or 对比
-            if (firstArr == null) {
-                //初始化
-                firstArr = thisArr;
-            } else {
-                //如果不同
-                if (Arrays.equals(firstArr, thisArr) == false) {
+                //-1,如果不符合
+                if (--thisArr[s.charAt(j) - 'a'] < 0) {
                     //失败
                     return false;
                 }
