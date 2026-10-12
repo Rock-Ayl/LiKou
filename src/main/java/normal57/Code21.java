@@ -86,62 +86,53 @@ public class Code21 {
 
     //初始化
     public Code21(int n) {
-        this.n = n;
-        this.totalTime = 0;
-        this.minTime = 0;
         //初始化数组
-        seatArr = new int[n + 1][4];
+        this.seatArr = new int[n + 1][4];
     }
 
-    //总座位数
-    private int n;
+    //座位缓存
     private int[][] seatArr;
     //总时间
-    private int totalTime;
+    private int totalTime = 0;
     //最小时间
-    private int minTime;
+    private int minTime = 0;
 
     public void toggle(String seat) {
         //拆分出座位
         int letter = seat.charAt(0) - 'A';
-        //获取行号
-        int row = Integer.parseInt(seat.substring(1));
-        //获取对应行
-        int[] rowSeatArr = seatArr[row];
+        //获取行号,获取对应行
+        int[] rowSeatArr = this.seatArr[Integer.parseInt(seat.substring(1))];
         //预定 or 释放
         if (rowSeatArr[letter] == 0) {
-            //中间 or 两边
+            //中间 or 左靠窗 or 右靠窗
             if (letter == 1 || letter == 2) {
-                //直接预定
+                //直接1
                 rowSeatArr[letter] = 1;
+            } else if (letter == 0) {
+                //计算是1还是3
+                rowSeatArr[letter] = (rowSeatArr[letter + 1] == 0 ? 1 : 3);
             } else {
-                //作为左靠窗 or 右靠窗
-                if (letter == 0) {
-                    //计算是1还是3
-                    rowSeatArr[letter] = (rowSeatArr[letter + 1] == 0 ? 1 : 3);
-                } else {
-                    //计算是1还是3
-                    rowSeatArr[letter] = (rowSeatArr[letter - 1] == 0 ? 1 : 3);
-                }
+                //计算是1还是3
+                rowSeatArr[letter] = (rowSeatArr[letter - 1] == 0 ? 1 : 3);
             }
             //预定
-            totalTime += rowSeatArr[letter];
-            minTime += 1;
+            this.totalTime += rowSeatArr[letter];
+            this.minTime += 1;
         } else {
             //直接释放
-            totalTime -= rowSeatArr[letter];
-            minTime -= 1;
+            this.totalTime -= rowSeatArr[letter];
+            this.minTime -= 1;
             //释放
             rowSeatArr[letter] = 0;
         }
     }
 
     public int getTotalTime() {
-        return totalTime;
+        return this.totalTime;
     }
 
     public int getMinTime() {
-        return minTime;
+        return this.minTime;
     }
 
 }
