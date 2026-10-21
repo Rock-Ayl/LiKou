@@ -56,7 +56,7 @@ public class Code4 {
         private int num;
 
         //数字索引列表
-        private List<Integer> indexList = new ArrayList<>();
+        private LinkedList<Integer> indexList = new LinkedList<>();
 
         //初始化
         public Node(int num) {
@@ -72,8 +72,8 @@ public class Code4 {
                 //当前数量
                 int count = indexList.size();
                 //获取左右索引
-                int left = indexList.get(0);
-                int right = indexList.get(count - 1);
+                int left = indexList.getFirst();
+                int right = indexList.getLast();
                 //总共这些
                 int all = right - left + 1;
                 //多出来的非本数字的节点
@@ -81,7 +81,7 @@ public class Code4 {
                 //如果超了
                 if (other > k) {
                     //删除第一个
-                    indexList.remove(0);
+                    indexList.removeFirst();
                 } else {
                     //跳出
                     break;
