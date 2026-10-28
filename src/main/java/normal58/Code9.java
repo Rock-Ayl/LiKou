@@ -92,14 +92,16 @@ public class Code9 {
             int tagetLength = 1;
             //目标不同数字数量
             int targetNumCount = 1;
-            //循环2
-            for (int j = i; j < nums.length; j++) {
+            //索引
+            int index = i;
+            //循环
+            while (index < nums.length) {
                 //数字计数
-                int numCount = countMap.getOrDefault(nums[j], 0) + 1;
+                int numCount = countMap.getOrDefault(nums[index], 0) + 1;
                 //更新
-                countMap.put(nums[j], numCount);
+                countMap.put(nums[index], numCount);
                 //当前长度
-                int length = j - i + 1;
+                int length = index - i + 1;
                 //如果到达check长度
                 if (length == tagetLength) {
                     //如果满足
@@ -110,6 +112,8 @@ public class Code9 {
                     //下一组
                     tagetLength += ++targetNumCount;
                 }
+                //下一个
+                index++;
             }
         }
         //返回
