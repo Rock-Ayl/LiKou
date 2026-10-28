@@ -112,7 +112,7 @@ public class Code9 {
                     //下一组
                     tagetLength += ++targetNumCount;
                     //如果没办法延长到下一组
-                    if (tagetLength > nums.length - i + 1) {
+                    if (tagetLength > nums.length - i) {
                         //跳出
                         break;
                     }
