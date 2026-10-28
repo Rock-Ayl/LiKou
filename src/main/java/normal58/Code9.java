@@ -86,7 +86,7 @@ public class Code9 {
         int result = 0;
         //循环
         for (int i = 0; i < nums.length; i++) {
-            //计数
+            //顺序计数map
             LinkedHashMap<Integer, Integer> countMap = new LinkedHashMap<>();
             //目标长度
             int tagetLength = 1;
@@ -127,12 +127,12 @@ public class Code9 {
         int numCount = 1;
         //循环
         for (Map.Entry<Integer, Integer> entry : countMap.entrySet()) {
-            //如果不同
+            //如果不是目标数量
             if (entry.getValue().equals(numCount) == false) {
                 //不是
                 return false;
             }
-            //+1
+            //目标数量+1
             numCount++;
         }
         //默认是
