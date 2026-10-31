@@ -59,6 +59,7 @@ package normal58;
  */
 public class Code11 {
 
+    //todo 可以把两个cost数组作为前缀和,懒得做了....
     public long shiftDistance(String s, String t, int[] nextCost, int[] previousCost) {
         //结果
         long result = 0L;
