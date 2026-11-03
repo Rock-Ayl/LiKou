@@ -30,3 +30,6 @@ logs
 .gradle
 build
 src/test
+
+# ai
+.leetcode-analysis
