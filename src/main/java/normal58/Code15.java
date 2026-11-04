@@ -1,8 +1,6 @@
 package normal58;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -46,20 +44,20 @@ public class Code15 {
 
     public int numberOfBoomerangs(int[][] points) {
         //距离缓存列表
-        List<Map<Double, Integer>> walkMapList = new ArrayList<>(points.length);
+        Map<Double, Integer>[] walkMapList = new HashMap[points.length];
         //循环
         for (int i = 0; i < points.length; i++) {
             //初始化
-            walkMapList.add(new HashMap<>());
+            walkMapList[i] = new HashMap<>();
         }
         //循环
         for (int i = 0; i < points.length; i++) {
             //获取第一个
-            Map<Double, Integer> oneMap = walkMapList.get(i);
+            Map<Double, Integer> oneMap = walkMapList[i];
             //循环其他点
             for (int j = i + 1; j < points.length; j++) {
                 //获取第二个
-                Map<Double, Integer> twoMap = walkMapList.get(j);
+                Map<Double, Integer> twoMap = walkMapList[j];
                 //计算两个点之间的距离
                 Double distance = getDistance(points[i], points[j]);
                 //缓存距离+1
@@ -72,7 +70,7 @@ public class Code15 {
         //循环
         for (int i = 0; i < points.length; i++) {
             //获取
-            Map<Double, Integer> oneMap = walkMapList.get(i);
+            Map<Double, Integer> oneMap = walkMapList[i];
             //循环
             for (Integer count : oneMap.values()) {
                 //高斯数学
