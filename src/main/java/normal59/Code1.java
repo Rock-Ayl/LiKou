@@ -1,6 +1,7 @@
 package normal59;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 4112. 将子树置零后的最大得分
@@ -159,28 +160,35 @@ public class Code1 {
             //结束
             return;
         }
-        //排序
-        Collections.sort(node.children, (a, b) -> a.maxScoreSum - b.maxScoreSum);
-        //获取节点
-        Node minNode = node.children.get(0);
+        //和
+        int sum = node.score;
+        //最小
+        int min = Integer.MAX_VALUE;
+        //循环
+        for (Node child : node.children) {
+            //累加
+            sum += child.maxScoreSum;
+            //更新最小
+            min = Math.min(min, child.maxScoreSum);
+        }
         //根据操作判断最大分数
         switch (node.op) {
             //可以选择一个节点
             case 0:
                 //如果是负数
-                if (minNode.maxScoreSum < 0) {
-                    //重置为0
-                    minNode.maxScoreSum = 0;
+                if (min < 0) {
+                    //重置为0,所以要加入
+                    sum -= min;
                 }
                 break;
             //必须选择一个节点
             case 1:
                 //强行重置为0
-                minNode.maxScoreSum = 0;
+                sum -= min;
                 break;
         }
         //计算最大分数和
-        node.maxScoreSum = node.score + node.children.stream().mapToInt(p -> p.maxScoreSum).sum();
+        node.maxScoreSum = sum;
     }
 
     public static void main(String[] args) {
