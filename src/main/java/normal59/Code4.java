@@ -52,8 +52,8 @@ package normal59;
 public class Code4 {
 
     public long numberOfWays(String s) {
-        //实现
-        return execute(s, new char[]{'0', '1','0'}) + execute(s, new char[]{'1', '0', '1'});
+        //两种情况
+        return execute(s, new char[]{'0', '1', '0'}) + execute(s, new char[]{'1', '0', '1'});
     }
 
     //一次实现
